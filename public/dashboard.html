@@ -25,12 +25,12 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .mono{font-family:'IBM Plex Mono',monospace;}
 
 /* TOPBAR */
-.topbar{height:30px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:16px;font-size:10px;color:var(--t3);margin-top:24px;}
+.topbar{height:30px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:16px;font-size:10px;color:var(--t3);}
 .topbar .brand{color:var(--amber);font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;}
 .topbar .sep{width:1px;height:14px;background:var(--t4);}
 
 /* NAV */
-.nav{height:34px;background:var(--panel);border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:2px;}
+.nav{height:34px;background:var(--panel);border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:8px;}
 .nav-tab{padding:5px 14px;font-size:11px;font-weight:500;color:var(--t2);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
 .nav-tab:hover{color:var(--t1);}
 .nav-tab.on{color:var(--amber);border-bottom-color:var(--amber);}
@@ -153,7 +153,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .footer{padding:10px 16px;font-size:9px;color:var(--t4);border-top:1px solid var(--rule);background:var(--panel);text-align:center;}
 
 /* NEWS RIBBON */
-.news-ribbon{height:24px;background:#000;border-bottom:1px solid var(--rule);overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:200;}
+.news-ribbon{flex:1;height:24px;background:transparent;overflow:hidden;position:relative;}
 .news-ribbon-inner{display:flex;gap:48px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 300s linear infinite;position:absolute;padding-left:100%;}
 .news-ribbon-inner:hover{animation-play-state:paused;}
 .news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
@@ -217,14 +217,13 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   <span style="margin-left:auto">31 Mar 2026 15:42 EST</span>
 </div>
 
-<div class="news-ribbon">
-  <div class="news-ribbon-inner" id="newsRibbon">
-    <span class="news-item"><span class="news-tag">LOADING</span> Fetching latest headlines...</span>
-  </div>
-</div>
-
 <div class="nav">
-  <div class="nav-r" style="margin-left:0;"><span class="live">LIVE</span><span>EIA / OPEC / OFAC / Kpler / CEIC</span></div>
+  <span class="live">LIVE</span>
+  <div class="news-ribbon">
+    <div class="news-ribbon-inner" id="newsRibbon">
+      <span class="news-item"><span class="news-tag">LOADING</span> Fetching latest headlines...</span>
+    </div>
+  </div>
 </div>
 
 <div class="ticker">
