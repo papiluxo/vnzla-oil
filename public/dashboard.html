@@ -152,6 +152,10 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 
 .footer{padding:10px 16px;font-size:9px;color:var(--t4);border-top:1px solid var(--rule);background:var(--panel);text-align:center;}
 
+/* Mobile helpers */
+.show-mobile{display:none;}
+.hide-mobile{display:inline;}
+
 /* NEWS RIBBON */
 .news-ribbon{flex:1;height:24px;background:transparent;overflow:hidden;position:relative;}
 .news-ribbon-inner{display:flex;gap:48px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 300s linear infinite;position:absolute;padding-left:100%;}
@@ -182,8 +186,15 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   .topbar span:last-child{display:block;font-size:8px;margin-left:auto;}
 
   /* Nav + ribbon */
-  .nav{padding:0 8px;gap:6px;height:28px;}
-  .live{font-size:9px;}
+  .nav{padding:0 8px;gap:6px;height:26px;overflow:hidden;position:relative;}
+  .news-ribbon{height:26px;}
+  .news-ribbon-inner{font-size:9px;}
+  .news-item{font-size:9px;gap:4px;}
+  .live{font-size:9px;flex-shrink:0;}
+
+  /* Mobile helpers */
+  .show-mobile{display:inline !important;}
+  .hide-mobile{display:none !important;}
 
   /* Ticker: horizontal scroll */
   .ticker{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:14px;padding:0 10px;height:24px;font-size:9px;}
@@ -200,11 +211,15 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   .r2,.r64,.r73,.r37{grid-template-columns:1fr;}
 
   /* Panels */
-  .pnl-h{flex-wrap:wrap;gap:4px;padding:4px 8px;}
+  .pnl-h{flex-wrap:nowrap;gap:4px;padding:4px 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .pnl-h>.pnl-t{flex-shrink:0;white-space:nowrap;font-size:8px;}
   .pnl-b{padding:6px 8px;}
   .pnl-t{font-size:9px;}
-  .ptabs{flex-wrap:wrap;gap:2px;}
-  .ptab{padding:2px 6px;font-size:9px;}
+  .ptabs{flex-wrap:nowrap;gap:1px;flex-shrink:0;}
+  .ptab{padding:2px 5px;font-size:8px;white-space:nowrap;}
+  /* Chart filter bar: single scrollable row */
+  .pnl-h div[style*="display:flex"]{flex-shrink:0;gap:6px;}
+  .pnl-h span[style*="width:1px"]{flex-shrink:0;}
 
   /* Charts: shorter */
   .ch-l{height:180px;}
@@ -328,7 +343,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 <!-- HISTORICAL + SCENARIOS -->
 <div class="pnl">
   <div class="pnl-h">
-    <span class="pnl-t">Historical Production & 2026 Scenarios</span>
+    <span class="pnl-t"><span class="hide-mobile">Historical Production & 2026 Scenarios</span><span class="show-mobile">Prod & Scenarios</span></span>
     <div style="display:flex;gap:10px;align-items:center;">
       <div class="ptabs" id="granTabs">
         <button class="ptab" onclick="setGran('M',this)">Monthly</button>
