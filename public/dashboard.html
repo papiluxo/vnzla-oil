@@ -18,7 +18,7 @@
   --t1:#e8eaed;--t2:#9aa0a6;--t3:#5f6368;--t4:#3c4043;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);font-size:12px;-webkit-font-smoothing:antialiased;}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);font-size:12px;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--t4);border-radius:2px;}
@@ -167,44 +167,88 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 @keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* MOBILE */
+/* ---- MOBILE ---- */
 @media(max-width:900px){
   .sidebar{display:none;}
-  .page{flex-direction:column;height:auto;}
+  .page{flex-direction:column;height:auto;overflow:visible;}
   .main{overflow:visible;padding:6px;}
 }
 @media(max-width:768px){
-  .kpi-strip{grid-template-columns:repeat(2,1fr);}
-  .r2,.r64,.r73,.r37{grid-template-columns:1fr;}
-  .sc-row{grid-template-columns:1fr;}
-  .src-grid{grid-template-columns:1fr;}
-  .topbar{font-size:9px;padding:0 8px;gap:8px;}
-  .topbar .brand{font-size:10px;}
-  .ticker{overflow-x:auto;gap:12px;padding:0 8px;}
-  .kpi-v{font-size:16px;}
+  /* Topbar: only show brand */
+  .topbar{padding:0 10px;gap:6px;overflow:hidden;}
+  .topbar .sep{display:none;}
+  .topbar span:not(.brand){display:none;}
+  .topbar .brand{display:block;font-size:10px;}
+  .topbar span:last-child{display:block;font-size:8px;margin-left:auto;}
+
+  /* Nav + ribbon */
+  .nav{padding:0 8px;gap:6px;height:28px;}
+  .live{font-size:9px;}
+
+  /* Ticker: horizontal scroll */
+  .ticker{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:14px;padding:0 10px;height:24px;font-size:9px;}
+
+  /* KPIs: 2-col, then 3-col at wider phone */
+  .kpi-strip{grid-template-columns:repeat(2,1fr);gap:4px;}
   .kpi{padding:6px 8px;}
-  .pnl-h{flex-wrap:wrap;gap:4px;}
-  .ptabs{flex-wrap:wrap;}
-  .ch-l{height:200px;}
-  .ch-m{height:170px;}
+  .kpi-l{font-size:7px;}
+  .kpi-v{font-size:15px;}
+  .kpi-s{font-size:8px;}
+  .kpi-c{font-size:8px;}
+
+  /* All grid rows: single column */
+  .r2,.r64,.r73,.r37{grid-template-columns:1fr;}
+
+  /* Panels */
+  .pnl-h{flex-wrap:wrap;gap:4px;padding:4px 8px;}
+  .pnl-b{padding:6px 8px;}
+  .pnl-t{font-size:9px;}
+  .ptabs{flex-wrap:wrap;gap:2px;}
+  .ptab{padding:2px 6px;font-size:9px;}
+
+  /* Charts: shorter */
+  .ch-l{height:180px;}
+  .ch-m{height:160px;}
+
+  /* Scenarios: single col, compact */
+  .sc-row{grid-template-columns:1fr;gap:3px;margin-bottom:4px;}
+  .sc{padding:6px 8px;}
   .sc-v{font-size:14px;}
   .sc-d,.sc-s{display:none;}
-  .tbl td,.tbl th{padding:4px 5px;font-size:10px;}
-  .sb-s{padding:8px 10px;}
+
+  /* Tables: scrollable, compact */
+  .tbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .tbl thead,.tbl tbody,.tbl tr{display:table;width:100%;table-layout:auto;}
+  .tbl td,.tbl th{padding:3px 5px;font-size:9px;white-space:nowrap;}
+
+  /* Map: shorter */
+  [style*="height:380px"]{height:280px !important;}
+
+  /* Infra bars */
+  .inf-r{font-size:9px;}
+
+  /* Callouts */
+  .co{font-size:9px;padding:5px 7px;}
+
+  /* Footer */
+  .footer{font-size:8px;padding:8px 10px;}
+
+  /* Sources grid */
+  .src-grid{grid-template-columns:1fr;}
+
+  /* Modal */
+  .mod{width:95vw;max-height:90vh;}
+  .dr-v{max-width:180px;font-size:10px;}
 }
-@media(max-width:480px){
-  .kpi-strip{grid-template-columns:repeat(2,1fr);gap:4px;}
-  .kpi-l{font-size:7px;}
-  .kpi-v{font-size:14px;}
-  .kpi-s,.kpi-c{font-size:8px;}
-  .news-ribbon{height:22px;}
-  .news-item{font-size:9px;}
-  .topbar span:not(.brand):not(.sep){display:none;}
-  .topbar .brand{display:block;}
-  .ticker{gap:10px;font-size:9px;}
-  .pnl-t{font-size:9px;}
-  .sc{padding:6px 8px;}
-  .co{font-size:9px;}
-  .mod{width:95vw;}
+@media(max-width:390px){
+  /* Very small phones */
+  .kpi-strip{grid-template-columns:1fr 1fr;gap:3px;}
+  .kpi-v{font-size:13px;}
+  .ticker{font-size:8px;gap:10px;}
+  .ch-l{height:150px;}
+  .ch-m{height:130px;}
+  .sc-row{display:none;}
+  [style*="height:380px"]{height:220px !important;}
 }
 </style>
 </head>
