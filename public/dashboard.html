@@ -931,7 +931,8 @@ mapObs.observe(document.getElementById('mapContainer'));
   try {
     const r=await fetch('/api/news');
     if(r.ok){
-      const news=await r.json();
+      const data=await r.json();
+      const news=data.items||data;
       const ribbon=document.getElementById('newsRibbon');
       if(ribbon&&news.length){
         ribbon.innerHTML=news.map(function(item){
