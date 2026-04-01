@@ -79,10 +79,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse;}
-.tbl th{text-align:left;font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:4px 7px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule-2);position:sticky;top:0;background:var(--panel);z-index:1;}
-.tbl th:last-child{border-right:none;}
-.tbl td{padding:5px 7px;border-bottom:1px solid var(--rule-2);border-right:1px solid var(--rule-2);font-size:11px;}
-.tbl td:last-child{border-right:none;}
+.tbl th{text-align:left;font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:4px 7px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--panel);z-index:1;}
+.tbl td{padding:5px 7px;border-bottom:1px solid var(--rule-2);font-size:11px;}
 .tbl tbody tr{cursor:pointer;transition:background .1s;}
 .tbl tbody tr:hover{background:var(--amber-dim);}
 .nm{font-weight:600;color:var(--t1);}
@@ -233,10 +231,17 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   .sc-v{font-size:14px;}
   .sc-d,.sc-s{display:none;}
 
-  /* Tables: scrollable, compact */
+  /* Tables: scrollable, fixed-width columns for alignment */
   .tbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .tbl thead,.tbl tbody,.tbl tr{display:table;width:100%;table-layout:auto;}
-  .tbl td,.tbl th{padding:3px 5px;font-size:9px;white-space:nowrap;}
+  .tbl thead,.tbl tbody,.tbl tr{display:table;table-layout:fixed;width:max-content;}
+  .tbl td,.tbl th{padding:3px 6px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tbl th:nth-child(1),.tbl td:nth-child(1){width:100px;} /* Company */
+  .tbl th:nth-child(2),.tbl td:nth-child(2){width:75px;}  /* Origin */
+  .tbl th:nth-child(3),.tbl td:nth-child(3){width:90px;}  /* OFAC */
+  .tbl th:nth-child(4),.tbl td:nth-child(4){width:65px;}  /* Prod */
+  .tbl th:nth-child(5),.tbl td:nth-child(5){width:90px;}  /* Guidance */
+  .tbl th:nth-child(6),.tbl td:nth-child(6){width:60px;}  /* Share */
+  .tbl th:nth-child(7),.tbl td:nth-child(7){width:130px;} /* Key JVs */
 
   /* Map: shorter */
   [style*="height:380px"]{height:280px !important;}
