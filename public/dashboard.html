@@ -154,17 +154,58 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 
 /* NEWS RIBBON */
 .news-ribbon{height:24px;background:#000;border-bottom:1px solid var(--rule);overflow:hidden;position:relative;}
-.news-ribbon-inner{display:flex;gap:40px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 60s linear infinite;position:absolute;padding-left:100%;}
+.news-ribbon-inner{display:flex;gap:48px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 140s linear infinite;position:absolute;padding-left:100%;}
 .news-ribbon-inner:hover{animation-play-state:paused;}
 .news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
 .news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}
 .news-item a:hover{color:var(--amber);}
 .news-time{color:var(--t4);font-size:9px;}
-.news-tag{color:var(--amber);font-weight:600;font-size:9px;letter-spacing:.3px;}
+.news-tag{font-weight:600;font-size:9px;letter-spacing:.3px;}
+.news-tag-x{color:var(--blue);}
+.news-tag-news{color:var(--amber);}
+.news-src{color:var(--t4);font-size:8px;}
 @keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
-@media(max-width:900px){.sidebar{display:none;}.page{flex-direction:column;height:auto;}.main{overflow:visible;}}
-@media(max-width:768px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.r2,.r64,.r73,.r37{grid-template-columns:1fr;}.sc-row{grid-template-columns:1fr;}.src-grid{grid-template-columns:1fr;}.ticker{display:none;}.news-ribbon{display:none;}}
+/* MOBILE */
+@media(max-width:900px){
+  .sidebar{display:none;}
+  .page{flex-direction:column;height:auto;}
+  .main{overflow:visible;padding:6px;}
+}
+@media(max-width:768px){
+  .kpi-strip{grid-template-columns:repeat(2,1fr);}
+  .r2,.r64,.r73,.r37{grid-template-columns:1fr;}
+  .sc-row{grid-template-columns:1fr;}
+  .src-grid{grid-template-columns:1fr;}
+  .topbar{font-size:9px;padding:0 8px;gap:8px;}
+  .topbar .brand{font-size:10px;}
+  .ticker{overflow-x:auto;gap:12px;padding:0 8px;}
+  .kpi-v{font-size:16px;}
+  .kpi{padding:6px 8px;}
+  .pnl-h{flex-wrap:wrap;gap:4px;}
+  .ptabs{flex-wrap:wrap;}
+  .ch-l{height:200px;}
+  .ch-m{height:170px;}
+  .sc-v{font-size:14px;}
+  .sc-d,.sc-s{display:none;}
+  .tbl td,.tbl th{padding:4px 5px;font-size:10px;}
+  .sb-s{padding:8px 10px;}
+}
+@media(max-width:480px){
+  .kpi-strip{grid-template-columns:repeat(2,1fr);gap:4px;}
+  .kpi-l{font-size:7px;}
+  .kpi-v{font-size:14px;}
+  .kpi-s,.kpi-c{font-size:8px;}
+  .news-ribbon{height:22px;}
+  .news-item{font-size:9px;}
+  .topbar span:not(.brand):not(.sep){display:none;}
+  .topbar .brand{display:block;}
+  .ticker{gap:10px;font-size:9px;}
+  .pnl-t{font-size:9px;}
+  .sc{padding:6px 8px;}
+  .co{font-size:9px;}
+  .mod{width:95vw;}
+}
 </style>
 </head>
 <body>
@@ -927,27 +968,34 @@ mapObs.observe(document.getElementById('mapContainer'));
     }
   }catch(e){console.log('Price fetch failed:',e);}
 
-  // Fetch news
+  // Fetch news + X posts
   try {
-    const r=await fetch('/api/news');
-    if(r.ok){
-      const data=await r.json();
-      const news=data.items||data;
-      const ribbon=document.getElementById('newsRibbon');
-      if(ribbon&&news.length){
-        ribbon.innerHTML=news.map(function(item){
-          const d=new Date(item.pubDate);
-          const ago=Math.floor((Date.now()-d.getTime())/3600000);
-          const time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';
-          return '<span class="news-item"><span class="news-tag">NEWS</span><span class="news-time">'+time+'</span><a href="'+item.link+'" target="_blank">'+item.title+'</a></span>';
-        }).join('')+'&nbsp;&nbsp;&nbsp;&nbsp;'+news.map(function(item){
-          var d=new Date(item.pubDate);var ago=Math.floor((Date.now()-d.getTime())/3600000);
-          var time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';
-          return '<span class="news-item"><span class="news-tag">NEWS</span><span class="news-time">'+time+'</span><a href="'+item.link+'" target="_blank">'+item.title+'</a></span>';
-        }).join('');
+    var allItems=[];
+    // Fetch X posts first (higher alpha)
+    try {
+      var xr=await fetch('/api/x');
+      if(xr.ok){var xd=await xr.json();(xd.items||[]).forEach(function(t){allItems.push({type:'x',title:t.text,link:t.url,time:t.created_at,author:t.author});});}
+    }catch(e){}
+    // Fetch news
+    try {
+      var nr=await fetch('/api/news');
+      if(nr.ok){var nd=await nr.json();(nd.items||[]).forEach(function(n){allItems.push({type:'news',title:n.title,link:n.link,time:n.pubDate,author:n.source});});}
+    }catch(e){}
+    // Sort by recency
+    allItems.sort(function(a,b){return new Date(b.time)-new Date(a.time);});
+    var ribbon=document.getElementById('newsRibbon');
+    if(ribbon&&allItems.length){
+      function fmtAgo(t){var ago=Math.floor((Date.now()-new Date(t).getTime())/3600000);return ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';}
+      function mkItem(item){
+        var tag=item.type==='x'?'<span class="news-tag news-tag-x">X</span>':'<span class="news-tag news-tag-news">NEWS</span>';
+        var src=item.author?'<span class="news-src">'+item.author+'</span>':'';
+        return '<span class="news-item">'+tag+'<span class="news-time">'+fmtAgo(item.time)+'</span>'+src+'<a href="'+item.link+'" target="_blank" rel="noopener">'+item.title.substring(0,120)+'</a></span>';
       }
+      // Duplicate for seamless loop
+      var html=allItems.map(mkItem).join('');
+      ribbon.innerHTML=html+html;
     }
-  }catch(e){console.log('News fetch failed:',e);}
+  }catch(e){console.log('Feed fetch failed:',e);}
 })();
 </script>
 </body>

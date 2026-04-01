@@ -1,6 +1,8 @@
 {
   "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
   "prompts": [
-    "still not visible [Image #1] and lets have the news be a ribbon on the top that slides w news articles related to venezuela oil prod or overall market news on oil"
+    "still not visible [Image #1] and lets have the news be a ribbon on the top that slides w news articles related to venezuela oil prod or overall market news on oil",
+    "the news ribbon says \"loading, fetching latest headlines...\" lets fix that",
+    "lets optimize for mobile ui now in case someone opens in phone. also the news ribbon speed is too fast, and they all seem somewhat old news. lets be more precise and intentional abt the news stories there, we could be tracking hormuz stuff or maybe even x posts that are mentioning venezuela oil prod (i like the x posts better cause its higher speed alpha)"
   ]
 }

@@ -275,5 +275,183 @@
       "description": "Commit and push static HTML approach"
     },
     "tool_use_id": "toolu_013x8FHZQahFXqDjGCJE5DJa"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "npx vercel --prod --yes 2>&1 | tail -5",
+      "timeout": 120000,
+      "description": "Deploy to Vercel production"
+    },
+    "tool_use_id": "toolu_01M4vixkpMbUEScv9pwrmK6J"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s https://vnzla-oil.vercel.app/api/news | head -100",
+      "description": "Check news API response"
+    },
+    "tool_use_id": "toolu_01RtdK59fRBgqmSmQTn1CVc3"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    const r=await fetch('/api/news');\n    if(r.ok){\n      const news=await r.json();",
+      "new_string": "    const r=await fetch('/api/news');\n    if(r.ok){\n      const data=await r.json();\n      const news=data.items||data;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Pz17PkDGLjdGW17ofPep63"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add public/dashboard.html && git commit -m \"Fix news ribbon: API returns {items:[...]} not bare array\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\" && git push origin main",
+      "description": "Commit and push fix"
+    },
+    "tool_use_id": "toolu_013jTBqwewmQaxzwpmnHmKaj"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "npx vercel --prod --yes 2>&1 | tail -3",
+      "timeout": 120000,
+      "description": "Deploy fix"
+    },
+    "tool_use_id": "toolu_013AviLuHKeJBx8zLPwBr2LY"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/news/route.ts"
+    },
+    "tool_use_id": "toolu_01Jno3p2MKaTnoQahSPCsyZq"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "scrollNews|news-ribbon|@media.*768",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01Lqw32AZXZd9nAb8Xi8p3pQ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 48,
+      "limit": 8
+    },
+    "tool_use_id": "toolu_01WUbRVG6udEnGoVVMhFN38n"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "/* NEWS RIBBON */\n.news-ribbon{height:24px;background:#000;border-bottom:1px solid var(--rule);overflow:hidden;position:relative;}\n.news-ribbon-inner{display:flex;gap:40px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 60s linear infinite;position:absolute;padding-left:100%;}\n.news-ribbon-inner:hover{animation-play-state:paused;}\n.news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}\n.news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}\n.news-item a:hover{color:var(--amber);}\n.news-time{color:var(--t4);font-size:9px;}\n.news-tag{color:var(--amber);font-weight:600;font-size:9px;letter-spacing:.3px;}\n@keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}\n\n@media(max-width:900px){.sidebar{display:none;}.page{flex-direction:column;height:auto;}.main{overflow:visible;}}\n@media(max-width:768px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.r2,.r64,.r73,.r37{grid-template-columns:1fr;}.sc-row{grid-template-columns:1fr;}.src-grid{grid-template-columns:1fr;}.ticker{display:none;}.news-ribbon{display:none;}}",
+      "new_string": "/* NEWS RIBBON */\n.news-ribbon{height:24px;background:#000;border-bottom:1px solid var(--rule);overflow:hidden;position:relative;}\n.news-ribbon-inner{display:flex;gap:48px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 140s linear infinite;position:absolute;padding-left:100%;}\n.news-ribbon-inner:hover{animation-play-state:paused;}\n.news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}\n.news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}\n.news-item a:hover{color:var(--amber);}\n.news-time{color:var(--t4);font-size:9px;}\n.news-tag{font-weight:600;font-size:9px;letter-spacing:.3px;}\n.news-tag-x{color:var(--blue);}\n.news-tag-news{color:var(--amber);}\n.news-src{color:var(--t4);font-size:8px;}\n@keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}\n\n/* MOBILE */\n@media(max-width:900px){\n  .sidebar{display:none;}\n  .page{flex-direction:column;height:auto;}\n  .main{overflow:visible;padding:6px;}\n}\n@media(max-width:768px){\n  .kpi-strip{grid-template-columns:repeat(2,1fr);}\n  .r2,.r64,.r73,.r37{grid-template-columns:1fr;}\n  .sc-row{grid-template-columns:1fr;}\n  .src-grid{grid-template-columns:1fr;}\n  .topbar{font-size:9px;padding:0 8px;gap:8px;}\n  .topbar .brand{font-size:10px;}\n  .ticker{overflow-x:auto;gap:12px;padding:0 8px;}\n  .kpi-v{font-size:16px;}\n  .kpi{padding:6px 8px;}\n  .pnl-h{flex-wrap:wrap;gap:4px;}\n  .ptabs{flex-wrap:wrap;}\n  .ch-l{height:200px;}\n  .ch-m{height:170px;}\n  .sc-v{font-size:14px;}\n  .sc-d,.sc-s{display:none;}\n  .tbl td,.tbl th{padding:4px 5px;font-size:10px;}\n  .sb-s{padding:8px 10px;}\n}\n@media(max-width:480px){\n  .kpi-strip{grid-template-columns:repeat(2,1fr);gap:4px;}\n  .kpi-l{font-size:7px;}\n  .kpi-v{font-size:14px;}\n  .kpi-s,.kpi-c{font-size:8px;}\n  .news-ribbon{height:22px;}\n  .news-item{font-size:9px;}\n  .topbar span:not(.brand):not(.sep){display:none;}\n  .topbar .brand{display:block;}\n  .ticker{gap:10px;font-size:9px;}\n  .pnl-t{font-size:9px;}\n  .sc{padding:6px 8px;}\n  .co{font-size:9px;}\n  .mod{width:95vw;}\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_011zBNxhgX9DTeJuuvbwBYJ7"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  // Fetch news\n  try {\n    const r=await fetch('/api/news');\n    if(r.ok){\n      const data=await r.json();\n      const news=data.items||data;\n      const ribbon=document.getElementById('newsRibbon');\n      if(ribbon&&news.length){\n        ribbon.innerHTML=news.map(function(item){\n          const d=new Date(item.pubDate);\n          const ago=Math.floor((Date.now()-d.getTime())/3600000);\n          const time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';\n          return '<span class=\"news-item\"><span class=\"news-tag\">NEWS</span><span class=\"news-time\">'+time+'</span><a href=\"'+item.link+'\" target=\"_blank\">'+item.title+'</a></span>';\n        }).join('')+'&nbsp;&nbsp;&nbsp;&nbsp;'+news.map(function(item){\n          var d=new Date(item.pubDate);var ago=Math.floor((Date.now()-d.getTime())/3600000);\n          var time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';\n          return '<span class=\"news-item\"><span class=\"news-tag\">NEWS</span><span class=\"news-time\">'+time+'</span><a href=\"'+item.link+'\" target=\"_blank\">'+item.title+'</a></span>';\n        }).join('');\n      }\n    }\n  }catch(e){console.log('News fetch failed:',e);}",
+      "new_string": "  // Fetch news + X posts\n  try {\n    var allItems=[];\n    // Fetch X posts first (higher alpha)\n    try {\n      var xr=await fetch('/api/x');\n      if(xr.ok){var xd=await xr.json();(xd.items||[]).forEach(function(t){allItems.push({type:'x',title:t.text,link:t.url,time:t.created_at,author:t.author});});}\n    }catch(e){}\n    // Fetch news\n    try {\n      var nr=await fetch('/api/news');\n      if(nr.ok){var nd=await nr.json();(nd.items||[]).forEach(function(n){allItems.push({type:'news',title:n.title,link:n.link,time:n.pubDate,author:n.source});});}\n    }catch(e){}\n    // Sort by recency\n    allItems.sort(function(a,b){return new Date(b.time)-new Date(a.time);});\n    var ribbon=document.getElementById('newsRibbon');\n    if(ribbon&&allItems.length){\n      function fmtAgo(t){var ago=Math.floor((Date.now()-new Date(t).getTime())/3600000);return ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';}\n      function mkItem(item){\n        var tag=item.type==='x'?'<span class=\"news-tag news-tag-x\">X</span>':'<span class=\"news-tag news-tag-news\">NEWS</span>';\n        var src=item.author?'<span class=\"news-src\">'+item.author+'</span>':'';\n        return '<span class=\"news-item\">'+tag+'<span class=\"news-time\">'+fmtAgo(item.time)+'</span>'+src+'<a href=\"'+item.link+'\" target=\"_blank\" rel=\"noopener\">'+item.title.substring(0,120)+'</a></span>';\n      }\n      // Duplicate for seamless loop\n      var html=allItems.map(mkItem).join('');\n      ribbon.innerHTML=html+html;\n    }\n  }catch(e){console.log('Feed fetch failed:',e);}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01EbbFoAkuHWVFharN6X91Ab"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/x/route.ts",
+      "content": "import { NextResponse } from 'next/server';\n\n// X/Twitter API v2 \u2014 Recent Search\n// Requires TWITTER_BEARER_TOKEN env var (Basic tier $100/mo or Academic Research)\n// Falls back gracefully if not configured\n\ninterface Tweet {\n  text: string;\n  url: string;\n  created_at: string;\n  author: string;\n}\n\nexport async function GET() {\n  const token = process.env.TWITTER_BEARER_TOKEN;\n\n  if (!token) {\n    // No token configured \u2014 return empty so news ribbon falls back to RSS\n    return NextResponse.json(\n      { items: [], note: 'TWITTER_BEARER_TOKEN not configured', timestamp: new Date().toISOString() },\n      { headers: { 'Cache-Control': 'public, s-maxage=60' } }\n    );\n  }\n\n  try {\n    const query = encodeURIComponent(\n      '(venezuela oil OR PDVSA OR \"venezuelan crude\" OR \"venezuela production\") -is:retweet lang:en'\n    );\n    const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=10&sort_order=relevancy&tweet.fields=created_at,author_id,public_metrics&expansions=author_id&user.fields=username,name`;\n\n    const res = await fetch(url, {\n      headers: { Authorization: `Bearer ${token}` },\n      next: { revalidate: 900 }, // 15-min cache\n    });\n\n    if (!res.ok) {\n      const err = await res.text();\n      console.error('[api/x] Twitter API error:', res.status, err);\n      return NextResponse.json(\n        { items: [], error: `Twitter API ${res.status}`, timestamp: new Date().toISOString() },\n        { status: 200 } // Don't break the ribbon\n      );\n    }\n\n    const data = await res.json();\n    const users = new Map<string, string>();\n    if (data.includes?.users) {\n      for (const u of data.includes.users) {\n        users.set(u.id, `@${u.username}`);\n      }\n    }\n\n    const items: Tweet[] = (data.data || []).map((t: { text: string; id: string; created_at: string; author_id: string }) => ({\n      text: t.text.replace(/https:\\/\\/t\\.co\\/\\S+/g, '').trim().substring(0, 140),\n      url: `https://x.com/i/status/${t.id}`,\n      created_at: t.created_at,\n      author: users.get(t.author_id) || '',\n    }));\n\n    return NextResponse.json(\n      { items, timestamp: new Date().toISOString() },\n      { headers: { 'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=300' } }\n    );\n  } catch (err) {\n    console.error('[api/x] fetch failed:', err);\n    return NextResponse.json(\n      { items: [], error: 'X feed unavailable', timestamp: new Date().toISOString() },\n      { status: 200 }\n    );\n  }\n}\n"
+    },
+    "tool_use_id": "toolu_01Rq25cGbHXk1cvicidnoxLR"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/news/route.ts",
+      "content": "import { NextResponse } from 'next/server';\n\ninterface NewsItem {\n  title: string;\n  link: string;\n  pubDate: string;\n  source: string;\n}\n\nfunction parseRSS(xml: string): NewsItem[] {\n  const items: NewsItem[] = [];\n  const itemMatches = xml.matchAll(/<item>([\\s\\S]*?)<\\/item>/g);\n\n  for (const match of itemMatches) {\n    const block = match[1];\n    const title = block.match(/<title><!\\[CDATA\\[(.*?)\\]\\]><\\/title>/)?.[1]\n      ?? block.match(/<title>(.*?)<\\/title>/)?.[1]\n      ?? '';\n    const link = block.match(/<link>(.*?)<\\/link>/)?.[1]\n      ?? block.match(/<guid>(.*?)<\\/guid>/)?.[1]\n      ?? '';\n    const pubDate = block.match(/<pubDate>(.*?)<\\/pubDate>/)?.[1] ?? '';\n\n    // Google News encodes source after last \" - \"\n    const titleParts = title.split(' - ');\n    const source = titleParts.length > 1 ? titleParts[titleParts.length - 1].trim() : '';\n    const cleanTitle = titleParts.slice(0, -1).join(' - ').trim() || title;\n\n    if (cleanTitle && link) {\n      items.push({ title: cleanTitle, link, pubDate, source });\n    }\n  }\n  return items;\n}\n\nconst RSS_FEEDS = [\n  // Multiple queries for broader, fresher coverage\n  'https://news.google.com/rss/search?q=venezuela+oil+production+sanctions&hl=en-US&gl=US&ceid=US:en',\n  'https://news.google.com/rss/search?q=PDVSA+chevron+venezuela&hl=en-US&gl=US&ceid=US:en',\n  'https://news.google.com/rss/search?q=brent+crude+oil+price+hormuz&hl=en-US&gl=US&ceid=US:en',\n  'https://news.google.com/rss/search?q=oil+market+OPEC+production&hl=en-US&gl=US&ceid=US:en',\n];\n\nexport async function GET() {\n  try {\n    // Fetch all feeds in parallel\n    const results = await Promise.allSettled(\n      RSS_FEEDS.map(url =>\n        fetch(url, {\n          headers: {\n            'User-Agent': 'Mozilla/5.0 (compatible; vnzla-oil-dashboard/1.0)',\n            Accept: 'application/rss+xml, application/xml, text/xml',\n          },\n          next: { revalidate: 1800 }, // 30-min cache per feed\n        }).then(r => r.ok ? r.text() : '')\n      )\n    );\n\n    // Collect and deduplicate\n    const seen = new Set<string>();\n    const allItems: NewsItem[] = [];\n\n    for (const result of results) {\n      if (result.status === 'fulfilled' && result.value) {\n        for (const item of parseRSS(result.value)) {\n          const key = item.title.toLowerCase().substring(0, 60);\n          if (!seen.has(key)) {\n            seen.add(key);\n            allItems.push(item);\n          }\n        }\n      }\n    }\n\n    // Sort by date descending, take top 15\n    allItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());\n    const items = allItems.slice(0, 15);\n\n    return NextResponse.json(\n      { items, timestamp: new Date().toISOString() },\n      { headers: { 'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=300' } }\n    );\n  } catch (err) {\n    console.error('[api/news] fetch failed:', err);\n    return NextResponse.json(\n      { items: [], error: 'News feed unavailable', timestamp: new Date().toISOString() },\n      { status: 503 }\n    );\n  }\n}\n"
+    },
+    "tool_use_id": "toolu_01S1wkWWyR4fonNFFLTnVxWA"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nMobile UI + slower news ribbon + X posts + multi-source news\n\n- Mobile responsive: 768px and 480px breakpoints with proper\n  KPI grid, chart heights, table density, scenario card collapse\n- News ribbon slowed from 60s to 140s animation\n- /api/x endpoint for Twitter/X posts (needs TWITTER_BEARER_TOKEN env var)\n- /api/news now queries 4 RSS feeds in parallel (Venezuela oil,\n  PDVSA/Chevron, Brent/Hormuz, OPEC) \u2014 deduped, sorted by recency, top 15\n- Ribbon shows X posts (blue tag) + news (amber tag) with source attribution\n- Falls back gracefully to news-only when X token not configured\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main",
+      "description": "Commit and push all changes"
+    },
+    "tool_use_id": "toolu_01Nn3SsGdCsydyAvgPnjETYr"
   }
 ]
