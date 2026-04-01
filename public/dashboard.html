@@ -465,6 +465,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
       <button class="ptab" onclick="mapFilter('infra',this)">Infra</button>
       <button class="ptab" onclick="mapFilter('gl50a',this)">GL-50A</button>
       <button class="ptab" onclick="mapFilter('excluded',this)">Excluded</button>
+      <button class="ptab" onclick="mapFilter('spill',this)" style="color:var(--red)">Spills</button>
     </div>
   </div>
   <div id="mapContainer" style="flex:1;position:relative;">
@@ -478,6 +479,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
       <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#1abc9c;margin-right:2px;"></span>Gas</span>
       <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#2980b9;margin-right:2px;"></span>Refinery</span>
       <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#8e44ad;margin-right:2px;"></span>Terminal</span>
+      <span><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff1744;margin-right:2px;border:1px solid rgba(255,23,68,.4);"></span>Oil Spill</span>
     </div>
   </div>
 </div>
@@ -951,7 +953,19 @@ const mapData=[
   {id:24,name:'El Palito Refinery',lat:10.47,lon:-68.13,op:'PDVSA',type:'refinery',cat:'infra',bpd:140000,ofac:'PDVSA — sanctioned',notes:'Puerto Cabello, Carabobo. 140K bpd nameplate. Receives western crude. Frequently offline.'}
 ];
 
-const typeColors={'field':'#e67e22','upgrader_field':'#c0392b','offshore_gas_field':'#1abc9c','gas_field':'#16a085','refinery':'#2980b9','terminal_refinery':'#8e44ad','upgrader_terminal':'#8e44ad'};
+const spillData=[
+  {id:'s1',name:'LOL-3 Pipeline Rupture',lat:11.62,lon:-70.23,date:'Jan 4, 2025',volume:'~90,000 bbl',area:'',cause:'Pipeline rupture — corroded safety shutoff valves',status:'Repaired Jan 22 — cleanup disputed',impact:'1,953 fishermen affected, 5,000 families; mangroves, seagrass, migratory birds. 70th spill in this area since 2019.',src:'La Patilla'},
+  {id:'s2',name:'Amuay Refinery Overflow',lat:11.75,lon:-70.22,date:'Late Jan 2025',volume:'Undisclosed',area:'',cause:'Storage tank overflow — operational negligence',status:'Unknown — no PDVSA disclosure',impact:'Proximity to Gulf of Venezuela coast.',src:'pdvsa-adhoc.com'},
+  {id:'s3',name:'Lake Maracaibo Chronic Leaks',lat:9.80,lon:-71.60,date:'Ongoing (Jan 2025)',volume:'~1,000 bbl/day chronic',area:'13,000 km² estuary',cause:'~15,000 abandoned/active wells; infrastructure >50 years old',status:'Ongoing / uncontainable',impact:'Vanadium and lead in fish; 200 km mangrove shoreline; 1.6M people\'s drinking water at risk.',src:'OilPrice.com'},
+  {id:'s4',name:'LOL Pipeline — Mitare Beach',lat:11.60,lon:-70.15,date:'Feb 5, 2025',volume:'>150K bbl cumulative since 2020',area:'',cause:'Pipeline rupture — new failure <15 days after previous repair',status:'Temporary repair (foam clamps, sandbags)',impact:'Red/black mangroves destroyed; seagrass contaminated; endangered sea turtles; 7,000 fishing families across 55 communities.',src:'La Patilla'},
+  {id:'s5',name:'Monagas–José Pipeline Rupture',lat:9.70,lon:-64.50,date:'Late Feb 2025',volume:'>24,000 bbl',area:'',cause:'Pipeline rupture — crude transport to José Complex',status:'Media access blocked by National Guard; cameras confiscated',impact:'Pao Aribi river contaminated; streams, ponds, farmland affected; human health problems documented.',src:'Atmosi.com'},
+  {id:'s6',name:'J-20 Station Spill, Morichal',lat:9.05,lon:-63.00,date:'~Jan 15, 2025',volume:'Up to ~50,000 bbl',area:'',cause:'Flow station failure — PDVSA inspected but took no action',status:'PDVSA did not remediate',impact:'Hydrocarbons in surrounding waters; La Pica river threatened; llanos ecosystem at risk.',src:'Reuters/Nasdaq'},
+  {id:'s7',name:'El Palito / Golfo Triste Slick',lat:10.55,lon:-68.10,date:'Mar 2025',volume:'Undisclosed',area:'225 km² oil slick',cause:'Refinery discharge — 3rd spill from El Palito (prior: Dec 2023, Aug 2024)',status:'Slick reached Falcón coast; cleanup unpublished',impact:'Morrocoy National Park: mangroves, coral reefs, seagrass; sea turtle nesting grounds; migratory birds; tourism industry.',src:'Maritime Executive'},
+  {id:'s8',name:'LOL Pipeline — Carirubana',lat:11.63,lon:-70.24,date:'Mar 25, 2026',volume:'Moderate (undisclosed)',area:'',cause:'Pipeline rupture near Cardón refinery — chronic infrastructure failure',status:'Containment teams deployed; pipeline halted',impact:'Crude visible in Gulf of Coro; fishing grounds contaminated.',src:'Reuters/PGJ Online'},
+  {id:'s9',name:'LOL Pipeline — Miranda',lat:11.45,lon:-69.85,date:'Mar 26, 2026',volume:'Moderate (undisclosed)',area:'',cause:'Pipeline rupture — 2nd failure within 24h on same system',status:'Containment deployed',impact:'Compounded contamination of Gulf of Coro from two simultaneous failures.',src:'Reuters'}
+];
+
+const typeColors={'field':'#e67e22','upgrader_field':'#c0392b','offshore_gas_field':'#1abc9c','gas_field':'#16a085','refinery':'#2980b9','terminal_refinery':'#8e44ad','upgrader_terminal':'#8e44ad','spill':'#ff1744'};
 const gl50aOps=['Chevron','Shell','Repsol','ENI','Maurel & Prom','BP'];
 
 function initMap(){
@@ -962,29 +976,31 @@ function initMap(){
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',maxZoom:18
   }).addTo(leafMap);
 
+  // Infrastructure markers
   mapData.forEach(f=>{
     const color=typeColors[f.type]||'#95a5a6';
     const radius=f.bpd>100000?10:f.bpd>50000?8:f.bpd>10000?6:f.cat==='infra'?9:5;
     const m=L.circleMarker([f.lat,f.lon],{radius,fillColor:color,color:'#fff',weight:1,opacity:.8,fillOpacity:.85}).addTo(leafMap);
-    m._data=f;
-    const prodStr=f.bpd>0?(f.cat==='infra'?`Nameplate: ${f.bpd.toLocaleString()} bpd`:`Production: ${f.bpd.toLocaleString()} bpd`):'Pre-production / Gas';
-    const ofacColor=f.ofac.includes('GL-50A')?'#00d26a':f.ofac.includes('EXCLUDED')?'#ff4d4d':f.ofac.includes('disavowed')?'#ff4d4d':'#ff9f1a';
-    m.bindPopup(`
-      <div style="font-family:'IBM Plex Sans',sans-serif;min-width:220px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:4px;">${f.name}</div>
-        <div style="font-size:11px;color:#888;margin-bottom:6px;">${f.op}</div>
-        <div style="font-size:11px;margin-bottom:3px;"><strong>Type:</strong> ${f.type.replace(/_/g,' ')}</div>
-        <div style="font-size:11px;margin-bottom:3px;"><strong>${prodStr}</strong></div>
-        <div style="font-size:11px;margin-bottom:6px;">OFAC: <span style="color:${ofacColor};font-weight:600;">${f.ofac}</span></div>
-        <div style="font-size:10px;color:#aaa;line-height:1.4;">${f.notes}</div>
-      </div>
-    `,{className:'custom-popup',maxWidth:280});
+    m._data=f;m._isSpill=false;
+    const prodStr=f.bpd>0?(f.cat==='infra'?'Nameplate: '+f.bpd.toLocaleString()+' bpd':'Production: '+f.bpd.toLocaleString()+' bpd'):'Pre-production / Gas';
+    const ofacColor=f.ofac.includes('GL-5')?'#00d26a':f.ofac.includes('EXCLUDED')?'#ff4d4d':f.ofac.includes('disavowed')?'#ff4d4d':'#ff9f1a';
+    m.bindPopup('<div style="font-family:IBM Plex Sans,sans-serif;min-width:220px;"><div style="font-size:13px;font-weight:700;margin-bottom:4px;">'+f.name+'</div><div style="font-size:11px;color:#888;margin-bottom:6px;">'+f.op+'</div><div style="font-size:11px;margin-bottom:3px;"><strong>Type:</strong> '+f.type.replace(/_/g,' ')+'</div><div style="font-size:11px;margin-bottom:3px;"><strong>'+prodStr+'</strong></div><div style="font-size:11px;margin-bottom:6px;">OFAC: <span style="color:'+ofacColor+';font-weight:600;">'+f.ofac+'</span></div><div style="font-size:10px;color:#aaa;line-height:1.4;">'+f.notes+'</div></div>',{className:'custom-popup',maxWidth:280});
+    mapMarkers.push(m);
+  });
+
+  // Oil spill markers — pulsing red circles
+  spillData.forEach(s=>{
+    const m=L.circleMarker([s.lat,s.lon],{radius:7,fillColor:'#ff1744',color:'rgba(255,23,68,.4)',weight:3,opacity:.9,fillOpacity:.7}).addTo(leafMap);
+    m._data={cat:'spill',op:'PDVSA'};m._isSpill=true;m._spillData=s;
+    var volLine=s.volume?'<div style="font-size:11px;margin-bottom:3px;"><strong>Volume:</strong> '+s.volume+'</div>':'';
+    var areaLine=s.area?'<div style="font-size:11px;margin-bottom:3px;"><strong>Area:</strong> '+s.area+'</div>':'';
+    m.bindPopup('<div style="font-family:IBM Plex Sans,sans-serif;min-width:240px;"><div style="font-size:13px;font-weight:700;color:#ff1744;margin-bottom:2px;">⚠ '+s.name+'</div><div style="font-size:10px;color:#888;margin-bottom:6px;">'+s.date+' · PDVSA</div><div style="font-size:11px;margin-bottom:3px;"><strong>Cause:</strong> '+s.cause+'</div>'+volLine+areaLine+'<div style="font-size:11px;margin-bottom:3px;"><strong>Status:</strong> '+s.status+'</div><div style="font-size:10px;color:#ff8a80;line-height:1.4;margin-top:4px;border-top:1px solid rgba(255,255,255,.06);padding-top:4px;"><strong>Impact:</strong> '+s.impact+'</div><div style="font-size:9px;color:#666;margin-top:4px;">Source: '+s.src+'</div></div>',{className:'custom-popup',maxWidth:300});
     mapMarkers.push(m);
   });
 
   // Style popups
   const style=document.createElement('style');
-  style.textContent=`.custom-popup .leaflet-popup-content-wrapper{background:#161a22;color:#e8eaed;border:1px solid rgba(255,255,255,.1);border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.5);}.custom-popup .leaflet-popup-tip{background:#161a22;border:1px solid rgba(255,255,255,.1);}.custom-popup .leaflet-popup-close-button{color:#5f6368;}.custom-popup .leaflet-popup-close-button:hover{color:#e8eaed;}`;
+  style.textContent='.custom-popup .leaflet-popup-content-wrapper{background:#161a22;color:#e8eaed;border:1px solid rgba(255,255,255,.1);border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.5);}.custom-popup .leaflet-popup-tip{background:#161a22;border:1px solid rgba(255,255,255,.1);}.custom-popup .leaflet-popup-close-button{color:#5f6368;}.custom-popup .leaflet-popup-close-button:hover{color:#e8eaed;}';
   document.head.appendChild(style);
 }
 
@@ -993,14 +1009,20 @@ function mapFilter(f,el){
   mapMarkers.forEach(m=>{
     const d=m._data;
     let show=true;
-    if(f==='field')show=d.cat==='field';
-    else if(f==='gas')show=d.cat==='gas';
-    else if(f==='infra')show=d.cat==='infra';
-    else if(f==='gl50a')show=gl50aOps.some(op=>d.op.includes(op));
-    else if(f==='excluded')show=d.ofac.includes('EXCLUDED')||d.ofac.includes('disavowed');
+    if(f==='spill')show=m._isSpill;
+    else if(f==='field')show=!m._isSpill&&d.cat==='field';
+    else if(f==='gas')show=!m._isSpill&&d.cat==='gas';
+    else if(f==='infra')show=!m._isSpill&&d.cat==='infra';
+    else if(f==='gl50a')show=!m._isSpill&&gl50aOps.some(function(op){return d.op&&d.op.includes(op);});
+    else if(f==='excluded')show=!m._isSpill&&d.ofac&&(d.ofac.includes('EXCLUDED')||d.ofac.includes('disavowed'));
+    // all = show everything including spills
     m.setStyle({fillOpacity:show?.85:.08,opacity:show?.8:.08});
-    if(show)m.setRadius(m._data.bpd>100000?10:m._data.bpd>50000?8:m._data.bpd>10000?6:m._data.cat==='infra'?9:5);
-    else m.setRadius(3);
+    if(m._isSpill){m.setRadius(show?7:2);}
+    else{
+      var bpd=m._data.bpd||0;
+      if(show)m.setRadius(bpd>100000?10:bpd>50000?8:bpd>10000?6:d.cat==='infra'?9:5);
+      else m.setRadius(3);
+    }
   });
 }
 
