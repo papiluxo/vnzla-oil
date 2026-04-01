@@ -1,7 +1,6 @@
 'use client';
 
-import Script from 'next/script';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface LivePrices {
   brent: { price: number; change: number; changePct: number };
@@ -13,116 +12,71 @@ interface DashboardProps {
   livePrices: LivePrices | null;
 }
 
+function loadScript(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => resolve();
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
 export default function Dashboard({ livePrices }: DashboardProps) {
-  const [scriptsReady, setScriptsReady] = useState(false);
   const initRef = useRef(false);
 
-  // Inject live prices into ticker after scripts load
   useEffect(() => {
-    if (!scriptsReady || !livePrices || initRef.current) return;
+    if (initRef.current) return;
     initRef.current = true;
 
-    const brent = livePrices.brent;
-    const wti = livePrices.wti;
+    (async () => {
+      // Load Chart.js and Leaflet sequentially to ensure they're on window
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
+      await loadScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
 
-    const fmt = (n: number) => n.toFixed(2);
-    const sign = (n: number) => (n >= 0 ? '+' : '');
-    const cls = (n: number) => (n >= 0 ? 't-up' : 't-dn');
+      // Now execute dashboard JS — DOM is ready, libs are loaded
+      const script = document.createElement('script');
+      script.textContent = dashboardJS;
+      document.body.appendChild(script);
 
-    // Update BRENT MAY tick
-    const ticks = document.querySelectorAll('.tick');
-    if (ticks[0]) {
-      const val = ticks[0].querySelector('.tick-v');
-      const chg = ticks[0].querySelector('.tick-c');
-      if (val) val.textContent = `$${fmt(brent.price)}`;
-      if (chg) {
-        chg.textContent = `${sign(brent.changePct)}${fmt(brent.changePct)}%`;
-        chg.className = `tick-c ${cls(brent.changePct)}`;
-      }
-    }
-    // Update WTI tick
-    if (ticks[2]) {
-      const val = ticks[2].querySelector('.tick-v');
-      const chg = ticks[2].querySelector('.tick-c');
-      if (val) val.textContent = `$${fmt(wti.price)}`;
-      if (chg) {
-        chg.textContent = `${sign(wti.changePct)}${fmt(wti.changePct)}%`;
-        chg.className = `tick-c ${cls(wti.changePct)}`;
-      }
-    }
+      // Inject live prices if available
+      if (livePrices) {
+        const fmt = (n: number) => n.toFixed(2);
+        const sign = (n: number) => (n >= 0 ? '+' : '');
+        const cls = (n: number) => (n >= 0 ? 't-up' : 't-dn');
+        const brent = livePrices.brent;
+        const wti = livePrices.wti;
 
-    // Update KPI Brent card (2nd KPI)
-    const kpis = document.querySelectorAll('.kpi');
-    if (kpis[1]) {
-      const val = kpis[1].querySelector('.kpi-v');
-      if (val) {
-        const dollars = Math.floor(brent.price);
-        const cents = fmt(brent.price).split('.')[1];
-        val.innerHTML = `$${dollars}<span style="font-size:11px">.${cents}</span>`;
+        const ticks = document.querySelectorAll('.tick');
+        if (ticks[0]) {
+          const val = ticks[0].querySelector('.tick-v');
+          const chg = ticks[0].querySelector('.tick-c');
+          if (val) val.textContent = `$${fmt(brent.price)}`;
+          if (chg) { chg.textContent = `${sign(brent.changePct)}${fmt(brent.changePct)}%`; chg.className = `tick-c ${cls(brent.changePct)}`; }
+        }
+        if (ticks[2]) {
+          const val = ticks[2].querySelector('.tick-v');
+          const chg = ticks[2].querySelector('.tick-c');
+          if (val) val.textContent = `$${fmt(wti.price)}`;
+          if (chg) { chg.textContent = `${sign(wti.changePct)}${fmt(wti.changePct)}%`; chg.className = `tick-c ${cls(wti.changePct)}`; }
+        }
+        const kpis = document.querySelectorAll('.kpi');
+        if (kpis[1]) {
+          const val = kpis[1].querySelector('.kpi-v');
+          if (val) { const d = Math.floor(brent.price); const c = fmt(brent.price).split('.')[1]; val.innerHTML = `$${d}<span style="font-size:11px">.${c}</span>`; }
+          const sub = kpis[1].querySelector('.kpi-c');
+          if (sub) { sub.textContent = `${sign(brent.changePct)}${fmt(brent.changePct)}% today · LIVE`; sub.className = `kpi-c ${cls(brent.changePct)}`; }
+        }
       }
-      const sub = kpis[1].querySelector('.kpi-c');
-      if (sub) {
-        sub.textContent = `${sign(brent.changePct)}${fmt(brent.changePct)}% today · LIVE`;
-        sub.className = `kpi-c ${cls(brent.changePct)}`;
-      }
-    }
-
-    // Update timestamp in topbar
-    const topbar = document.querySelector('.topbar');
-    if (topbar) {
-      const timeEl = topbar.querySelector('span:last-child');
-      if (timeEl) {
-        const d = new Date(livePrices.timestamp);
-        timeEl.textContent = d.toLocaleString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          timeZoneName: 'short',
-        });
-      }
-    }
-  }, [scriptsReady, livePrices]);
+    })();
+  }, [livePrices]);
 
   return (
     <>
-      {/* External CDN dependencies — load before dashboard JS */}
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      />
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
-      />
-      <Script
-        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
-        strategy="beforeInteractive"
-      />
-      <Script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        strategy="beforeInteractive"
-      />
-
-      {/* Inline dashboard styles */}
-      <style>{dashboardCSS}</style>
-
-      {/* Dashboard HTML structure */}
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" />
+      <style dangerouslySetInnerHTML={{ __html: dashboardCSS }} />
       <div dangerouslySetInnerHTML={{ __html: dashboardHTML }} />
-
-      {/* Dashboard JS — runs after DOM is ready */}
-      <Script
-        id="dashboard-js"
-        strategy="lazyOnload"
-        onReady={() => setScriptsReady(true)}
-      >
-        {dashboardJS}
-      </Script>
     </>
   );
 }
