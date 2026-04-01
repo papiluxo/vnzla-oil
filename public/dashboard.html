@@ -299,8 +299,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   <div class="tick"><span class="tick-l">BRENT JUN</span><span class="tick-v">$108.00</span><span class="tick-c t-up">+60% MTD</span></div>
   <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24</span><span class="tick-c t-up">+48% MTD</span></div>
   <div class="tick"><span class="tick-l">MEREY EST</span><span class="tick-v">~$99</span><span class="tick-c t-up">+75% vs 2025 avg</span></div>
-  <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">903–1,021K</span><span class="tick-c t-fl">FEB 26 RANGE</span></div>
-  <div class="tick"><span class="tick-l">GL-50A</span><span class="tick-v">6 COs</span><span class="tick-c t-up">AUTHORIZED</span></div>
+  <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">958–1,021K</span><span class="tick-c t-fl">FEB 26 RANGE</span></div>
+  <div class="tick"><span class="tick-l">OFAC GLs</span><span class="tick-v">GL-52 OPEN</span><span class="tick-c t-up">ALL US ENTITIES</span></div>
   <div class="tick"><span class="tick-l">CHN/RUS</span><span class="tick-v">EXCLUDED</span><span class="tick-c t-dn">OFAC</span></div>
   <div class="tick"><span class="tick-l">HORMUZ</span><span class="tick-v">DISRUPTED</span><span class="tick-c t-dn">SINCE MAR 2</span></div>
 </div>
@@ -313,7 +313,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 <div class="kpi-strip">
   <div class="kpi">
     <div class="kpi-l">Production (Feb 26)</div>
-    <div class="kpi-v">903<span style="font-size:11px;color:var(--t3)">–1,021K</span></div>
+    <div class="kpi-v">958<span style="font-size:11px;color:var(--t3)">–1,021K</span></div>
     <div class="kpi-s">CEIC crude vs TE w/ condensates</div>
     <div class="kpi-c t-up">Up from Jan 924K post-disruption</div>
   </div>
@@ -331,9 +331,9 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   </div>
   <div class="kpi">
     <div class="kpi-l">GL-50A Operators</div>
-    <div class="kpi-v" style="color:var(--green)">6</div>
-    <div class="kpi-s">BP CHV ENI REP SHL M&P</div>
-    <div class="kpi-c t-up">+3 added Feb 2026</div>
+    <div class="kpi-v" style="color:var(--green)">7+</div>
+    <div class="kpi-s">GL-50A Big Six + GL-52 US entities</div>
+    <div class="kpi-c t-up">GL-52 opened Mar 18</div>
   </div>
   <div class="kpi">
     <div class="kpi-l">Revenue (post-Jan 3)</div>
@@ -380,7 +380,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
       <div class="sc" onclick="pSc(this,'bull')"><div class="sc-tag" style="color:var(--green)">Bull — Full Reopening</div><div class="sc-v" style="color:var(--green)">1.4M</div><div class="sc-d">Broad relief · $10B+ capex · Upgrader restarts</div><div class="sc-s">JPMorgan 24-month horizon</div></div>
     </div>
     <div class="ch ch-l"><canvas id="hChart"></canvas></div>
-    <div style="margin-top:4px;font-size:9px;color:var(--t4);font-style:italic;">Sources vary: CEIC crude-only ~903K vs Trading Economics incl. condensates ~1,021K for Feb 2026. OPEC secondary vs IEA can differ by 70K+ bpd. Hover for period-over-period change.</div>
+    <div style="margin-top:4px;font-size:9px;color:var(--t4);font-style:italic;">Sources vary: CEIC crude-only ~903K (+ ~55K NABEP = ~958K) vs Trading Economics incl. condensates ~1,021K for Feb 2026. OPEC secondary vs IEA can differ by 70K+ bpd. Hover for period-over-period change.</div>
   </div>
 </div>
 
@@ -447,7 +447,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
     <div class="pnl-h"><span class="pnl-t">Critical Context</span></div>
     <div class="pnl-b" style="flex:1;display:flex;flex-direction:column;gap:8px;font-size:11px;color:var(--t2);line-height:1.5;">
       <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">POST-MADURO</strong>Captured Jan 3 by US forces. Rodríguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.</div>
-      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">REVENUE CONTROL</strong>EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr.</div>
+      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">REVENUE CONTROL</strong>EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 (Mar 18, 2026) broadened access beyond the Big Six — all established US entities now authorized for production &amp; JVs with PDVSA.</div>
       <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">HORMUZ CRISIS</strong>Strait disrupted since Mar 2. Brent +60% MTD — largest monthly surge since '88. Venezuela supply suddenly strategic to US.</div>
       <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">OPEC STATUS</strong>Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.</div>
     </div>
@@ -490,7 +490,9 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 <div class="sidebar">
   <div class="sb-s">
     <div class="sb-t">Sanctions & Policy Timeline</div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>MAR 18, 2026</div><div class="sb-text">GL-52: Broadest license yet — all established US entities authorized for production, JVs, and full oil/gas ops with PDVSA</div></div>
     <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>MAR 5, 2026</div><div class="sb-text">Shell signs oil/gas cooperation deals with PDVSA — witnessed by US Interior Sec. Burgum</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>MAR 13</div><div class="sb-text">GL-46B/48A/49A updates: expanded oil trade, goods/services, and contingent contracts</div></div>
     <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--amber)"></span>FEB 18</div><div class="sb-text">GL-50A: Maurel & Prom added to Big Six (Pertamina-owned, initially excluded)</div></div>
     <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>FEB 13</div><div class="sb-text">GL-49/50: Big Six authorized for full Venezuela oil/gas ops. GL-47 authorizes diluent exports</div></div>
     <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--red)"></span>FEB 12</div><div class="sb-text">Trump disavows Harry Sargeant III (NABEP) on Truth Social</div></div>
@@ -600,7 +602,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 </div>
 
 <script>
-const TOT=903; // CEIC crude-only baseline for share calculations
+const TOT=958; // CEIC crude-only baseline for share calculations (903 + 55 NABEP)
 const CO=[
   {n:'PDVSA',c:'Venezuela',f:'🇻🇪',tp:'State NOC',st:'active',ofac:'SDN — sanctioned',stL:'Active (sanctioned)',cur:200,curL:'~200K',tgt:'1.3M (national)',gl50a:false,excluded:false,assets:'Orinoco Belt · Lake Maracaibo · Paraguana',detail:'State monopoly; majority partner in all JVs. Direct ops ~200K bpd. 1.3M target carried from unmet 2024 goal. New hydrocarbon law (Jan 2026) ends PDVSA monopoly. Refining at ~20% capacity. $17.5B export revenue 2024. All transactions require OFAC authorization.',src:'EIA · iSANS · CRS'},
   {n:'Chevron',c:'United States',f:'🇺🇸',tp:'IOC — 4 JVs',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:242,curL:'242K',tgt:'Ayacucho-8 expansion',gl50a:true,excluded:false,assets:'Petropiar (107K) · Petroboscán (40K) · Petroindep. (34K)',detail:'Largest foreign operator — 27% of national output. GL-50A re-authorized Feb 2026. Negotiating Ayacucho-8 Orinoco expansion with reduced royalties. Deal review end-Mar 2026. Would become largest private Orinoco producer.',src:'EAI · OFAC · EnergyNow'},
@@ -612,7 +614,7 @@ const CO=[
   {n:'CNPC',c:'China',f:'🇨🇳',tp:'NOC — 4+ JVs',st:'excluded',ofac:'EXCLUDED',stL:'Excluded (OFAC)',cur:100,curL:'~100K',tgt:'Uncertain — "not welcome"',gl50a:false,excluded:true,assets:'Sinovensa (90-110K) · Petrourica · Petrozumano',detail:'All new GLs explicitly exclude Chinese entities. CNPC halted direct liftings; continued through traders. Declared "not welcome" post-Maduro. China bought ~82% of exports in 2025. Outstanding VZ debt to China: $10-15B. Bloomberg: claims on assets "tenuous."',src:'Bloomberg · S&P · Crowell'},
   {n:'CCRC',c:'China',f:'🇨🇳',tp:'Private E&P',st:'active',ofac:'Not named',stL:'Active (uncertain)',cur:12,curL:'12K',tgt:'60K by end-2026',gl50a:false,excluded:false,assets:'Lake Maracaibo · 2 oilfields (20-yr)',detail:'China Concord Resources — private firm. $1B+ committed under 20-year PSA (May 2024). 500 wells planned for 60K target. Not explicitly excluded (private, not state) but Chinese ownership complicates. Last verified output: 12K bpd (Aug 2025).',src:'OilPrice · BOE Report'},
   {n:'Roszarubezhneft',c:'Russia',f:'🇷🇺',tp:'State-linked — 5 JVs',st:'excluded',ofac:'EXCLUDED',stL:'Excluded (OFAC)',cur:130,curL:'~130K',tgt:'15-yr ext. but uncertain',gl50a:false,excluded:true,assets:'Petromonagas (87K) · Petrozamora · Petromiranda · Petrovictoria · Petroperija',detail:'Successor to Rosneft\'s VZ holdings. 5 JVs — much larger than initially apparent. All new GLs exclude Russian entities. Officially claims "all assets belong to Russia." 15-yr extension approved Nov 2025. $616M committed. Also holds Patao/Mejillones offshore gas (6.4 tcf).',src:'EnergyNow · Bloomberg · EI'},
-  {n:'NABEP',c:'United States',f:'🇺🇸',tp:'Private PSA',st:'excluded',ofac:'NOT in any GL',stL:'Disavowed by Trump',cur:0,curL:'Suspended',tgt:'Was targeting 300K',gl50a:false,excluded:true,assets:'Petrozamora · Junín Sur · Petrocedeño upgrader',detail:'North American Blue Energy Partners — Harry Sargeant III. Had ~55K bpd Petrozamora; combined ~126K. PDVSA projected 300K during 2026 if fully invested. Feb 12, 2026: Trump publicly disavowed Sargeant on Truth Social — "has no authority to act on behalf of the United States." NOT in any current GL.',src:'Guacamaya · Venezuela Politica · El Pitazo'},
+  {n:'NABEP',c:'United States',f:'🇺🇸',tp:'Private PSA',st:'active',ofac:'GL-52 (established US entity)',stL:'Active under GL-52',cur:55,curL:'~55K',tgt:'300K (PDVSA projection)',gl50a:false,excluded:false,assets:'Petrozamora · Junín Sur · Petrocedeño upgrader',detail:'North American Blue Energy Partners — Harry Sargeant III. ~55K bpd at Petrozamora (up from 25K in early 2024). Also operates Junín Sur + Petrocedeño upgrader (one of 2 functional upgraders). PDVSA projects 300K bpd if fully invested. GL-52 (Mar 18, 2026) authorized all established US entities for production/JVs with PDVSA — covers NABEP without needing specific license. Sargeant advising White House on Venezuela energy policy.',src:'Guacamaya · Venezuela Politica · El Pitazo'},
   {n:'ONGC Videsh',c:'India',f:'🇮🇳',tp:'NOC — JV Partner',st:'active',ofac:'Not named',stL:'Active (minimal)',cur:4,curL:'~4K',tgt:'Seeking expansion',gl50a:false,excluded:false,assets:'PIVSA / San Cristóbal · Petrocarabobo (11%)',detail:'Indian state NOC. PIVSA at ~4K bpd equity share. 11% in Petrocarabobo (designed 400K bpd, producing ~14K). Indian Oil (3.5%) + Oil India (3.5%) also in consortium. In talks with US to regain control.',src:'Offshore Tech · BOE Report'},
   {n:'Gold Reserve',c:'Canada',f:'🇨🇦',tp:'Junior Mining',st:'inactive',ofac:'N/A',stL:'No oil ops',cur:0,curL:'—',tgt:'—',gl50a:false,excluded:false,assets:'Brisas gold-copper (mining)',detail:'$740M ICSID award for expropriated Brisas. Mining only.',src:'Filings'},
   {n:'Harvest Natural',c:'United States',f:'🇺🇸',tp:'E&P (exited)',st:'inactive',ofac:'N/A',stL:'Exited ~2014',cur:0,curL:'—',tgt:'—',gl50a:false,excluded:false,assets:'Formerly Petrodelta',detail:'Exited circa 2013-14, sold 32% Petrodelta to CT Energy.',src:'Filings'}
@@ -849,10 +851,10 @@ new Chart(document.getElementById('exChart'),{
 // ---- COUNTRY BAR ----
 new Chart(document.getElementById('ctChart'),{
   type:'bar',
-  data:{labels:['US (Chevron)','VZ (PDVSA)','Russia','China','Spain','France','India','UK/NL (Shell+BP)'],
+  data:{labels:['US (CHV+NABEP)','VZ (PDVSA)','Russia','China','Spain','France','India','UK/NL (Shell+BP)'],
     datasets:[
-      {label:'Current',data:[242,200,130,112,50,20,4,0],backgroundColor:['#00d26a','#5b9cf6','#b197fc','#ff4d4d','#ff9f1a','#4ecdc4','#fb923c','#3c4043'],borderRadius:3,barPercentage:.5},
-      {label:'Upside',data:[55,0,0,48,30,10,15,100],backgroundColor:['rgba(0,210,106,.12)','rgba(91,156,246,.1)','rgba(177,151,252,.1)','rgba(255,77,77,.1)','rgba(255,159,26,.1)','rgba(78,205,196,.1)','rgba(251,146,60,.1)','rgba(60,64,67,.15)'],borderRadius:3,barPercentage:.5}
+      {label:'Current',data:[297,200,130,112,50,20,4,0],backgroundColor:['#00d26a','#5b9cf6','#b197fc','#ff4d4d','#ff9f1a','#4ecdc4','#fb923c','#3c4043'],borderRadius:3,barPercentage:.5},
+      {label:'Upside',data:[245,0,0,48,30,10,15,100],backgroundColor:['rgba(0,210,106,.12)','rgba(91,156,246,.1)','rgba(177,151,252,.1)','rgba(255,77,77,.1)','rgba(255,159,26,.1)','rgba(78,205,196,.1)','rgba(251,146,60,.1)','rgba(60,64,67,.15)'],borderRadius:3,barPercentage:.5}
     ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:10,font:{size:9}}},tooltip:{...tt,callbacks:{label:c=>`${c.dataset.label}: ${c.raw}K bpd`}}},
@@ -862,13 +864,13 @@ new Chart(document.getElementById('ctChart'),{
 // ---- JV BAR ----
 new Chart(document.getElementById('jvChart'),{
   type:'bar',
-  data:{labels:['Petropiar (CHV)','Sinovensa (CNPC)','Petromonagas (RUS)','Petrozamora (RUS)','Petroboscán (CHV)','Petroindep. (CHV)','Petroquiriquire (REP)','Petroregional (M&P)','Petrocarabobo (IND)','Petromiranda (RUS)','CCRC JVs','Petrovictoria (RUS)','PIVSA (ONGC)'],
-    datasets:[{data:[107,95,87,70,40,34,40,20,14,16,12,9,4],
-      backgroundColor:['#00d26a','#ff4d4d','#b197fc','#b197fc','#00d26a','#00d26a','#ff9f1a','#4ecdc4','#fb923c','#b197fc','#fbbf24','#b197fc','#fb923c'],borderRadius:2,barPercentage:.65}]},
+  data:{labels:['Petropiar (CHV)','Sinovensa (CNPC)','Petromonagas (RUS)','Petrozamora (NABEP)','Petroboscán (CHV)','Petroindep. (CHV)','Petroquiriquire (REP)','Petroregional (M&P)','Petrocarabobo (IND)','Petromiranda (RUS)','CCRC JVs','Petrovictoria (RUS)','PIVSA (ONGC)'],
+    datasets:[{data:[107,95,87,55,40,34,40,20,14,16,12,9,4],
+      backgroundColor:['#00d26a','#ff4d4d','#b197fc','#00d26a','#00d26a','#00d26a','#ff9f1a','#4ecdc4','#fb923c','#b197fc','#fbbf24','#b197fc','#fb923c'],borderRadius:2,barPercentage:.65}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:{...tt,callbacks:{
       label:c=>`${c.raw}K bpd`,
-      afterLabel:c=>{const notes={0:'GL-50A ✓ Record 109K May 25',1:'EXCLUDED — China',2:'EXCLUDED — Russia',3:'EXCLUDED — Russia',4:'GL-50A ✓',5:'GL-50A ✓',6:'GL-50A ✓ Resuming',7:'GL-50A ✓ Resuming',8:'In talks w/ US',9:'EXCLUDED — Russia',10:'Private Chinese — uncertain',11:'EXCLUDED — Russia',12:'In talks w/ US'};return notes[c.dataIndex]||'';}
+      afterLabel:c=>{const notes={0:'GL-50A ✓ Record 109K May 25',1:'EXCLUDED — China',2:'EXCLUDED — Russia',3:'GL-52 ✓ NABEP active ~55K bpd',4:'GL-50A ✓',5:'GL-50A ✓',6:'GL-50A ✓ Resuming',7:'GL-50A ✓ Resuming',8:'In talks w/ US',9:'EXCLUDED — Russia',10:'Private Chinese — uncertain',11:'EXCLUDED — Russia',12:'In talks w/ US'};return notes[c.dataIndex]||'';}
     }}},
     scales:{x:{title:{display:true,text:'K bpd',font:{size:9}},grid:{color:gridC}},y:{grid:{display:false},ticks:{font:{size:9}}}}}
 });
@@ -926,12 +928,12 @@ const mapData=[
   {id:1,name:'Petropiar (Hamaca)',lat:8.47,lon:-63.85,op:'PDVSA / Chevron',type:'upgrader_field',cat:'field',bpd:107000,ofac:'GL-50A ✓',notes:'Hamaca extra-heavy crude upgrader. Chevron ~30%. Record 109K bpd May 2025. One of 4 original Faja upgraders — one of 2 still partially operational.'},
   {id:2,name:'Sinovensa (Morichal)',lat:8.72,lon:-62.82,op:'PDVSA / CNPC',type:'field',cat:'field',bpd:95000,ofac:'EXCLUDED — China',notes:'CNPC 40%. Carabobo-1 block. Peaked at 160K bpd, now ~90-110K. Chinese entity excluded from all new OFAC GLs.'},
   {id:3,name:'Petromonagas (Zuata)',lat:8.31,lon:-64.28,op:'PDVSA / Roszarubezhneft',type:'upgrader_field',cat:'field',bpd:87000,ofac:'EXCLUDED — Russia',notes:'Formerly BP\'s block. Zuata upgrader. Roszarubezhneft ~17%. 15-yr extension approved Nov 2025.'},
-  {id:4,name:'Petrocedeño (Junín)',lat:8.18,lon:-64.55,op:'PDVSA (NABEP suspended)',type:'upgrader_field',cat:'field',bpd:40000,ofac:'NABEP disavowed',notes:'Formerly Sincor. Upgrader at ~25% capacity — key near-term upside if restarted. NABEP was operator before OFAC cancellation.'},
+  {id:4,name:'Petrocedeño (Junín)',lat:8.18,lon:-64.55,op:'PDVSA / NABEP',type:'upgrader_field',cat:'field',bpd:40000,ofac:'GL-52 ✓ (NABEP)',notes:'Formerly Sincor. NABEP active under GL-52 (Mar 18, 2026). Upgrader at ~25% capacity — key near-term upside. One of only 2 functional Orinoco upgraders. NABEP also operates Petrozamora (~55K bpd) and Junín Sur.'},
   {id:5,name:'Petroindependencia (Carabobo-3)',lat:8.62,lon:-63.12,op:'PDVSA / Chevron',type:'field',cat:'field',bpd:34000,ofac:'GL-50A ✓',notes:'Chevron 34%. Carabobo-3 block. Part of Chevron\'s 242K bpd combined output.'},
   {id:6,name:'Petrovictoria (Junín-6)',lat:8.05,lon:-64.72,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:9000,ofac:'EXCLUDED — Russia',notes:'Junín-6 block. Largely undeveloped. Russian entity excluded from new GLs.'},
   {id:7,name:'Petromiranda',lat:8.12,lon:-64.61,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:16000,ofac:'EXCLUDED — Russia',notes:'Grouped with Junín-6. Separate JV entity. Minimal active production.'},
   {id:8,name:'Petroboscán (Boscan)',lat:10.48,lon:-72.43,op:'PDVSA / Chevron',type:'field',cat:'field',bpd:40000,ofac:'GL-50A ✓',notes:'Zulia state, NW Lake Maracaibo. Heavy crude (12° API). Chevron 39.2%. One of Chevron\'s most active operations.'},
-  {id:9,name:'Petrozamora',lat:10.81,lon:-72.28,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:70000,ofac:'EXCLUDED — Russia',notes:'Northern Lake Maracaibo. NABEP was operator (~55K bpd) before suspension. Roszarubezhneft stake. Maduro targeted 100K bpd by end-2025.'},
+  {id:9,name:'Petrozamora',lat:10.81,lon:-72.28,op:'PDVSA / NABEP',type:'field',cat:'field',bpd:55000,ofac:'GL-52 ✓ (NABEP)',notes:'Northern Lake Maracaibo. NABEP (Harry Sargeant III) active operator under GL-52 — ~55K bpd. GL-52 (Mar 18, 2026) covers all established US entities without specific license. Roszarubezhneft retains minority stake but excluded from ops.'},
   {id:10,name:'Petroregional del Lago',lat:10.35,lon:-71.62,op:'PDVSA / Maurel & Prom',type:'field',cat:'field',bpd:20000,ofac:'GL-50A ✓ (Feb 18)',notes:'Eastern Lake Maracaibo. M&P ~40%. Added to GL-50A on Feb 18 after initial exclusion (Pertamina ownership).'},
   {id:11,name:'Petroquiriquire',lat:10.07,lon:-63.20,op:'PDVSA / Repsol',type:'field',cat:'field',bpd:40000,ofac:'GL-50A ✓',notes:'Monagas state (eastern VZ, not Maracaibo). Repsol ~15%. Oil + associated gas. Conventional reservoir.'},
   {id:12,name:'Boqueron / Petroperija',lat:10.22,lon:-72.68,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:8000,ofac:'EXCLUDED — Russia',notes:'Sierra de Perijá foothills, Zulia. Conventional heavy crude. 15-yr extension approved Nov 2025.'},
