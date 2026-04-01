@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VNZLA OIL — 2026 Production Guidance</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1117;--panel:#161a22;--panel-2:#1c2028;
+  --rule:rgba(255,255,255,.07);--rule-2:rgba(255,255,255,.04);
+  --amber:#ff9f1a;--amber-dim:rgba(255,159,26,.08);
+  --green:#00d26a;--red:#ff4d4d;--blue:#5b9cf6;
+  --cyan:#4ecdc4;--purple:#b197fc;
+  --t1:#e8eaed;--t2:#9aa0a6;--t3:#5f6368;--t4:#3c4043;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);font-size:12px;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--t4);border-radius:2px;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* TOPBAR */
+.topbar{height:30px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:16px;font-size:10px;color:var(--t3);}
+.topbar .brand{color:var(--amber);font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;}
+.topbar .sep{width:1px;height:14px;background:var(--t4);}
+
+/* NAV */
+.nav{height:34px;background:var(--panel);border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:2px;}
+.nav-tab{padding:5px 14px;font-size:11px;font-weight:500;color:var(--t2);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
+.nav-tab:hover{color:var(--t1);}
+.nav-tab.on{color:var(--amber);border-bottom-color:var(--amber);}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:10px;color:var(--t3);}
+.nav-r .live{color:var(--green);font-weight:600;}
+
+/* TICKER */
+.ticker{height:26px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:20px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:10px;white-space:nowrap;}
+.tick{display:flex;align-items:center;gap:5px;}
+.tick-l{color:var(--t4);font-weight:500;}
+.tick-v{color:var(--t1);font-weight:600;}
+.tick-c{font-weight:600;}
+.t-up{color:var(--green);}
+.t-dn{color:var(--red);}
+.t-fl{color:var(--amber);}
+
+/* LAYOUT */
+.page{display:flex;height:calc(100vh - 90px);overflow:hidden;}
+.main{flex:1;overflow-y:auto;padding:10px;}
+.sidebar{width:330px;border-left:1px solid var(--rule);overflow-y:auto;background:var(--panel);}
+
+/* PANELS */
+.pnl{background:var(--panel);border:1px solid var(--rule);margin-bottom:6px;}
+.pnl-h{padding:5px 10px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.015);}
+.pnl-t{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;}
+.pnl-b{padding:8px 10px;}
+.ptabs{display:flex;gap:1px;}
+.ptab{padding:2px 9px;font-size:10px;font-weight:500;background:transparent;border:none;color:var(--t3);cursor:pointer;transition:all .1s;}
+.ptab:hover{color:var(--t2);}
+.ptab.on{color:var(--amber);background:var(--amber-dim);}
+
+/* KPI */
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px;}
+.kpi{background:var(--panel);border:1px solid var(--rule);padding:8px 10px;}
+.kpi-l{font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:3px;}
+.kpi-v{font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace;line-height:1.1;}
+.kpi-s{font-size:9px;color:var(--t3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+.kpi-c{font-size:9px;font-weight:600;margin-top:1px;font-family:'IBM Plex Mono',monospace;}
+
+/* GRID */
+.row{display:grid;gap:6px;margin-bottom:6px;}
+.r2{grid-template-columns:1fr 1fr;}
+.r64{grid-template-columns:6fr 4fr;}
+.r73{grid-template-columns:7fr 3fr;}
+.r37{grid-template-columns:3fr 7fr;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:4px 7px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--panel);z-index:1;}
+.tbl td{padding:5px 7px;border-bottom:1px solid var(--rule-2);font-size:11px;}
+.tbl tbody tr{cursor:pointer;transition:background .1s;}
+.tbl tbody tr:hover{background:var(--amber-dim);}
+.nm{font-weight:600;color:var(--t1);}
+.dim{color:var(--t3);}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px;}
+.d-on{background:var(--green);}.d-lim{background:var(--amber);}.d-off{background:var(--red);}.d-x{background:var(--t4);}
+.bar-t{height:3px;background:var(--t4);border-radius:1px;min-width:50px;overflow:hidden;}
+.bar-f{height:100%;border-radius:1px;}
+
+/* CHART */
+.ch{position:relative;width:100%;}
+.ch-l{height:240px;}.ch-m{height:200px;}.ch-s{height:160px;}
+
+/* SCENARIOS */
+.sc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px;}
+.sc{padding:8px 10px;border:1px solid var(--rule);background:var(--panel);cursor:pointer;transition:all .15s;}
+.sc:hover{border-color:var(--t4);}
+.sc.on{border-color:var(--amber);background:var(--amber-dim);}
+.sc-tag{font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px;}
+.sc-v{font-size:17px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.sc-d{font-size:9px;color:var(--t3);margin-top:2px;line-height:1.3;}
+.sc-s{font-size:8px;color:var(--t4);margin-top:1px;font-style:italic;}
+
+/* SIDEBAR */
+.sb-s{border-bottom:1px solid var(--rule);padding:10px 12px;}
+.sb-t{font-size:9px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.sb-item{margin-bottom:8px;}
+.sb-date{font-size:9px;color:var(--t4);font-family:'IBM Plex Mono',monospace;font-weight:500;}
+.sb-text{font-size:10px;color:var(--t2);line-height:1.35;margin-top:1px;}
+.sb-dot{display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:4px;}
+
+/* INFRA */
+.inf{margin-bottom:6px;}
+.inf-r{display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;}
+.inf-r span:first-child{color:var(--t2);}
+.inf-r span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--t1);font-weight:500;font-size:10px;}
+.inf-bar{height:3px;background:var(--t4);border-radius:1px;overflow:hidden;}
+.inf-fill{height:100%;border-radius:1px;transition:width 1s ease;}
+
+/* CALLOUT */
+.co{padding:7px 9px;border-left:2px solid;font-size:10px;line-height:1.4;color:var(--t2);margin-top:6px;}
+.co-r{border-color:var(--red);background:rgba(255,77,77,.03);}
+.co-a{border-color:var(--amber);background:var(--amber-dim);}
+.co-g{border-color:var(--green);background:rgba(0,210,106,.03);}
+
+/* SOURCES */
+.src-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.src-box{padding:8px 10px;border:1px solid var(--rule);background:var(--panel);}
+.src-tl{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:5px;}
+.src-a{display:block;font-size:10px;color:var(--blue);text-decoration:none;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.src-a:hover{color:var(--amber);}
+.src-tag{font-size:8px;color:var(--t4);background:var(--panel-2);padding:0 3px;border-radius:2px;margin-right:3px;font-weight:600;display:inline-block;}
+
+/* MODAL */
+.mod-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:center;justify-content:center;}
+.mod-bg.open{display:flex;}
+.mod{background:var(--panel);border:1px solid var(--rule);width:540px;max-height:80vh;overflow-y:auto;}
+.mod-h{padding:8px 12px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02);}
+.mod-h h2{font-size:13px;font-weight:600;}
+.mod-x{width:22px;height:22px;border:1px solid var(--rule);background:transparent;color:var(--t3);cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;}
+.mod-x:hover{color:var(--t1);background:var(--panel-2);}
+.mod-b{padding:12px;}
+.dr{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--rule-2);}
+.dr-l{font-size:11px;color:var(--t3);}
+.dr-v{font-size:11px;font-weight:600;text-align:right;max-width:280px;}
+.ds{margin-top:10px;}
+.ds h3{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600;}
+.ds p{font-size:11px;color:var(--t2);line-height:1.55;}
+
+.footer{padding:10px 16px;font-size:9px;color:var(--t4);border-top:1px solid var(--rule);background:var(--panel);text-align:center;}
+
+/* NEWS RIBBON */
+.news-ribbon{height:24px;background:#000;border-bottom:1px solid var(--rule);overflow:hidden;position:relative;}
+.news-ribbon-inner{display:flex;gap:40px;align-items:center;height:100%;white-space:nowrap;animation:scrollNews 60s linear infinite;position:absolute;padding-left:100%;}
+.news-ribbon-inner:hover{animation-play-state:paused;}
+.news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
+.news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}
+.news-item a:hover{color:var(--amber);}
+.news-time{color:var(--t4);font-size:9px;}
+.news-tag{color:var(--amber);font-weight:600;font-size:9px;letter-spacing:.3px;}
+@keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+
+@media(max-width:900px){.sidebar{display:none;}.page{flex-direction:column;height:auto;}.main{overflow:visible;}}
+@media(max-width:768px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.r2,.r64,.r73,.r37{grid-template-columns:1fr;}.sc-row{grid-template-columns:1fr;}.src-grid{grid-template-columns:1fr;}.ticker{display:none;}.news-ribbon{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="brand">VNZLA OIL</span><span class="sep"></span>
+  <span>Venezuela Crude Oil Production Intelligence</span><span class="sep"></span>
+  <span>2026 Guidance Dashboard</span>
+  <span style="margin-left:auto">31 Mar 2026 15:42 EST</span>
+</div>
+
+<div class="news-ribbon">
+  <div class="news-ribbon-inner" id="newsRibbon">
+    <span class="news-item"><span class="news-tag">LOADING</span> Fetching latest headlines...</span>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-r" style="margin-left:0;"><span class="live">LIVE</span><span>EIA / OPEC / OFAC / Kpler / CEIC</span></div>
+</div>
+
+<div class="ticker">
+  <div class="tick"><span class="tick-l">BRENT MAY</span><span class="tick-v">$118.35</span><span class="tick-c t-up">+5.0%</span></div>
+  <div class="tick"><span class="tick-l">BRENT JUN</span><span class="tick-v">$108.00</span><span class="tick-c t-up">+60% MTD</span></div>
+  <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24</span><span class="tick-c t-up">+48% MTD</span></div>
+  <div class="tick"><span class="tick-l">MEREY EST</span><span class="tick-v">~$99</span><span class="tick-c t-up">+75% vs 2025 avg</span></div>
+  <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">903–1,021K</span><span class="tick-c t-fl">FEB 26 RANGE</span></div>
+  <div class="tick"><span class="tick-l">GL-50A</span><span class="tick-v">6 COs</span><span class="tick-c t-up">AUTHORIZED</span></div>
+  <div class="tick"><span class="tick-l">CHN/RUS</span><span class="tick-v">EXCLUDED</span><span class="tick-c t-dn">OFAC</span></div>
+  <div class="tick"><span class="tick-l">HORMUZ</span><span class="tick-v">DISRUPTED</span><span class="tick-c t-dn">SINCE MAR 2</span></div>
+</div>
+
+<div class="page">
+<div class="main">
+<div>
+
+<!-- KPIs -->
+<div class="kpi-strip">
+  <div class="kpi">
+    <div class="kpi-l">Production (Feb 26)</div>
+    <div class="kpi-v">903<span style="font-size:11px;color:var(--t3)">–1,021K</span></div>
+    <div class="kpi-s">CEIC crude vs TE w/ condensates</div>
+    <div class="kpi-c t-up">Up from Jan 924K post-disruption</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Brent (May Contract)</div>
+    <div class="kpi-v" style="color:var(--green)">$118<span style="font-size:11px">.35</span></div>
+    <div class="kpi-s">Hormuz premium</div>
+    <div class="kpi-c t-up">+60% MTD — best since '88</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Merey Blend (est.)</div>
+    <div class="kpi-v">~$99</div>
+    <div class="kpi-s">$8-10 discount to Brent</div>
+    <div class="kpi-c t-up">+75% vs 2025 avg ($56.68)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">GL-50A Operators</div>
+    <div class="kpi-v" style="color:var(--green)">6</div>
+    <div class="kpi-s">BP CHV ENI REP SHL M&P</div>
+    <div class="kpi-c t-up">+3 added Feb 2026</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Revenue (post-Jan 3)</div>
+    <div class="kpi-v">$1<span style="font-size:11px;color:var(--t3)">B+</span></div>
+    <div class="kpi-s">US-controlled escrow</div>
+    <div class="kpi-c">$5B projected near-term</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">External Debt</div>
+    <div class="kpi-v" style="color:var(--red)">$160<span style="font-size:11px">B</span></div>
+    <div class="kpi-s">Default since 2017</div>
+    <div class="kpi-c t-dn">2x GDP (~$80B)</div>
+  </div>
+</div>
+
+<!-- HISTORICAL + SCENARIOS -->
+<div class="pnl">
+  <div class="pnl-h">
+    <span class="pnl-t">Historical Production & 2026 Scenarios</span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <div class="ptabs" id="granTabs">
+        <button class="ptab" onclick="setGran('M',this)">Monthly</button>
+        <button class="ptab" onclick="setGran('Q',this)">Quarterly</button>
+        <button class="ptab on" onclick="setGran('A',this)">Annual</button>
+      </div>
+      <span style="width:1px;height:14px;background:var(--t4)"></span>
+      <div class="ptabs" id="rangeTabs">
+        <button class="ptab" onclick="setRng('1Y',this)">1Y</button>
+        <button class="ptab" onclick="setRng('3Y',this)">3Y</button>
+        <button class="ptab" onclick="setRng('5Y',this)">5Y</button>
+        <button class="ptab on" onclick="setRng('MAX',this)">Max</button>
+      </div>
+      <span style="width:1px;height:14px;background:var(--t4)"></span>
+      <button id="projToggle" onclick="toggleProj()" class="ptab on" style="display:flex;align-items:center;gap:4px;">
+        <span id="projDot" style="width:6px;height:6px;border-radius:50%;background:var(--amber);transition:all .2s;"></span>
+        Projections
+      </button>
+    </div>
+  </div>
+  <div class="pnl-b">
+    <div class="sc-row" id="scRow">
+      <div class="sc on" onclick="pSc(this,'bear')"><div class="sc-tag" style="color:var(--red)">Bear — Sanctions Hold</div><div class="sc-v" style="color:var(--red)">900K</div><div class="sc-d">No new licenses · Infra decay · China/Russia excluded</div><div class="sc-s">Goldman Sachs base case</div></div>
+      <div class="sc" onclick="pSc(this,'base')"><div class="sc-tag" style="color:var(--amber)">Base — GL-50A Ramp</div><div class="sc-v" style="color:var(--amber)">1.2M</div><div class="sc-d">Big Six ramp · Shell Dragon FID · Chevron Ayacucho-8</div><div class="sc-s">Kpler / analyst consensus</div></div>
+      <div class="sc" onclick="pSc(this,'bull')"><div class="sc-tag" style="color:var(--green)">Bull — Full Reopening</div><div class="sc-v" style="color:var(--green)">1.4M</div><div class="sc-d">Broad relief · $10B+ capex · Upgrader restarts</div><div class="sc-s">JPMorgan 24-month horizon</div></div>
+    </div>
+    <div class="ch ch-l"><canvas id="hChart"></canvas></div>
+    <div style="margin-top:4px;font-size:9px;color:var(--t4);font-style:italic;">Sources vary: CEIC crude-only ~903K vs Trading Economics incl. condensates ~1,021K for Feb 2026. OPEC secondary vs IEA can differ by 70K+ bpd. Hover for period-over-period change.</div>
+  </div>
+</div>
+
+<!-- PRODUCER TABLE -->
+<div class="pnl">
+  <div class="pnl-h">
+    <span class="pnl-t">All Producers</span>
+    <div class="ptabs">
+      <button class="ptab on" onclick="ft('all',this)">All (14)</button>
+      <button class="ptab" onclick="ft('gl50a',this)">GL-50A</button>
+      <button class="ptab" onclick="ft('active',this)">Active</button>
+      <button class="ptab" onclick="ft('excluded',this)">Excluded</button>
+    </div>
+  </div>
+  <div>
+    <table class="tbl" id="tbl"><thead><tr>
+      <th>Company</th><th>Origin</th><th>OFAC</th><th>Prod (bpd)</th><th>2026 Guidance</th><th>Share</th><th>Key JVs</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
+</div>
+
+<!-- EXPORT DESTINATIONS + COUNTRY BAR -->
+<div class="row r2">
+  <div class="pnl">
+    <div class="pnl-h"><span class="pnl-t">Export Destinations (2025 Avg)</span></div>
+    <div class="pnl-b"><div class="ch ch-m"><canvas id="exChart"></canvas></div></div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-h"><span class="pnl-t">Output by Country of Origin + Upside</span></div>
+    <div class="pnl-b"><div class="ch ch-m"><canvas id="ctChart"></canvas></div></div>
+  </div>
+</div>
+
+<!-- JV BAR + INFRA -->
+<div class="row r2">
+  <div class="pnl">
+    <div class="pnl-h"><span class="pnl-t">Empresas Mixtas — JV Output (K bpd)</span></div>
+    <div class="pnl-b"><div class="ch ch-m"><canvas id="jvChart"></canvas></div></div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-h"><span class="pnl-t">Infrastructure Utilization</span></div>
+    <div class="pnl-b">
+      <div class="inf"><div class="inf-r"><span>Paraguana Refinery (955K design)</span><span>~20%</span></div><div class="inf-bar"><div class="inf-fill" data-w="20" style="background:var(--red);width:0"></div></div></div>
+      <div class="inf"><div class="inf-r"><span>Petropiar Upgrader</span><span>~65%</span></div><div class="inf-bar"><div class="inf-fill" data-w="65" style="background:var(--amber);width:0"></div></div></div>
+      <div class="inf"><div class="inf-r"><span>Petrocedeño Upgrader (key upside)</span><span>~25%</span></div><div class="inf-bar"><div class="inf-fill" data-w="25" style="background:var(--red);width:0"></div></div></div>
+      <div class="inf"><div class="inf-r"><span>Storage Tanks</span><span>~66%</span></div><div class="inf-bar"><div class="inf-fill" data-w="66" style="background:var(--amber);width:0"></div></div></div>
+      <div class="inf"><div class="inf-r"><span>Pipeline Network</span><span>~40%</span></div><div class="inf-bar"><div class="inf-fill" data-w="40" style="background:var(--red);width:0"></div></div></div>
+      <div class="inf"><div class="inf-r"><span>Technical Workforce (vs 2014)</span><span>~30%</span></div><div class="inf-bar"><div class="inf-fill" data-w="30" style="background:var(--red);width:0"></div></div></div>
+      <div class="co co-r">$10–20B and several years needed before output exceeds 1.5M bpd. Only 2/4 Orinoco upgraders partially functional. GL-47 authorizes diluent exports. — CFR, Rystad</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIAL + CRITICAL CONTEXT -->
+<div class="row r2" style="align-items:stretch;">
+  <div class="pnl" style="display:flex;flex-direction:column;">
+    <div class="pnl-h"><span class="pnl-t">Financial Overview</span></div>
+    <div class="pnl-b" style="flex:1;"><div class="ch" style="height:180px;"><canvas id="finChart"></canvas></div></div>
+    <div style="padding:0 10px 8px 10px;">
+      <div class="co co-a">ExxonMobil CEO: "uninvestable." ConocoPhillips owed ~$10B. No firm capex commitments from Big Six. Trump's $100B investment claim unverified. — Fortune, CNBC</div>
+    </div>
+  </div>
+  <div class="pnl" style="display:flex;flex-direction:column;">
+    <div class="pnl-h"><span class="pnl-t">Critical Context</span></div>
+    <div class="pnl-b" style="flex:1;display:flex;flex-direction:column;gap:8px;font-size:11px;color:var(--t2);line-height:1.5;">
+      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">POST-MADURO</strong>Captured Jan 3 by US forces. Rodríguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.</div>
+      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">REVENUE CONTROL</strong>EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr.</div>
+      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">HORMUZ CRISIS</strong>Strait disrupted since Mar 2. Brent +60% MTD — largest monthly surge since '88. Venezuela supply suddenly strategic to US.</div>
+      <div><strong style="color:var(--t1);font-size:10px;display:block;margin-bottom:2px;">OPEC STATUS</strong>Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="pnl" style="height:380px;display:flex;flex-direction:column;">
+  <div class="pnl-h">
+    <span class="pnl-t">Infrastructure Map</span>
+    <div class="ptabs" id="mapFilterTabs">
+      <button class="ptab on" onclick="mapFilter('all',this)">All</button>
+      <button class="ptab" onclick="mapFilter('field',this)">Fields</button>
+      <button class="ptab" onclick="mapFilter('gas',this)">Gas</button>
+      <button class="ptab" onclick="mapFilter('infra',this)">Infra</button>
+      <button class="ptab" onclick="mapFilter('gl50a',this)">GL-50A</button>
+      <button class="ptab" onclick="mapFilter('excluded',this)">Excluded</button>
+    </div>
+  </div>
+  <div id="mapContainer" style="flex:1;position:relative;">
+    <div id="map" style="height:100%;width:100%;"></div>
+    <div id="mapOverlay" onclick="activateMap()" style="position:absolute;inset:0;z-index:999;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.15);transition:opacity .3s;">
+      <span style="background:rgba(22,26,34,.9);border:1px solid var(--rule);padding:6px 14px;font-size:10px;color:var(--t2);font-weight:500;">Click to interact with map</span>
+    </div>
+    <div style="position:absolute;bottom:8px;left:8px;background:rgba(22,26,34,.9);border:1px solid var(--rule);padding:4px 6px;z-index:1000;font-size:8px;display:flex;gap:6px;">
+      <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#e67e22;margin-right:2px;"></span>Oil</span>
+      <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#c0392b;margin-right:2px;"></span>Upgrader</span>
+      <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#1abc9c;margin-right:2px;"></span>Gas</span>
+      <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#2980b9;margin-right:2px;"></span>Refinery</span>
+      <span><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#8e44ad;margin-right:2px;"></span>Terminal</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div><!-- /main -->
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-s">
+    <div class="sb-t">Sanctions & Policy Timeline</div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>MAR 5, 2026</div><div class="sb-text">Shell signs oil/gas cooperation deals with PDVSA — witnessed by US Interior Sec. Burgum</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--amber)"></span>FEB 18</div><div class="sb-text">GL-50A: Maurel & Prom added to Big Six (Pertamina-owned, initially excluded)</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>FEB 13</div><div class="sb-text">GL-49/50: Big Six authorized for full Venezuela oil/gas ops. GL-47 authorizes diluent exports</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--red)"></span>FEB 12</div><div class="sb-text">Trump disavows Harry Sargeant III (NABEP) on Truth Social</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>JAN 9</div><div class="sb-text">EO 14373: All Venezuelan oil revenue to US-controlled Treasury accounts</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>JAN 3</div><div class="sb-text">Maduro captured by US special forces. Rodríguez assumes presidency</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--amber)"></span>NOV 2025</div><div class="sb-text">Assembly approves 15-yr Russian JV extension through 2041</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--green)"></span>JUL 2025</div><div class="sb-text">OFAC issues new license — Chevron JVs resume ops</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--red)"></span>APR 2025</div><div class="sb-text">25% US tariff on Venezuelan oil importers</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--red)"></span>MAR 2025</div><div class="sb-text">OFAC revokes Repsol, ENI, M&P licenses</div></div>
+    <div class="sb-item"><div class="sb-date"><span class="sb-dot" style="background:var(--red)"></span>FEB 2025</div><div class="sb-text">Trump revokes Chevron Biden-era GL-41</div></div>
+  </div>
+  <div class="sb-s">
+    <div class="sb-t">GL-50A — "Big Six"</div>
+    <div style="font-size:10px;line-height:1.7;color:var(--t2);">
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span><span class="dot d-on"></span>BP</span><span class="mono dim">UK · New entrant</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span><span class="dot d-on"></span>Chevron</span><span class="mono dim">US · 242K bpd</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span><span class="dot d-on"></span>ENI</span><span class="mono dim">IT · Resuming</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span><span class="dot d-on"></span>Repsol</span><span class="mono dim">ES · Resuming</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span><span class="dot d-on"></span>Shell</span><span class="mono dim">NL · Dragon Gas</span></div>
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span><span class="dot d-on"></span>Maurel & Prom</span><span class="mono dim">FR · Feb 18</span></div>
+    </div>
+    <div class="co co-a" style="margin-top:6px;font-size:9px;">US-law governed contracts only. Payments to OFAC Foreign Government Deposit Funds. No Chinese/Russian/Iranian counterparties. 10-day + 90-day reporting requirements.</div>
+  </div>
+  <div class="sb-s">
+    <div class="sb-t">Active Deals (Q1 2026)</div>
+    <div class="sb-item"><div class="sb-text"><strong style="color:var(--t1)">Shell — Dragon Gas:</strong> 350 mmcfd offshore to Trinidad LNG. FID possible 2026. First gas 2027–28.</div></div>
+    <div class="sb-item"><div class="sb-text"><strong style="color:var(--t1)">Shell — Carito/Pirital:</strong> 94K bpd crude + 1 Bcfd gas. 350 mmcfd currently flared.</div></div>
+    <div class="sb-item"><div class="sb-text"><strong style="color:var(--t1)">Chevron — Ayacucho 8:</strong> Orinoco expansion. Reduced royalties. Review end-Mar.</div></div>
+    <div class="sb-item"><div class="sb-text"><strong style="color:var(--t1)">CCRC — Maracaibo:</strong> $1B, 500 wells, 60K target end-2026. Status uncertain post-Jan.</div></div>
+  </div>
+  <div class="sb-s">
+    <div class="sb-t">Debt Exposure</div>
+    <div style="font-size:10px;line-height:1.7;color:var(--t2);">
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span>Bondholders (prin+int)</span><span class="mono" style="color:var(--red)">~$100B</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span>China (outstanding)</span><span class="mono" style="color:var(--red)">$10–15B</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span>Russia (outstanding)</span><span class="mono" style="color:var(--red)">~$5B</span></div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--rule-2);padding:2px 0"><span>ConocoPhillips (arb.)</span><span class="mono" style="color:var(--amber)">~$10B</span></div>
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span>Total external</span><span class="mono" style="color:var(--red);font-weight:600">~$160B</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+  Data: EIA, OPEC, OFAC, CEIC, Trading Economics, Kpler, Goldman Sachs, JPMorgan, Rystad, S&P Global, Mayer Brown, Cleary Gottlieb, Crowell & Moring
+  &nbsp;|&nbsp; Updated 31 Mar 2026
+  &nbsp;|&nbsp; <a href="#" onclick="document.getElementById('srcBg').classList.add('open');return false;" style="color:var(--blue);text-decoration:none;">View All Sources &rarr;</a>
+</div>
+
+<!-- Sources Modal -->
+<div class="mod-bg" id="srcBg" style="z-index:400;" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="mod" style="width:720px;" onclick="event.stopPropagation()">
+    <div class="mod-h"><h2>Sources & References</h2><button class="mod-x" onclick="document.getElementById('srcBg').classList.remove('open')">&#10005;</button></div>
+    <div class="mod-b">
+      <div class="src-grid">
+        <div class="src-box">
+          <div class="src-tl">OFAC & Legal</div>
+          <a class="src-a" href="https://ofac.treasury.gov/recent-actions/20260213" target="_blank"><span class="src-tag">OFAC</span>GL-49/GL-50 Issuance</a>
+          <a class="src-a" href="https://www.mayerbrown.com/en/insights/publications/2026/02/ofac-issues-new-general-licenses-expanding-permitted-activities-in-the-venezuelan-energy-sector" target="_blank"><span class="src-tag">MB</span>GL-47–50A Analysis</a>
+          <a class="src-a" href="https://www.mayerbrown.com/en/insights/publications/2026/01/new-executive-order-shields-venezuelan-oil-revenue-in-us-government-custody" target="_blank"><span class="src-tag">MB</span>EO 14373 Revenue Shield</a>
+          <a class="src-a" href="https://www.clearygottlieb.com/news-and-insights/publication-listing/ofac-issues-general-licenses-49-and-50a" target="_blank"><span class="src-tag">CG</span>GL-49 & GL-50A</a>
+          <a class="src-a" href="https://www.crowell.com/en/insights/client-alerts/eight-takeaways-after-seven-weeks-of-ofacs-six-wait-seven-new-and-updated-general-licenses-for-venezuela" target="_blank"><span class="src-tag">C&M</span>8 Takeaways on GLs</a>
+          <a class="src-a" href="https://www.morganlewis.com/pubs/2026/02/venezuela-oil-industry-sanctions-update-analyzing-ofac-general-licenses-and-new-faqs" target="_blank"><span class="src-tag">ML</span>Feb 2026 GL + FAQs</a>
+          <a class="src-a" href="https://www.hoganlovells.com/en/publications/new-green-lights-for-venezuela-what-do-the-latest-us-general-licenses-authorize" target="_blank"><span class="src-tag">HL</span>New Green Lights</a>
+          <a class="src-a" href="https://www.sullcrom.com/insights/memo/2026/January/Venezuelan-Investment-Investing-Within-Existing-US-Sanctions-Framework" target="_blank"><span class="src-tag">S&C</span>Investment Framework</a>
+        </div>
+        <div class="src-box">
+          <div class="src-tl">Market & Industry</div>
+          <a class="src-a" href="https://www.cnbc.com/2026/03/31/oil-price-today-wti-brent-trump-energy-sites-water-war-escalation-deal.html" target="_blank"><span class="src-tag">CNBC</span>Oil prices Hormuz</a>
+          <a class="src-a" href="https://energynow.com/2026/03/chevron-shell-closing-in-on-first-big-oil-production-deals-in-venezuela-since-us-captured-maduro-sources-say/" target="_blank"><span class="src-tag">EN</span>Chevron/Shell deals</a>
+          <a class="src-a" href="https://ocean-energyresources.com/2026/03/08/shell-signs-new-venezuela-energy-deals/" target="_blank"><span class="src-tag">OER</span>Shell deals Mar 8</a>
+          <a class="src-a" href="https://energy-analytics-institute.org/2025/03/02/chevron-jvs-in-venezuela-producing-around-242000-b-d-or-27-of-venezuelas-production/" target="_blank"><span class="src-tag">EAI</span>Chevron 242K bpd</a>
+          <a class="src-a" href="https://energy-analytics-institute.org/2026/01/12/eai-brief-venezuelas-merey-averaged-56-68-bbl-in-2025-down-13-6-v-2024-opec-says/" target="_blank"><span class="src-tag">EAI</span>Merey $56.68 2025</a>
+          <a class="src-a" href="https://www.thenationalnews.com/business/energy/2026/01/05/venezuelan-oil-output-could-reach-12-million-bpd-by-end-of-2026-if-sanctions-are-lifted/" target="_blank"><span class="src-tag">Kpler</span>1.2M scenario</a>
+          <a class="src-a" href="https://fortune.com/2026/01/09/trump-oil-venezuela-100-billion-exxon-uninvestable/" target="_blank"><span class="src-tag">Fortune</span>"Uninvestable"</a>
+          <a class="src-a" href="https://www.cnbc.com/2026/01/10/what-the-big-oil-executives-told-trump-about-investing-in-venezuela.html" target="_blank"><span class="src-tag">CNBC</span>Big Oil told Trump</a>
+        </div>
+        <div class="src-box">
+          <div class="src-tl">Data & Government</div>
+          <a class="src-a" href="https://tradingeconomics.com/venezuela/crude-oil-production" target="_blank"><span class="src-tag">TE</span>Production monthly</a>
+          <a class="src-a" href="https://www.ceicdata.com/en/indicator/venezuela/crude-oil-production" target="_blank"><span class="src-tag">CEIC</span>Production data</a>
+          <a class="src-a" href="https://www.eia.gov/international/analysis/country/VEN" target="_blank"><span class="src-tag">EIA</span>Country analysis</a>
+          <a class="src-a" href="https://www.opec.org/assets/assetdb/asb-2025.pdf" target="_blank"><span class="src-tag">OPEC</span>ASB 2025</a>
+          <a class="src-a" href="https://www.cfr.org/expert-brief/increasing-venezuelas-oil-output-will-take-several-years-and-billions-dollars" target="_blank"><span class="src-tag">CFR</span>Investment gap</a>
+          <a class="src-a" href="https://www.rand.org/pubs/commentary/2026/01/china-could-play-spoiler-in-venezuelas-debt-restructuring.html" target="_blank"><span class="src-tag">RAND</span>China debt</a>
+          <a class="src-a" href="https://globalwitness.org/en/campaigns/fossil-fuels/us-oil-grab-puts-150-billion-of-venezuelan-peoples-money-in-jeopardy/" target="_blank"><span class="src-tag">GW</span>$150B analysis</a>
+          <a class="src-a" href="https://guacamayave.com/en/what-do-we-know-about-the-new-oil-contracts-in-venezuela-2/" target="_blank"><span class="src-tag">Gua</span>New oil contracts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="mod-bg" id="mBg" onclick="cMod(event)">
+  <div class="mod" onclick="event.stopPropagation()">
+    <div class="mod-h"><h2 id="mT"></h2><button class="mod-x" onclick="document.getElementById('mBg').classList.remove('open')">&#10005;</button></div>
+    <div class="mod-b" id="mB"></div>
+  </div>
+</div>
+
+<script>
+const TOT=903; // CEIC crude-only baseline for share calculations
+const CO=[
+  {n:'PDVSA',c:'Venezuela',f:'🇻🇪',tp:'State NOC',st:'active',ofac:'SDN — sanctioned',stL:'Active (sanctioned)',cur:200,curL:'~200K',tgt:'1.3M (national)',gl50a:false,excluded:false,assets:'Orinoco Belt · Lake Maracaibo · Paraguana',detail:'State monopoly; majority partner in all JVs. Direct ops ~200K bpd. 1.3M target carried from unmet 2024 goal. New hydrocarbon law (Jan 2026) ends PDVSA monopoly. Refining at ~20% capacity. $17.5B export revenue 2024. All transactions require OFAC authorization.',src:'EIA · iSANS · CRS'},
+  {n:'Chevron',c:'United States',f:'🇺🇸',tp:'IOC — 4 JVs',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:242,curL:'242K',tgt:'Ayacucho-8 expansion',gl50a:true,excluded:false,assets:'Petropiar (107K) · Petroboscán (40K) · Petroindep. (34K)',detail:'Largest foreign operator — 27% of national output. GL-50A re-authorized Feb 2026. Negotiating Ayacucho-8 Orinoco expansion with reduced royalties. Deal review end-Mar 2026. Would become largest private Orinoco producer.',src:'EAI · OFAC · EnergyNow'},
+  {n:'Shell',c:'Netherlands/UK',f:'🇳🇱',tp:'IOC — New Entrant',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:0,curL:'Re-entering',tgt:'Dragon: 350 mmcfd gas',gl50a:true,excluded:false,assets:'Dragon Gas (offshore) · Carito/Pirital',detail:'Most active of Big Six in new deals. Mar 5, 2026: Signed oil/gas agreements with PDVSA — witnessed by US Interior Sec. Burgum. Dragon Gas: FID possible 2026, piped to Trinidad Atlantic LNG, exports Q3 2027. Carito/Pirital: 94K bpd crude + 1 Bcfd gas (350 mmcfd currently flared).',src:'OER · Upstream · EnergyNow'},
+  {n:'Repsol',c:'Spain',f:'🇪🇸',tp:'IOC — JV Partner',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:50,curL:'~50K (resuming)',tgt:'Expansion pending',gl50a:true,excluded:false,assets:'Petroquiriquire (40K) · Petrocarabobo · Cardon IV',detail:'Re-authorized GL-50A Feb 2026 after Mar 2025 revocation. ~50-55K bpd before suspension. Cardon IV (50/50 ENI) produces 0.5 bcf/d gas for domestic grid. Ramp-up reportedly slower than Chevron/Shell.',src:'Mayer Brown · Venezuelanalysis'},
+  {n:'ENI',c:'Italy',f:'🇮🇹',tp:'IOC — JV Partner',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:5,curL:'~5K (resuming)',tgt:'TBD',gl50a:true,excluded:false,assets:'Cardon IV gas (w/ Repsol) · Petrosucre',detail:'GL-50A authorized. Petrosucre offshore ~3K bpd (down from 15K pre-2019). ENI owed ~$3B by PDVSA. "Stuck on sidelines" per Energy Intelligence — ramp slower than Chevron/Shell.',src:'Cleary · Energy Intelligence'},
+  {n:'Maurel & Prom',c:'France',f:'🇫🇷',tp:'E&P — JV (Pertamina)',st:'gl50a',ofac:'GL-50A ✓ (Feb 18)',stL:'GL-50A authorized',cur:20,curL:'~20K (resuming)',tgt:'Expansion pending',gl50a:true,excluded:false,assets:'Petroregional del Lago · Urdaneta Oeste',detail:'Initially excluded from GL-50 due to Pertamina (Indonesian state oil) ownership — added GL-50A Feb 18. Ran Petroregional at ~20K bpd before suspension.',src:'Crowell · Key Facts Energy'},
+  {n:'BP',c:'United Kingdom',f:'🇬🇧',tp:'IOC — New Entrant',st:'gl50a',ofac:'GL-50A ✓',stL:'GL-50A authorized',cur:0,curL:'Re-entering',tgt:'TBD',gl50a:true,excluded:false,assets:'Historical presence; opportunistic re-entry',detail:'GL-50A authorized. Minimal historical Venezuela operations. Seen as opportunistic re-entry. No deal announcements as of Mar 2026. Holds 45% of Atlantic LNG in Trinidad (Shell also 45%).',src:'Mayer Brown · Hogan Lovells'},
+  {n:'CNPC',c:'China',f:'🇨🇳',tp:'NOC — 4+ JVs',st:'excluded',ofac:'EXCLUDED',stL:'Excluded (OFAC)',cur:100,curL:'~100K',tgt:'Uncertain — "not welcome"',gl50a:false,excluded:true,assets:'Sinovensa (90-110K) · Petrourica · Petrozumano',detail:'All new GLs explicitly exclude Chinese entities. CNPC halted direct liftings; continued through traders. Declared "not welcome" post-Maduro. China bought ~82% of exports in 2025. Outstanding VZ debt to China: $10-15B. Bloomberg: claims on assets "tenuous."',src:'Bloomberg · S&P · Crowell'},
+  {n:'CCRC',c:'China',f:'🇨🇳',tp:'Private E&P',st:'active',ofac:'Not named',stL:'Active (uncertain)',cur:12,curL:'12K',tgt:'60K by end-2026',gl50a:false,excluded:false,assets:'Lake Maracaibo · 2 oilfields (20-yr)',detail:'China Concord Resources — private firm. $1B+ committed under 20-year PSA (May 2024). 500 wells planned for 60K target. Not explicitly excluded (private, not state) but Chinese ownership complicates. Last verified output: 12K bpd (Aug 2025).',src:'OilPrice · BOE Report'},
+  {n:'Roszarubezhneft',c:'Russia',f:'🇷🇺',tp:'State-linked — 5 JVs',st:'excluded',ofac:'EXCLUDED',stL:'Excluded (OFAC)',cur:130,curL:'~130K',tgt:'15-yr ext. but uncertain',gl50a:false,excluded:true,assets:'Petromonagas (87K) · Petrozamora · Petromiranda · Petrovictoria · Petroperija',detail:'Successor to Rosneft\'s VZ holdings. 5 JVs — much larger than initially apparent. All new GLs exclude Russian entities. Officially claims "all assets belong to Russia." 15-yr extension approved Nov 2025. $616M committed. Also holds Patao/Mejillones offshore gas (6.4 tcf).',src:'EnergyNow · Bloomberg · EI'},
+  {n:'NABEP',c:'United States',f:'🇺🇸',tp:'Private PSA',st:'excluded',ofac:'NOT in any GL',stL:'Disavowed by Trump',cur:0,curL:'Suspended',tgt:'Was targeting 300K',gl50a:false,excluded:true,assets:'Petrozamora · Junín Sur · Petrocedeño upgrader',detail:'North American Blue Energy Partners — Harry Sargeant III. Had ~55K bpd Petrozamora; combined ~126K. PDVSA projected 300K during 2026 if fully invested. Feb 12, 2026: Trump publicly disavowed Sargeant on Truth Social — "has no authority to act on behalf of the United States." NOT in any current GL.',src:'Guacamaya · Venezuela Politica · El Pitazo'},
+  {n:'ONGC Videsh',c:'India',f:'🇮🇳',tp:'NOC — JV Partner',st:'active',ofac:'Not named',stL:'Active (minimal)',cur:4,curL:'~4K',tgt:'Seeking expansion',gl50a:false,excluded:false,assets:'PIVSA / San Cristóbal · Petrocarabobo (11%)',detail:'Indian state NOC. PIVSA at ~4K bpd equity share. 11% in Petrocarabobo (designed 400K bpd, producing ~14K). Indian Oil (3.5%) + Oil India (3.5%) also in consortium. In talks with US to regain control.',src:'Offshore Tech · BOE Report'},
+  {n:'Gold Reserve',c:'Canada',f:'🇨🇦',tp:'Junior Mining',st:'inactive',ofac:'N/A',stL:'No oil ops',cur:0,curL:'—',tgt:'—',gl50a:false,excluded:false,assets:'Brisas gold-copper (mining)',detail:'$740M ICSID award for expropriated Brisas. Mining only.',src:'Filings'},
+  {n:'Harvest Natural',c:'United States',f:'🇺🇸',tp:'E&P (exited)',st:'inactive',ofac:'N/A',stL:'Exited ~2014',cur:0,curL:'—',tgt:'—',gl50a:false,excluded:false,assets:'Formerly Petrodelta',detail:'Exited circa 2013-14, sold 32% Petrodelta to CT Energy.',src:'Filings'}
+];
+
+function mkRow(c,full){
+  const pct=c.cur>0?(c.cur/TOT*100).toFixed(1)+'%':'—';
+  const dc=c.st==='gl50a'?'d-on':c.st==='active'?'d-lim':c.st==='excluded'?'d-off':'d-x';
+  const bc=c.st==='gl50a'?'var(--green)':c.st==='active'?'var(--amber)':c.st==='excluded'?'var(--red)':'var(--t4)';
+  const bw=Math.min(c.cur/260*100,100);
+  let h=`<td><span class="nm">${c.f} ${c.n}</span></td><td class="dim">${c.c}</td>`;
+  if(full)h+=`<td class="dim">${c.tp}</td>`;
+  h+=`<td style="white-space:nowrap"><span class="dot ${dc}"></span>${c.stL}</td><td class="mono">${c.curL}</td><td class="mono" style="color:${c.tgt&&c.tgt!=='—'?'var(--amber)':'var(--t4)'}">${c.tgt||'—'}</td><td><div style="display:flex;align-items:center;gap:5px"><div class="bar-t"><div class="bar-f" style="width:${bw}%;background:${bc}"></div></div><span class="mono dim" style="font-size:9px">${pct}</span></div></td><td class="dim" style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px">${c.assets}</td>`;
+  return h;
+}
+function renderT(id,f,full){
+  const tb=document.querySelector(`#${id} tbody`);tb.innerHTML='';
+  let ls=CO;
+  if(f==='gl50a')ls=CO.filter(c=>c.gl50a);
+  else if(f==='active')ls=CO.filter(c=>c.st==='active'||c.st==='gl50a');
+  else if(f==='excluded')ls=CO.filter(c=>c.excluded);
+  else if(f==='inactive')ls=CO.filter(c=>c.st==='inactive');
+  ls.forEach(c=>{const tr=document.createElement('tr');tr.onclick=()=>oMod(c);tr.innerHTML=mkRow(c,full);tb.appendChild(tr);});
+}
+function ft(f,el){el.closest('.ptabs').querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));el.classList.add('on');renderT('tbl',f,false);}
+// ft2 removed — single-page layout
+
+function oMod(c){
+  document.getElementById('mT').textContent=c.n;
+  const pct=c.cur>0?(c.cur/TOT*100).toFixed(1)+'%':'—';
+  document.getElementById('mB').innerHTML=`
+    <div class="dr"><span class="dr-l">Country</span><span class="dr-v">${c.f} ${c.c}</span></div>
+    <div class="dr"><span class="dr-l">Type</span><span class="dr-v">${c.tp}</span></div>
+    <div class="dr"><span class="dr-l">OFAC Status</span><span class="dr-v">${c.ofac}</span></div>
+    <div class="dr"><span class="dr-l">GL-50A Named</span><span class="dr-v" style="color:${c.gl50a?'var(--green)':'var(--t3)'}">${c.gl50a?'Yes':'No'}</span></div>
+    <div class="dr"><span class="dr-l">Current Production</span><span class="dr-v">${c.curL}</span></div>
+    <div class="dr"><span class="dr-l">2026 Guidance</span><span class="dr-v">${c.tgt||'—'}</span></div>
+    <div class="dr"><span class="dr-l">Share of National</span><span class="dr-v">${pct}</span></div>
+    <div class="dr"><span class="dr-l">Key Assets</span><span class="dr-v" style="max-width:260px;text-align:right">${c.assets}</span></div>
+    <div class="ds"><h3>Analysis</h3><p>${c.detail}</p></div>
+    <div class="ds"><h3>Sources</h3><p style="color:var(--t4);font-size:10px">${c.src}</p></div>`;
+  document.getElementById('mBg').classList.add('open');
+}
+function cMod(e){if(e.target===e.currentTarget)e.target.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('mBg').classList.remove('open');document.getElementById('srcBg').classList.remove('open');}});
+// No tab switching needed — single page view
+
+// ===== CHARTS =====
+Chart.defaults.color='#5f6368';Chart.defaults.borderColor='rgba(255,255,255,.04)';Chart.defaults.font.family="'IBM Plex Sans',sans-serif";
+const tt={backgroundColor:'#1c2028',borderColor:'rgba(255,255,255,.08)',borderWidth:1,padding:10,cornerRadius:4,titleFont:{size:10,weight:'600',family:"'IBM Plex Mono'"},bodyFont:{size:10,family:"'IBM Plex Mono'"}};
+const gridC='rgba(255,255,255,.03)';
+
+// ---- MULTI-RESOLUTION DATA ----
+// Annual data (K bpd averages, EIA/OPEC)
+const dataA={
+  labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026E'],
+  vals:  [2400,  2400,  2000,  1400,  1000,  500,   650,   750,   830,   1050,  950,   null],
+  notes: ['Pre-crisis','Pre-crisis','Sanctions begin','Collapse accelerates','Direct oil sanctions','COVID + sanctions trough','Partial recovery','Iranian/Chinese traders','Gradual climb','Chevron license peak','License revocations','Post-Maduro scenarios']
+};
+// Quarterly data — full range 2015-2026 to match annual
+const dataQ={
+  labels:['Q1 15','Q2 15','Q3 15','Q4 15','Q1 16','Q2 16','Q3 16','Q4 16','Q1 17','Q2 17','Q3 17','Q4 17','Q1 18','Q2 18','Q3 18','Q4 18','Q1 19','Q2 19','Q3 19','Q4 19','Q1 20','Q2 20','Q3 20','Q4 20','Q1 21','Q2 21','Q3 21','Q4 21','Q1 22','Q2 22','Q3 22','Q4 22','Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24','Q1 25','Q2 25','Q3 25','Q4 25','Q1 26','Q2 26E','Q3 26E','Q4 26E'],
+  vals:  [2500,  2450,  2380,  2350,  2450,  2420,  2380,  2350,  2100,  2050,  1950,  1900,  1600,  1450,  1300,  1200,  1100,  1050,  950,   900,   700,   550,   400,   500,   520,   560,   620,   700,   720,   730,   750,   780,   780,   810,   830,   870,   900,   1000,  1080,  1100,  1020,  980,   950,   870,   960,   null,  null,  null],
+  notes: ['','','','','','','','','Sanctions begin','','','Accelerating decline','','','','Collapse deepens','','','','Direct oil sanctions','COVID onset','COVID trough','Sanctions nadir Sep','Recovery begins','Slow rebuild','Iranian traders active','Continued rebuild','Year-end push','Stabilizing','Chinese buying grows','Steady','Year-end push','Plateau','Slow growth','Continued growth','Best Q since 2019','Chevron ramp begins','Chevron + CNPC push','Licensing peak','Strong close','License revocations hit','Partial recovery','Mixed signals','Maduro era ends','Post-capture + GL-50A ramp','','','EOY 2026 scenario target']
+};
+// Monthly data — full range 2015-2026 (annual estimates subdivided pre-2024, granular post-2024)
+const dataM={
+  labels:[
+    'Jan 15','Apr 15','Jul 15','Oct 15','Jan 16','Apr 16','Jul 16','Oct 16','Jan 17','Apr 17','Jul 17','Oct 17','Jan 18','Apr 18','Jul 18','Oct 18','Jan 19','Apr 19','Jul 19','Oct 19',
+    'Jan 20','Apr 20','Jul 20','Oct 20','Jan 21','Apr 21','Jul 21','Oct 21','Jan 22','Apr 22','Jul 22','Oct 22','Jan 23','Apr 23','Jul 23','Oct 23',
+    'Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26E','May 26E','Jun 26E','Jul 26E','Aug 26E','Sep 26E','Oct 26E','Nov 26E','Dec 26E'],
+  vals:[
+    2500,2450,2380,2350,2450,2420,2380,2350,2100,2050,1950,1900,1600,1450,1300,1200,1100,1050,950,900,
+    700,550,400,500,520,560,620,700,720,730,750,780,780,810,830,870,
+    820,850,900,950,1000,1020,1060,1100,1080,1100,1090,1080,1050,1040,1010,980,970,980,980,966,920,1010,897,870,924,903,null,null,null,null,null,null,null,null,null,null],
+  notes:[
+    '','','','','','','','','Sanctions begin','','','','','','','Collapse deepens','','','','Direct oil sanctions',
+    'COVID onset','COVID trough','Sanctions nadir','Recovery begins','','','','','','','','','','','','',
+    '','','Chevron ramping','CCRC PSA signed','','','Strong','Peak exports 966K','','Oct peak','','Year-end','','Trump revokes CHV GL-41','OFAC revokes EU licenses','25% tariff imposed','Wind-down deadline','','','CCRC at 12K','','OPEC: 1,010K','IEA: 860K / OPEC: 934K','Maduro captured Jan 3','Post-capture disruption','CEIC: 903K / TE: 1,021K','Latest — TBD','','','','','','','','','EOY 2026 scenario target']
+};
+
+// Scenario targets are EOY 2026 estimates — always anchored to the final label
+// that represents end-of-2026 (e.g. '2026E', 'Q4 26E', 'Dec 26E')
+// We find the last actual data point and draw a line from it to the EOY target
+function mkScenario(labels,vals,sc){
+  const n=labels.length;
+  const arr=new Array(n).fill(null);
+  const tgt={bear:900,base:1200,bull:1400}[sc];
+  // Find the EOY 2026 label — it's always the last one in our data sets
+  // Find the last non-null actual value as anchor
+  let anchorIdx=-1;
+  for(let i=n-1;i>=0;i--){if(vals[i]!==null){anchorIdx=i;break;}}
+  if(anchorIdx<0)return arr;
+  // Place anchor and target
+  arr[anchorIdx]=vals[anchorIdx];
+  arr[n-1]=tgt;
+  // If there are gaps between anchor and end, interpolate
+  if(n-1>anchorIdx+1){
+    const steps=n-1-anchorIdx;
+    for(let i=1;i<steps;i++){
+      arr[anchorIdx+i]=Math.round(vals[anchorIdx]+(tgt-vals[anchorIdx])*(i/steps));
+    }
+  }
+  return arr;
+}
+
+const scC={bear:'#ff4d4d',base:'#ff9f1a',bull:'#00d26a'};
+const scN={bear:'Bear 900K',base:'Base 1.2M',bull:'Bull 1.4M'};
+
+let curGran='A';
+let curRange='MAX';
+let curSc='bear';
+let projOn=true;
+
+// Parse a label like '2024', 'Q1 24', 'Jan 24', 'Q4 26E', 'Dec 26E' into a comparable year number
+function labelToYear(lbl){
+  const s=lbl.replace('E','').trim();
+  // Annual: '2024'
+  if(/^\d{4}$/.test(s))return parseInt(s);
+  // Quarterly: 'Q1 24'
+  let m=s.match(/Q(\d)\s+(\d{2})/);
+  if(m)return 2000+parseInt(m[2])+(parseInt(m[1])-1)*0.25;
+  // Monthly: 'Jan 24'
+  const months={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  m=s.match(/([A-Z][a-z]{2})\s+(\d{2})/);
+  if(m)return 2000+parseInt(m[2])+((months[m[1]]||0)/12);
+  return 0;
+}
+
+function getDataForView(){
+  const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
+  let startIdx=0;
+  if(curRange!=='MAX'){
+    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;
+    // Find the last label's year, then cut to (lastYear - yearsBack)
+    const lastYear=labelToYear(d.labels[d.labels.length-1]);
+    const cutoff=lastYear-yearsBack;
+    startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);
+    if(startIdx<0)startIdx=0;
+  }
+  let labels=d.labels.slice(startIdx);
+  let vals=d.vals.slice(startIdx);
+  let notes=d.notes.slice(startIdx);
+  // When projections off, trim trailing nulls so the line fills the chart
+  if(!projOn){
+    let lastReal=labels.length-1;
+    while(lastReal>0&&vals[lastReal]===null)lastReal--;
+    labels=labels.slice(0,lastReal+1);
+    vals=vals.slice(0,lastReal+1);
+    notes=notes.slice(0,lastReal+1);
+  }
+  return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc)};
+}
+
+function buildChart(){
+  const v=getDataForView();
+  hC.data.labels=v.labels;
+  hC.data.datasets[0].data=v.vals;
+  hC.data.datasets[1].data=v.scenario;
+  hC.data.datasets[1].borderColor=scC[curSc];
+  hC.data.datasets[1].pointBackgroundColor=scC[curSc];
+  hC.data.datasets[1].label=scN[curSc];
+  // adjust point size for density
+  const dense=v.labels.length>16;
+  hC.data.datasets[0].pointRadius=dense?1.5:3;
+  hC.data.datasets[0].pointHoverRadius=dense?5:7;
+  hC.data.datasets[0].pointHitRadius=dense?12:15;
+  hC.data.datasets[0].borderWidth=dense?1.5:2;
+  hC.data.datasets[1].pointHitRadius=dense?12:15;
+  hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;
+  hC.update();
+}
+
+const hC=new Chart(document.getElementById('hChart'),{
+  type:'line',
+  data:{labels:dataA.labels,datasets:[
+    {label:'Actual (K bpd)',data:dataA.vals,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:7,pointHitRadius:15,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
+    {label:scN.bear,data:mkScenario(dataA.labels,dataA.vals,'bear'),borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:15,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===1&&!projOn)return false;return true;}}},
+      tooltip:{...tt,callbacks:{
+        label:function(ctx){
+          if(ctx.raw===null)return '';
+          const v=ctx.raw;
+          let s=`${ctx.dataset.label}: ${v.toLocaleString()}K bpd`;
+          // Period-over-period change
+          if(ctx.datasetIndex===0&&ctx.dataIndex>0){
+            const allVals=ctx.chart.data.datasets[0].data;
+            const prev=allVals[ctx.dataIndex-1];
+            if(prev&&v){
+              const chg=((v-prev)/prev*100).toFixed(1);
+              const periodLabel=curGran==='A'?'YoY':curGran==='Q'?'QoQ':'MoM';
+              s+=`  (${chg>0?'+':''}${chg}% ${periodLabel})`;
+            }
+          }
+          return s;
+        },
+        afterLabel:function(ctx){
+          if(ctx.datasetIndex!==0)return '';
+          const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
+          // find the matching note
+          const label=ctx.label;
+          const idx=d.labels.indexOf(label);
+          if(idx>=0&&d.notes[idx])return d.notes[idx];
+          return '';
+        }
+      }}
+    },
+    scales:{y:{title:{display:true,text:'K bpd',font:{size:9}},grid:{color:gridC},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45,maxTicksLimit:20}}}
+  }
+});
+
+function pSc(el,s){document.querySelectorAll('.sc').forEach(b=>b.classList.remove('on'));el.classList.add('on');curSc=s;buildChart();}
+function setGran(g,el){document.getElementById('granTabs').querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));el.classList.add('on');curGran=g;buildChart();}
+function setRng(r,el){document.getElementById('rangeTabs').querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));el.classList.add('on');curRange=r;buildChart();}
+
+// Monthly trend removed — data available in historical chart (monthly view)
+
+// ---- EXPORTS ----
+new Chart(document.getElementById('exChart'),{
+  type:'doughnut',
+  data:{labels:['China  ~750K  (82%)','US  ~60K  (7%)','India  ~30K  (3%)','Spain  ~16K  (2%)','Cuba / Other  ~54K  (6%)'],
+    datasets:[{data:[750,60,30,16,54],backgroundColor:['#ff4d4d','#00d26a','#fb923c','#ff9f1a','#3c4043'],borderWidth:0,hoverOffset:4}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'62%',
+    layout:{padding:{bottom:4}},
+    plugins:{legend:{position:'left',labels:{padding:12,usePointStyle:true,pointStyle:'circle',boxWidth:8,font:{size:9,family:"'IBM Plex Mono'"}}},
+      tooltip:{...tt,callbacks:{label:c=>{const tot=910;return ` ~${c.raw}K bpd (${(c.raw/tot*100).toFixed(0)}% of exports)`;}}}},
+  }
+});
+
+// Operator pie removed — share shown in table
+
+// ---- COUNTRY BAR ----
+new Chart(document.getElementById('ctChart'),{
+  type:'bar',
+  data:{labels:['US (Chevron)','VZ (PDVSA)','Russia','China','Spain','France','India','UK/NL (Shell+BP)'],
+    datasets:[
+      {label:'Current',data:[242,200,130,112,50,20,4,0],backgroundColor:['#00d26a','#5b9cf6','#b197fc','#ff4d4d','#ff9f1a','#4ecdc4','#fb923c','#3c4043'],borderRadius:3,barPercentage:.5},
+      {label:'Upside',data:[55,0,0,48,30,10,15,100],backgroundColor:['rgba(0,210,106,.12)','rgba(91,156,246,.1)','rgba(177,151,252,.1)','rgba(255,77,77,.1)','rgba(255,159,26,.1)','rgba(78,205,196,.1)','rgba(251,146,60,.1)','rgba(60,64,67,.15)'],borderRadius:3,barPercentage:.5}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:10,font:{size:9}}},tooltip:{...tt,callbacks:{label:c=>`${c.dataset.label}: ${c.raw}K bpd`}}},
+    scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:8}}},y:{stacked:true,title:{display:true,text:'K bpd',font:{size:9}},grid:{color:gridC}}}}
+});
+
+// ---- JV BAR ----
+new Chart(document.getElementById('jvChart'),{
+  type:'bar',
+  data:{labels:['Petropiar (CHV)','Sinovensa (CNPC)','Petromonagas (RUS)','Petrozamora (RUS)','Petroboscán (CHV)','Petroindep. (CHV)','Petroquiriquire (REP)','Petroregional (M&P)','Petrocarabobo (IND)','Petromiranda (RUS)','CCRC JVs','Petrovictoria (RUS)','PIVSA (ONGC)'],
+    datasets:[{data:[107,95,87,70,40,34,40,20,14,16,12,9,4],
+      backgroundColor:['#00d26a','#ff4d4d','#b197fc','#b197fc','#00d26a','#00d26a','#ff9f1a','#4ecdc4','#fb923c','#b197fc','#fbbf24','#b197fc','#fb923c'],borderRadius:2,barPercentage:.65}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tt,callbacks:{
+      label:c=>`${c.raw}K bpd`,
+      afterLabel:c=>{const notes={0:'GL-50A ✓ Record 109K May 25',1:'EXCLUDED — China',2:'EXCLUDED — Russia',3:'EXCLUDED — Russia',4:'GL-50A ✓',5:'GL-50A ✓',6:'GL-50A ✓ Resuming',7:'GL-50A ✓ Resuming',8:'In talks w/ US',9:'EXCLUDED — Russia',10:'Private Chinese — uncertain',11:'EXCLUDED — Russia',12:'In talks w/ US'};return notes[c.dataIndex]||'';}
+    }}},
+    scales:{x:{title:{display:true,text:'K bpd',font:{size:9}},grid:{color:gridC}},y:{grid:{display:false},ticks:{font:{size:9}}}}}
+});
+
+// ---- FINANCIAL CHART ----
+new Chart(document.getElementById('finChart'),{
+  type:'bar',
+  data:{labels:['Total Ext. Debt','Bondholder Debt','China Debt','ConocoPhillips','Russia Debt','2024 Oil Revenue','Post-Jan 3 Revenue'],
+    datasets:[{
+      label:'$B',data:[160,100,12.5,10,5,17.5,1],
+      backgroundColor:['#ff4d4d','#ff4d4d','#ff4d4d','#ff9f1a','#b197fc','#00d26a','#00d26a'],borderRadius:2,barPercentage:.55
+    }]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tt,callbacks:{label:c=>`$${c.raw}B`}}},
+    scales:{x:{title:{display:true,text:'$B',font:{size:9}},grid:{color:gridC}},y:{grid:{display:false},ticks:{font:{size:9}}}}}
+});
+
+// ---- PROJECTION TOGGLE ----
+function toggleProj(){
+  projOn=!projOn;
+  const btn=document.getElementById('projToggle');
+  const dot=document.getElementById('projDot');
+  if(projOn){
+    btn.classList.add('on');
+    dot.style.background='var(--amber)';
+  } else {
+    btn.classList.remove('on');
+    dot.style.background='var(--t4)';
+  }
+  hC.data.datasets[1].hidden=!projOn;
+  // Collapse scenario cards
+  const row=document.getElementById('scRow');
+  row.style.maxHeight=projOn?'200px':'0';
+  row.style.opacity=projOn?'1':'0';
+  row.style.marginBottom=projOn?'6px':'0';
+  row.style.overflow='hidden';
+  row.style.transition='all .25s ease';
+  // Trim x-axis: when projections off, cut trailing nulls so line fills the chart
+  buildChart();
+}
+
+// ---- MAP SCROLL TRAP FIX ----
+function activateMap(){
+  const ov=document.getElementById('mapOverlay');
+  ov.style.opacity='0';
+  ov.style.pointerEvents='none';
+  if(leafMap)leafMap.scrollWheelZoom.enable();
+}
+
+// ---- MAP ----
+let mapInit=false;
+let leafMap=null;
+let mapMarkers=[];
+const mapData=[
+  {id:1,name:'Petropiar (Hamaca)',lat:8.47,lon:-63.85,op:'PDVSA / Chevron',type:'upgrader_field',cat:'field',bpd:107000,ofac:'GL-50A ✓',notes:'Hamaca extra-heavy crude upgrader. Chevron ~30%. Record 109K bpd May 2025. One of 4 original Faja upgraders — one of 2 still partially operational.'},
+  {id:2,name:'Sinovensa (Morichal)',lat:8.72,lon:-62.82,op:'PDVSA / CNPC',type:'field',cat:'field',bpd:95000,ofac:'EXCLUDED — China',notes:'CNPC 40%. Carabobo-1 block. Peaked at 160K bpd, now ~90-110K. Chinese entity excluded from all new OFAC GLs.'},
+  {id:3,name:'Petromonagas (Zuata)',lat:8.31,lon:-64.28,op:'PDVSA / Roszarubezhneft',type:'upgrader_field',cat:'field',bpd:87000,ofac:'EXCLUDED — Russia',notes:'Formerly BP\'s block. Zuata upgrader. Roszarubezhneft ~17%. 15-yr extension approved Nov 2025.'},
+  {id:4,name:'Petrocedeño (Junín)',lat:8.18,lon:-64.55,op:'PDVSA (NABEP suspended)',type:'upgrader_field',cat:'field',bpd:40000,ofac:'NABEP disavowed',notes:'Formerly Sincor. Upgrader at ~25% capacity — key near-term upside if restarted. NABEP was operator before OFAC cancellation.'},
+  {id:5,name:'Petroindependencia (Carabobo-3)',lat:8.62,lon:-63.12,op:'PDVSA / Chevron',type:'field',cat:'field',bpd:34000,ofac:'GL-50A ✓',notes:'Chevron 34%. Carabobo-3 block. Part of Chevron\'s 242K bpd combined output.'},
+  {id:6,name:'Petrovictoria (Junín-6)',lat:8.05,lon:-64.72,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:9000,ofac:'EXCLUDED — Russia',notes:'Junín-6 block. Largely undeveloped. Russian entity excluded from new GLs.'},
+  {id:7,name:'Petromiranda',lat:8.12,lon:-64.61,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:16000,ofac:'EXCLUDED — Russia',notes:'Grouped with Junín-6. Separate JV entity. Minimal active production.'},
+  {id:8,name:'Petroboscán (Boscan)',lat:10.48,lon:-72.43,op:'PDVSA / Chevron',type:'field',cat:'field',bpd:40000,ofac:'GL-50A ✓',notes:'Zulia state, NW Lake Maracaibo. Heavy crude (12° API). Chevron 39.2%. One of Chevron\'s most active operations.'},
+  {id:9,name:'Petrozamora',lat:10.81,lon:-72.28,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:70000,ofac:'EXCLUDED — Russia',notes:'Northern Lake Maracaibo. NABEP was operator (~55K bpd) before suspension. Roszarubezhneft stake. Maduro targeted 100K bpd by end-2025.'},
+  {id:10,name:'Petroregional del Lago',lat:10.35,lon:-71.62,op:'PDVSA / Maurel & Prom',type:'field',cat:'field',bpd:20000,ofac:'GL-50A ✓ (Feb 18)',notes:'Eastern Lake Maracaibo. M&P ~40%. Added to GL-50A on Feb 18 after initial exclusion (Pertamina ownership).'},
+  {id:11,name:'Petroquiriquire',lat:10.07,lon:-63.20,op:'PDVSA / Repsol',type:'field',cat:'field',bpd:40000,ofac:'GL-50A ✓',notes:'Monagas state (eastern VZ, not Maracaibo). Repsol ~15%. Oil + associated gas. Conventional reservoir.'},
+  {id:12,name:'Boqueron / Petroperija',lat:10.22,lon:-72.68,op:'PDVSA / Roszarubezhneft',type:'field',cat:'field',bpd:8000,ofac:'EXCLUDED — Russia',notes:'Sierra de Perijá foothills, Zulia. Conventional heavy crude. 15-yr extension approved Nov 2025.'},
+  {id:13,name:'CCRC Lake Maracaibo',lat:10.62,lon:-71.55,op:'PDVSA / China Concord',type:'field',cat:'field',bpd:12000,ofac:'Private Chinese — uncertain',notes:'Private Chinese firm. $1B+ investment, 20-yr PSA. 500 wells planned, 60K bpd target end-2026.'},
+  {id:14,name:'Corocoro / Petrosucre',lat:10.22,lon:-62.02,op:'PDVSA / ENI',type:'field',cat:'field',bpd:3000,ofac:'GL-50A ✓ (ENI)',notes:'Shallow offshore Gulf of Paria. ~3K bpd (down from 15K pre-2019). ENI partial interest.'},
+  {id:15,name:'San Cristóbal (ONGC)',lat:9.72,lon:-63.18,op:'PDVSA / ONGC Videsh',type:'field',cat:'field',bpd:4000,ofac:'Not named in GLs',notes:'ONGC Videsh 11%. Heavy crude, conventional. In talks with US to regain operational control.'},
+  {id:16,name:'Dragon Gas Field',lat:10.98,lon:-62.38,op:'PDVSA / Shell',type:'offshore_gas_field',cat:'gas',bpd:0,ofac:'GL-50A ✓',notes:'Offshore north of Paria. ~4.2 Tcf reserves. Shell signed Mar 2026. FID possible 2026. Pipeline to Trinidad Atlantic LNG. First gas 2027-28.'},
+  {id:17,name:'Cardon IV / Perla Gas',lat:11.62,lon:-70.98,op:'PDVSA / ENI / Repsol',type:'offshore_gas_field',cat:'gas',bpd:0,ofac:'GL-50A ✓',notes:'Offshore Paraguaná. Largest gas discovery in Western Hemisphere (~17 Tcf). ENI 32.5%, Repsol 32.5%. ~1.1 Bcfd plateau. Feeds domestic grid.'},
+  {id:18,name:'Patao / Mejillones',lat:11.15,lon:-62.55,op:'PDVSA / Roszarubezhneft',type:'offshore_gas_field',cat:'gas',bpd:0,ofac:'EXCLUDED — Russia',notes:'Offshore NE Paria Basin. 6.4 Tcf combined reserves. Undeveloped. Russian interest excluded from new GLs.'},
+  {id:19,name:'Carito-Pirital',lat:9.85,lon:-63.45,op:'PDVSA (Shell deal pending)',type:'gas_field',cat:'gas',bpd:0,ofac:'GL-50A ✓ (Shell)',notes:'Monagas state. 94K bpd crude + 1 Bcfd gas. 350 mmcfd currently flared. Shell signed cooperation deal Mar 5, 2026.'},
+  {id:20,name:'Amuay Refinery',lat:11.74,lon:-70.22,op:'PDVSA',type:'refinery',cat:'infra',bpd:645000,ofac:'PDVSA — sanctioned',notes:'Paraguana Refinery Complex. Nameplate 645K bpd — was world\'s largest. Operating ~20% capacity. Major fire 2012.'},
+  {id:21,name:'Cardón Refinery',lat:11.63,lon:-70.23,op:'PDVSA',type:'refinery',cat:'infra',bpd:310000,ofac:'PDVSA — sanctioned',notes:'Adjacent to Amuay. Nameplate 310K bpd. Combined CRP: 955K bpd nameplate.'},
+  {id:22,name:'José Industrial Complex',lat:10.19,lon:-64.87,op:'PDVSA',type:'upgrader_terminal',cat:'infra',bpd:600000,ofac:'PDVSA — sanctioned',notes:'Anzoátegui coast. Hub for all 4 Orinoco upgraders. Export terminal. 600K bpd nameplate. Actual ~100-150K bpd.'},
+  {id:23,name:'Puerto La Cruz Terminal',lat:10.17,lon:-64.67,op:'PDVSA',type:'terminal_refinery',cat:'infra',bpd:187000,ofac:'PDVSA — sanctioned',notes:'Major export terminal for eastern crude. El Chaure refinery 187K bpd nameplate.'},
+  {id:24,name:'El Palito Refinery',lat:10.47,lon:-68.13,op:'PDVSA',type:'refinery',cat:'infra',bpd:140000,ofac:'PDVSA — sanctioned',notes:'Puerto Cabello, Carabobo. 140K bpd nameplate. Receives western crude. Frequently offline.'}
+];
+
+const typeColors={'field':'#e67e22','upgrader_field':'#c0392b','offshore_gas_field':'#1abc9c','gas_field':'#16a085','refinery':'#2980b9','terminal_refinery':'#8e44ad','upgrader_terminal':'#8e44ad'};
+const gl50aOps=['Chevron','Shell','Repsol','ENI','Maurel & Prom','BP'];
+
+function initMap(){
+  if(mapInit){leafMap.invalidateSize();return;}
+  mapInit=true;
+  leafMap=L.map('map',{zoomControl:true,attributionControl:true,scrollWheelZoom:false}).setView([9.2,-66],6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',maxZoom:18
+  }).addTo(leafMap);
+
+  mapData.forEach(f=>{
+    const color=typeColors[f.type]||'#95a5a6';
+    const radius=f.bpd>100000?10:f.bpd>50000?8:f.bpd>10000?6:f.cat==='infra'?9:5;
+    const m=L.circleMarker([f.lat,f.lon],{radius,fillColor:color,color:'#fff',weight:1,opacity:.8,fillOpacity:.85}).addTo(leafMap);
+    m._data=f;
+    const prodStr=f.bpd>0?(f.cat==='infra'?`Nameplate: ${f.bpd.toLocaleString()} bpd`:`Production: ${f.bpd.toLocaleString()} bpd`):'Pre-production / Gas';
+    const ofacColor=f.ofac.includes('GL-50A')?'#00d26a':f.ofac.includes('EXCLUDED')?'#ff4d4d':f.ofac.includes('disavowed')?'#ff4d4d':'#ff9f1a';
+    m.bindPopup(`
+      <div style="font-family:'IBM Plex Sans',sans-serif;min-width:220px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px;">${f.name}</div>
+        <div style="font-size:11px;color:#888;margin-bottom:6px;">${f.op}</div>
+        <div style="font-size:11px;margin-bottom:3px;"><strong>Type:</strong> ${f.type.replace(/_/g,' ')}</div>
+        <div style="font-size:11px;margin-bottom:3px;"><strong>${prodStr}</strong></div>
+        <div style="font-size:11px;margin-bottom:6px;">OFAC: <span style="color:${ofacColor};font-weight:600;">${f.ofac}</span></div>
+        <div style="font-size:10px;color:#aaa;line-height:1.4;">${f.notes}</div>
+      </div>
+    `,{className:'custom-popup',maxWidth:280});
+    mapMarkers.push(m);
+  });
+
+  // Style popups
+  const style=document.createElement('style');
+  style.textContent=`.custom-popup .leaflet-popup-content-wrapper{background:#161a22;color:#e8eaed;border:1px solid rgba(255,255,255,.1);border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.5);}.custom-popup .leaflet-popup-tip{background:#161a22;border:1px solid rgba(255,255,255,.1);}.custom-popup .leaflet-popup-close-button{color:#5f6368;}.custom-popup .leaflet-popup-close-button:hover{color:#e8eaed;}`;
+  document.head.appendChild(style);
+}
+
+function mapFilter(f,el){
+  document.getElementById('mapFilterTabs').querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  mapMarkers.forEach(m=>{
+    const d=m._data;
+    let show=true;
+    if(f==='field')show=d.cat==='field';
+    else if(f==='gas')show=d.cat==='gas';
+    else if(f==='infra')show=d.cat==='infra';
+    else if(f==='gl50a')show=gl50aOps.some(op=>d.op.includes(op));
+    else if(f==='excluded')show=d.ofac.includes('EXCLUDED')||d.ofac.includes('disavowed');
+    m.setStyle({fillOpacity:show?.85:.08,opacity:show?.8:.08});
+    if(show)m.setRadius(m._data.bpd>100000?10:m._data.bpd>50000?8:m._data.bpd>10000?6:m._data.cat==='infra'?9:5);
+    else m.setRadius(3);
+  });
+}
+
+// INIT
+renderT('tbl','all',false);
+const obs=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.inf-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});obs.unobserve(e.target);}});},{threshold:.2});
+document.querySelectorAll('.inf').forEach(i=>obs.observe(i));
+// Init map when it scrolls into view
+const mapObs=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){initMap();mapObs.unobserve(e.target);}});},{threshold:.1});
+mapObs.observe(document.getElementById('mapContainer'));
+
+// ---- LIVE DATA FETCH ----
+(async function(){
+  // Fetch live prices
+  try {
+    const r=await fetch('/api/prices');
+    if(r.ok){
+      const d=await r.json();
+      const fmt=n=>n.toFixed(2);
+      const sign=n=>n>=0?'+':'';
+      const cls=n=>n>=0?'t-up':'t-dn';
+      // Update ticker
+      const ticks=document.querySelectorAll('.tick');
+      if(ticks[0]){
+        ticks[0].querySelector('.tick-v').textContent='$'+fmt(d.brent.price);
+        const c=ticks[0].querySelector('.tick-c');c.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'%';c.className='tick-c '+cls(d.brent.changePct);
+      }
+      if(ticks[2]){
+        ticks[2].querySelector('.tick-v').textContent='$'+fmt(d.wti.price);
+        const c=ticks[2].querySelector('.tick-c');c.textContent=sign(d.wti.changePct)+fmt(d.wti.changePct)+'%';c.className='tick-c '+cls(d.wti.changePct);
+      }
+      // Update KPI
+      const kpis=document.querySelectorAll('.kpi');
+      if(kpis[1]){
+        kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style="font-size:11px">.'+fmt(d.brent.price).split('.')[1]+'</span>';
+        const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);
+      }
+      // Update timestamp
+      const ts=document.querySelector('.topbar span:last-child');
+      if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
+    }
+  }catch(e){console.log('Price fetch failed:',e);}
+
+  // Fetch news
+  try {
+    const r=await fetch('/api/news');
+    if(r.ok){
+      const news=await r.json();
+      const ribbon=document.getElementById('newsRibbon');
+      if(ribbon&&news.length){
+        ribbon.innerHTML=news.map(function(item){
+          const d=new Date(item.pubDate);
+          const ago=Math.floor((Date.now()-d.getTime())/3600000);
+          const time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';
+          return '<span class="news-item"><span class="news-tag">NEWS</span><span class="news-time">'+time+'</span><a href="'+item.link+'" target="_blank">'+item.title+'</a></span>';
+        }).join('')+'&nbsp;&nbsp;&nbsp;&nbsp;'+news.map(function(item){
+          var d=new Date(item.pubDate);var ago=Math.floor((Date.now()-d.getTime())/3600000);
+          var time=ago<1?'Just now':ago<24?ago+'h ago':Math.floor(ago/24)+'d ago';
+          return '<span class="news-item"><span class="news-tag">NEWS</span><span class="news-time">'+time+'</span><a href="'+item.link+'" target="_blank">'+item.title+'</a></span>';
+        }).join('');
+      }
+    }
+  }catch(e){console.log('News fetch failed:',e);}
+})();
+</script>
+</body>
+</html>
