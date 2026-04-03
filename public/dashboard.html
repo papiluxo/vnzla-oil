@@ -1136,12 +1136,18 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
 
 // ---- LIVE DATA FETCH ----
 (async function(){
-  // Run all fetches in parallel — none blocks the others
+  // Fetch with 8s timeout — never let a slow API block the dashboard
+  function fetchT(url){
+    return Promise.race([
+      fetch(url),
+      new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},8000);})
+    ]).catch(function(){return null;});
+  }
   var [pricesRes, prodRes, newsRes, xRes] = await Promise.all([
-    fetch('/api/prices').catch(function(){return null;}),
-    fetch('/api/production').catch(function(){return null;}),
-    fetch('/api/news').catch(function(){return null;}),
-    fetch('/api/x').catch(function(){return null;})
+    fetchT('/api/prices'),
+    fetchT('/api/production'),
+    fetchT('/api/news'),
+    fetchT('/api/x')
   ]);
 
   // --- PRICES ---

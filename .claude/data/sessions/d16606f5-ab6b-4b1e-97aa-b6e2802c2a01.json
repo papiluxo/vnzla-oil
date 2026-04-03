@@ -36,6 +36,7 @@
     "fix the colors on the kpi text and subtexts and also the live estimate does not show march",
     "honestly i think the best way to do this is to keep the default view as is but remove the live estimate and blended lines--these should be turned into toggles on the same menu where we can select the time rate and range and projections toggle. clicking on blended or live estimate toggles turns both on but once they are on you can turn either off to concentrate on just two lines. actually fuck it, remove the blended line. just live estimate and change the name to unofficial figure or number idk, whichever one is better in your opinion. finally, give the external debt kpi a \"-\" sig before the number",
     "the graph one default view should not have the empty space expecting the user to click on unofficial est. also, remove the text of the 3month lag when you hover over the official eia line. also, if it does have the 3 month lag then how come feb and jan are part of that line, they should only be part of unofficial est. finally, add a 6 month time range and make that the default instead of 3y",
-    ".make sure we clarify the prod kpi is an estimate from ceic/kpler. finally, the site got stuck fetching once i reloaded after your latest update"
+    ".make sure we clarify the prod kpi is an estimate from ceic/kpler. finally, the site got stuck fetching once i reloaded after your latest update",
+    "i see theres three active branches including main. the site still isnt loading properly"
   ]
 }

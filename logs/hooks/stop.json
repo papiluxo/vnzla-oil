@@ -340,5 +340,14 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Fixed all four issues:\n\n**EIA line accuracy** \u2014 Jan/Feb 2026 no longer show on the EIA Official line. The line now nulls out any period beyond EIA's actual latest (Dec 2025). Those months only appear when you toggle on Unofficial Est.\n\n**No empty space** \u2014 chart trims to the last EIA data point by default. When you toggle Unofficial Est. on, it extends to show Mar 2026 (Kpler 1,090K).\n\n**Removed lag text** \u2014 legend just says \"EIA Official\" now, no \"(3-mo lag)\".\n\n**6M default** \u2014 range options are now `6M | 1Y | 3Y | 5Y | Max` with 6M highlighted. Default view shows ~Oct 2025 through Dec 2025, a tight window of the most recent EIA data."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Three fixes:\n\n**Production KPI** \u2014 now shows `Production (Mar 2026 est.)` with \"est.\" suffix when the latest data point is from an unofficial source. Sub-text shows the actual source name (e.g. \"Kpler/vessel exports\"). When EIA catches up and becomes the latest, it drops the \"est.\" suffix.\n\n**Parallel fetches** \u2014 all 4 API calls (prices, production, news, X) now fire simultaneously via `Promise.all`. If one API is slow or hangs, the others still complete and update their sections. No more stuck loading.\n\n**Debt KPI** \u2014 already has `-$160B` from the previous commit."
   }
 ]
