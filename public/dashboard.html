@@ -771,7 +771,10 @@ function getDataForView(){
   let startIdx=0;
   if(curRange!=='MAX'){
     const yearsBack={'6M':0.5,'1Y':1,'3Y':3,'5Y':5}[curRange]||1;
-    const lastYear=labelToYear(d.labels[d.labels.length-1]);
+    // Find last label with actual data (not null) to anchor the range
+    var lastDataIdx=d.vals.length-1;
+    while(lastDataIdx>0&&d.vals[lastDataIdx]===null)lastDataIdx--;
+    const lastYear=labelToYear(d.labels[lastDataIdx]);
     const cutoff=lastYear-yearsBack;
     startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);
     if(startIdx<0)startIdx=0;
@@ -1170,6 +1173,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         });
       }
       updateTicks('BRENT MAY','$'+fmt(d.brent.price)+unit,sign(d.brent.changePct)+fmt(d.brent.changePct)+'%',cls(d.brent.changePct));
+      if(d.brentNext)updateTicks('BRENT JUN','$'+fmt(d.brentNext.price)+unit,sign(d.brentNext.changePct)+fmt(d.brentNext.changePct)+'%',cls(d.brentNext.changePct));
       updateTicks('WTI','$'+fmt(d.wti.price)+unit,sign(d.wti.changePct)+fmt(d.wti.changePct)+'%',cls(d.wti.changePct));
       if(d.merey)updateTicks('MEREY','$'+fmt(d.merey.price)+unit,'-$'+fmt(d.merey.spread)+' spread','t-fl');
       if(d.petcoke){

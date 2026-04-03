@@ -349,5 +349,23 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Done. Three fixes:\n\n**Production KPI** \u2014 now shows `Production (Mar 2026 est.)` with \"est.\" suffix when the latest data point is from an unofficial source. Sub-text shows the actual source name (e.g. \"Kpler/vessel exports\"). When EIA catches up and becomes the latest, it drops the \"est.\" suffix.\n\n**Parallel fetches** \u2014 all 4 API calls (prices, production, news, X) now fire simultaneously via `Promise.all`. If one API is slow or hangs, the others still complete and update their sections. No more stuck loading.\n\n**Debt KPI** \u2014 already has `-$160B` from the previous commit."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Deployed. Changes:\n\n- **8-second timeout** on every API fetch \u2014 if any endpoint hangs, it's killed after 8s and returns null. Dashboard continues with whatever data it has.\n- **Deleted the two stale analytics branches** (those were auto-created by Vercel when you enabled analytics)\n- **Fresh production deploy** on clean main\n\nTry reloading https://vnzla-oil.vercel.app now. If it still doesn't load, can you open browser dev tools (F12 \u2192 Console tab) and tell me what error shows? That'll pinpoint the exact issue."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Same bug as before \u2014 `let estOn` was declared after the chart code that calls `getDataForView()` which references it. Moved it up with the other state variables. JS validates clean. Should load now."
   }
 ]

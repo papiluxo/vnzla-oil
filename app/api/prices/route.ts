@@ -44,10 +44,11 @@ async function fetchTicker(symbol: string): Promise<{ price: number; change: num
 }
 
 export async function GET() {
-  // Fetch Brent, WTI, and attempt petcoke symbols in parallel
-  const [brent, wti, petcokePc, petcokeMtf] = await Promise.all([
-    fetchTicker('BZ=F'),
-    fetchTicker('CL=F'),
+  // Fetch Brent front-month, Brent next-month, WTI, petcoke in parallel
+  const [brent, brentNext, wti, petcokePc, petcokeMtf] = await Promise.all([
+    fetchTicker('BZ=F'),        // Brent continuous front-month
+    fetchTicker('BZN26.NYM'),   // Brent Jul 2026 contract (next major)
+    fetchTicker('CL=F'),        // WTI front-month
     fetchTicker('PC=F'),
     fetchTicker('MTF=F'),
   ]);
@@ -79,6 +80,7 @@ export async function GET() {
   return NextResponse.json(
     {
       brent: brent ?? { price: 118.35, change: 5.61, changePct: 5.0 },
+      brentNext: brentNext ?? null,
       wti: wti ?? { price: 102.24, change: 4.88, changePct: 5.02 },
       merey,
       petcoke,

@@ -5413,5 +5413,244 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01AWsw2kF35k74bf1a9XDJTo"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "let estOn|var estOn",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01U5Bd9AebRYMy6EUT5hdQJK"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "let curGran|let curRange|let curSc|let projOn",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_018e4K26ihxuePLdCXofCV7b"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "let curGran='M';\nlet curRange='6M';\nlet curSc='bear';\nlet projOn=false;",
+      "new_string": "let curGran='M';\nlet curRange='6M';\nlet curSc='bear';\nlet projOn=false;\nlet estOn=false;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01KLkX4R5WzCqygjP74uAvMS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "let estOn=false;\nconst hC=new Chart",
+      "new_string": "const hC=new Chart",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01KtZW79J5UeumpdRBqDQGaA"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"const fs=require('fs');const h=fs.readFileSync('public/dashboard.html','utf8');const m=h.match(/<script>([\\s\\S]*?)<\\/script>/);try{new Function(m[1]);console.log('OK');}catch(e){console.log(e.message);}\" && git add public/dashboard.html && git commit -m \"Fix: move estOn declaration before getDataForView (same issue as projOn)\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Verify, commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01NYSshh1SojjPHiDqJqKsiE"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s https://vnzla-oil.vercel.app/api/prices | python3 -c \"import sys,json;d=json.load(sys.stdin);print('Brent:',d['brent']['price'],'chg:',d['brent']['changePct'],'%');print('WTI:',d['wti']['price']);print('Timestamp:',d['timestamp'])\"",
+      "description": "Check live prices"
+    },
+    "tool_use_id": "toolu_01LWLBNC6ax47V5FxWguWqdB"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"\nconst fs=require('fs');\nconst html=fs.readFileSync('public/dashboard.html','utf8');\nconst m=html.match(/<script>([\\s\\S]*?)<\\/script>/);\nconst js=m[1];\nconst lines=js.split('\\n');\n\n// Find getDataForView and check what it references\nconst gdvLine=lines.findIndex(l=>l.includes('function getDataForView'));\nconst chartLine=lines.findIndex(l=>l.includes('const hC=new Chart'));\nconst initViewLine=lines.findIndex(l=>l.includes('const initView='));\nconst estOnLine=lines.findIndex(l=>l.includes('let estOn'));\nconst liveDataLine=lines.findIndex(l=>l.includes('var liveDataLoaded'));\n\nconsole.log('estOn declared:', estOnLine);\nconsole.log('liveDataLoaded declared:', liveDataLine);\nconsole.log('getDataForView defined:', gdvLine);\nconsole.log('initView=getDataForView():', initViewLine);\nconsole.log('Chart created:', chartLine);\n\"",
+      "description": "Check variable/function ordering"
+    },
+    "tool_use_id": "toolu_017ynqX5byq1HeLvdkdQPMwy"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"\nconst fs=require('fs');\nconst html=fs.readFileSync('public/dashboard.html','utf8');\nconst m=html.match(/<script>([\\s\\S]*?)<\\/script>/);\nconst lines=m[1].split('\\n');\nconst labelToKeyLine=lines.findIndex(l=>l.includes('function labelToKey'));\nconst labelToYearLine=lines.findIndex(l=>l.includes('function labelToYear'));\nconsole.log('labelToKey:', labelToKeyLine);\nconsole.log('labelToYear:', labelToYearLine);\nconsole.log('getDataForView:', lines.findIndex(l=>l.includes('function getDataForView')));\nconsole.log('buildChart:', lines.findIndex(l=>l.includes('function buildChart')));\n\"",
+      "description": "Check function ordering"
+    },
+    "tool_use_id": "toolu_01NczXWDdGYQg1Ghpp7suyXR"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"\nconst fs=require('fs');\nconst html=fs.readFileSync('public/dashboard.html','utf8');\nconst m=html.match(/<script>([\\s\\S]*?)<\\/script>/);\n// Inject mock DOM and Chart\nconst mockCode='var document={querySelectorAll:()=>[],getElementById:()=>({style:{},querySelectorAll:()=>[],querySelector:()=>({style:{},textContent:\\\"\\\",innerHTML:\\\"\\\",className:\\\"\\\"})}),createElement:()=>({onload:null,onerror:null}),addEventListener:()=>{}};var L={map:()=>({})};var Chart=function(){return{data:{datasets:[{},{},{}]},options:{scales:{x:{ticks:{}}}},update:()=>{}}};Chart.defaults={color:\\\"\\\",borderColor:\\\"\\\",font:{}};var IntersectionObserver=function(){return{observe:()=>{}}};var requestAnimationFrame=function(f){};var fetch=function(){return Promise.resolve({ok:false});};';\ntry{\n  eval(mockCode+m[1]);\n  // Now test getDataForView\n  var v=getDataForView();\n  console.log('Labels count:',v.labels.length);\n  console.log('First:',v.labels[0],'Last:',v.labels[v.labels.length-1]);\n  console.log('eiaLine nulls:',v.eiaLine.filter(x=>x===null).length,'of',v.eiaLine.length);\n  console.log('vals sample:',v.vals.slice(0,5));\n}catch(e){console.log('Error:',e.message);}\n\"",
+      "description": "Test getDataForView output"
+    },
+    "tool_use_id": "toolu_011HKx69uuXTcz9n2H9CRdfY"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  if(curRange!=='MAX'){\n    const yearsBack={'6M':0.5,'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    const lastYear=labelToYear(d.labels[d.labels.length-1]);\n    const cutoff=lastYear-yearsBack;",
+      "new_string": "  if(curRange!=='MAX'){\n    const yearsBack={'6M':0.5,'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    // Find last label with actual data (not null) to anchor the range\n    var lastDataIdx=d.vals.length-1;\n    while(lastDataIdx>0&&d.vals[lastDataIdx]===null)lastDataIdx--;\n    const lastYear=labelToYear(d.labels[lastDataIdx]);\n    const cutoff=lastYear-yearsBack;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01WxXkyLtPm7dyuhsABgiCzJ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/prices/route.ts",
+      "limit": 40
+    },
+    "tool_use_id": "toolu_01KFJxrbQytifB13vHp4zeQj"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/prices/route.ts",
+      "offset": 40,
+      "limit": 40
+    },
+    "tool_use_id": "toolu_01L3PNhRoENmSGrtWAgg6aYv"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/prices/route.ts",
+      "old_string": "  // Fetch Brent, WTI, and attempt petcoke symbols in parallel\n  const [brent, wti, petcokePc, petcokeMtf] = await Promise.all([\n    fetchTicker('BZ=F'),\n    fetchTicker('CL=F'),\n    fetchTicker('PC=F'),\n    fetchTicker('MTF=F'),\n  ]);",
+      "new_string": "  // Fetch Brent front-month, Brent next-month, WTI, petcoke in parallel\n  const [brent, brentNext, wti, petcokePc, petcokeMtf] = await Promise.all([\n    fetchTicker('BZ=F'),        // Brent continuous front-month\n    fetchTicker('BZN26.NYM'),   // Brent Jul 2026 contract (next major)\n    fetchTicker('CL=F'),        // WTI front-month\n    fetchTicker('PC=F'),\n    fetchTicker('MTF=F'),\n  ]);",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01JogoVXgc4wDq52fRWWhGv1"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/prices/route.ts",
+      "offset": 78,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_01SaawmuybNS2bLdvCdC2j8x"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/app/api/prices/route.ts",
+      "old_string": "      brent: brent ?? { price: 118.35, change: 5.61, changePct: 5.0 },\n      wti: wti ?? { price: 102.24, change: 4.88, changePct: 5.02 },\n      merey,\n      petcoke,",
+      "new_string": "      brent: brent ?? { price: 118.35, change: 5.61, changePct: 5.0 },\n      brentNext: brentNext ?? null,\n      wti: wti ?? { price: 102.24, change: 4.88, changePct: 5.02 },\n      merey,\n      petcoke,",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Qyfsy1kRVuLHbSDgLPgbHN"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      updateTicks('BRENT MAY','$'+fmt(d.brent.price)+unit,sign(d.brent.changePct)+fmt(d.brent.changePct)+'%',cls(d.brent.changePct));\n      updateTicks('WTI','$'+fmt(d.wti.price)+unit,sign(d.wti.changePct)+fmt(d.wti.changePct)+'%',cls(d.wti.changePct));",
+      "new_string": "      updateTicks('BRENT MAY','$'+fmt(d.brent.price)+unit,sign(d.brent.changePct)+fmt(d.brent.changePct)+'%',cls(d.brent.changePct));\n      if(d.brentNext)updateTicks('BRENT JUN','$'+fmt(d.brentNext.price)+unit,sign(d.brentNext.changePct)+fmt(d.brentNext.changePct)+'%',cls(d.brentNext.changePct));\n      updateTicks('WTI','$'+fmt(d.wti.price)+unit,sign(d.wti.changePct)+fmt(d.wti.changePct)+'%',cls(d.wti.changePct));",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01WgvtenVGmAFtupbAwyLnAV"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"const fs=require('fs');const h=fs.readFileSync('public/dashboard.html','utf8');const m=h.match(/<script>([\\s\\S]*?)<\\/script>/);try{new Function(m[1]);console.log('JS OK');}catch(e){console.log(e.message);}\" && git add -A && git commit -m \"$(cat <<'EOF'\nFix chart 6M range + add Brent next-month contract tracking\n\nChart fix: range calculation now anchors from last actual data point\n(not last label) so 6M doesn't start in a null zone.\n\nPrices API: now fetches BZ=F (front-month) + BZN26.NYM (Jul 2026)\nseparately. BRENT JUN ticker updates with its own live contract price.\n\nBoth Brent contracts update every 5 min from Yahoo Finance.\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Verify, commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01RNqBgDeb3dUs7nKgBdXZiP"
   }
 ]
