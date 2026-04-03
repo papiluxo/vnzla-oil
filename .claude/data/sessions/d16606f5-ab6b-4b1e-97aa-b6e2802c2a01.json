@@ -45,6 +45,7 @@
     "clicking the unofficial est legend text on the graph should behave the same way as untoggling. they are not behaving the same rn. the toggle button is the correct behavior",
     "the unofficial estimate should apply to quarterly time rate as its a 3 month estimate (bcause of the 3 month lag), which is a quarter",
     "it shouldnt be the last month of march it should be the averga eof the three estimated months... jan, feb and march",
-    "ok increase the font size of the text in general so its easier to read for ppl above the age of 50 and translate the whole site to spanish, making it a toggle on the header, next to the date and time that allows you to switch between english and spanish"
+    "ok increase the font size of the text in general so its easier to read for ppl above the age of 50 and translate the whole site to spanish, making it a toggle on the header, next to the date and time that allows you to switch between english and spanish",
+    "the toggle appears for a split second when launching and then disappears. adjust the size of the font on the news ribbon, share percent in all producers table, and key jvs in that same table"
   ]
 }

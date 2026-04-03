@@ -168,8 +168,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .news-item{font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
 .news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}
 .news-item a:hover{color:var(--amber);}
-.news-time{color:var(--t4);font-size:9px;}
-.news-tag{font-weight:600;font-size:9px;letter-spacing:.3px;}
+.news-time{color:var(--t4);font-size:10px;}
+.news-tag{font-weight:600;font-size:10px;letter-spacing:.3px;}
 .news-tag-x{color:var(--blue);}
 .news-tag-news{color:var(--amber);}
 .news-src{color:var(--t4);font-size:8px;}
@@ -643,7 +643,7 @@ function mkRow(c,full){
   const bw=Math.min(c.cur/260*100,100);
   let h=`<td><span class="nm">${c.f} ${c.n}</span></td><td class="dim">${c.c}</td>`;
   if(full)h+=`<td class="dim">${c.tp}</td>`;
-  h+=`<td style="white-space:nowrap"><span class="dot ${dc}"></span>${c.stL}</td><td class="mono">${c.curL}</td><td class="mono" style="color:${c.tgt&&c.tgt!=='—'?'var(--amber)':'var(--t4)'}">${c.tgt||'—'}</td><td><div style="display:flex;align-items:center;gap:5px"><div class="bar-t"><div class="bar-f" style="width:${bw}%;background:${bc}"></div></div><span class="mono dim" style="font-size:9px">${pct}</span></div></td><td class="dim" style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px">${c.assets}</td>`;
+  h+=`<td style="white-space:nowrap"><span class="dot ${dc}"></span>${c.stL}</td><td class="mono">${c.curL}</td><td class="mono" style="color:${c.tgt&&c.tgt!=='—'?'var(--amber)':'var(--t4)'}">${c.tgt||'—'}</td><td><div style="display:flex;align-items:center;gap:5px"><div class="bar-t"><div class="bar-f" style="width:${bw}%;background:${bc}"></div></div><span class="mono dim" style="font-size:11px">${pct}</span></div></td><td class="dim" style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px">${c.assets}</td>`;
   return h;
 }
 function renderT(id,f,full){
@@ -1387,7 +1387,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';
       }
       // Update timestamp
-      const ts=document.querySelector('.topbar span:last-child');
+      const ts=document.getElementById('topbarTs');
       if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
     }
   }catch(e){console.log('Prices error:',e);}
