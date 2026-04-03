@@ -295,11 +295,11 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 </div>
 
 <div class="ticker">
-  <div class="tick"><span class="tick-l">BRENT MAY</span><span class="tick-v">$118.35</span><span class="tick-c t-up">+5.0%</span></div>
-  <div class="tick"><span class="tick-l">BRENT JUN</span><span class="tick-v">$108.00</span><span class="tick-c t-up">+60% MTD</span></div>
-  <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24</span><span class="tick-c t-up">+48% MTD</span></div>
-  <div class="tick"><span class="tick-l">MEREY EST</span><span class="tick-v">~$99</span><span class="tick-c t-up">+75% vs 2025 avg</span></div>
-  <div class="tick"><span class="tick-l">PETCOKE</span><span class="tick-v">~$45</span><span class="tick-c t-fl">EST</span></div>
+  <div class="tick"><span class="tick-l">BRENT MAY</span><span class="tick-v">$118.35<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-up">+5.0%</span></div>
+  <div class="tick"><span class="tick-l">BRENT JUN</span><span class="tick-v">$108.00<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-up">+60% MTD</span></div>
+  <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-up">+48% MTD</span></div>
+  <div class="tick"><span class="tick-l">MEREY EST</span><span class="tick-v">~$99<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-up">+75% vs 2025 avg</span></div>
+  <div class="tick"><span class="tick-l">PETCOKE</span><span class="tick-v">~$45<span style="color:var(--t4)">/st</span></span><span class="tick-c t-fl">EST</span></div>
   <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">958–1,021K</span><span class="tick-c t-fl">FEB 26 RANGE</span></div>
   <div class="tick"><span class="tick-l">OFAC GLs</span><span class="tick-v">GL-52 OPEN</span><span class="tick-c t-up">ALL US ENTITIES</span></div>
   <div class="tick"><span class="tick-l">CHN/RUS</span><span class="tick-v">EXCLUDED</span><span class="tick-c t-dn">OFAC</span></div>
@@ -1051,19 +1051,21 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
       const cls=n=>n>=0?'t-up':'t-dn';
       // Update ticker
       const ticks=document.querySelectorAll('.tick');
+      var unit='<span style="color:var(--t4)">/bbl</span>';
+      var unitSt='<span style="color:var(--t4)">/st</span>';
       if(ticks[0]){
-        ticks[0].querySelector('.tick-v').textContent='$'+fmt(d.brent.price);
+        ticks[0].querySelector('.tick-v').innerHTML='$'+fmt(d.brent.price)+unit;
         const c=ticks[0].querySelector('.tick-c');c.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'%';c.className='tick-c '+cls(d.brent.changePct);
       }
       if(ticks[2]){
-        ticks[2].querySelector('.tick-v').textContent='$'+fmt(d.wti.price);
+        ticks[2].querySelector('.tick-v').innerHTML='$'+fmt(d.wti.price)+unit;
         const c=ticks[2].querySelector('.tick-c');c.textContent=sign(d.wti.changePct)+fmt(d.wti.changePct)+'%';c.className='tick-c '+cls(d.wti.changePct);
       }
       // Update Merey
       if(d.merey) {
         var mTick = Array.from(ticks).find(function(t){return t.querySelector('.tick-l').textContent.includes('MEREY');});
         if(mTick) {
-          mTick.querySelector('.tick-v').textContent = '$' + fmt(d.merey.price);
+          mTick.querySelector('.tick-v').innerHTML = '$' + fmt(d.merey.price) + unit;
           var mc = mTick.querySelector('.tick-c');
           mc.textContent = '-$' + fmt(d.merey.spread) + ' spread';
           mc.className = 'tick-c t-fl';
@@ -1073,7 +1075,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
       if(d.petcoke) {
         var pTick = Array.from(ticks).find(function(t){return t.querySelector('.tick-l').textContent.includes('PETCOKE');});
         if(pTick) {
-          pTick.querySelector('.tick-v').textContent = d.petcoke.live ? '$' + fmt(d.petcoke.price) : '~$' + fmt(d.petcoke.price);
+          pTick.querySelector('.tick-v').innerHTML = (d.petcoke.live ? '$' + fmt(d.petcoke.price) : '~$' + fmt(d.petcoke.price)) + unitSt;
           var pc = pTick.querySelector('.tick-c');
           pc.textContent = d.petcoke.live ? (d.petcoke.changePct >= 0 ? '+' : '') + fmt(d.petcoke.changePct) + '%' : 'EST';
           pc.className = 'tick-c ' + (d.petcoke.live ? (d.petcoke.changePct >= 0 ? 't-up' : 't-dn') : 't-fl');
