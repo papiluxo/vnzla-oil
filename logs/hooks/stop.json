@@ -448,5 +448,50 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Done. Clicking ES now translates:\n\n**Sidebar** \u2014 all 11 timeline events, GL-50A composition labels, Big Six callout text, all 4 active deals, debt exposure rows\n\n**Table** \u2014 column headers (Empresa, Origen, OFAC, Prod, Proyecci\u00f3n 2026, Cuota, JVs Clave)\n\n**Footer** \u2014 all category labels (Producci\u00f3n, Precios, Sanciones, Escenarios, Noticias, Geo) + update cadence text\n\n**News ribbon** \u2014 \"NEWS\" tags become \"NOTICIAS\"\n\n**Topbar** \u2014 title + subtitle translate\n\n**Header** is already sticky \u2014 topbar/nav/ticker sit outside the `.main` scroll container so they never scroll away."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. When you toggle ES, every piece of text translates:\n\n**Company table rows** \u2014 type, status, guidance, assets all in Spanish per row\n\n**Company detail modals** \u2014 click any producer and all 10 field labels + the full analysis paragraph are in Spanish. E.g. Chevron shows \"Mayor operador extranjero \u2014 27% de la producci\u00f3n nacional...\"\n\n**Chart legend** \u2014 \"EIA Oficial\" and \"Est. No Oficial (CEIC/Kpler)\"\n\n**Scenario cards** \u2014 \"Pesimista \u2014 Sanciones Vigentes\", \"Base \u2014 Rampa GL-50A\", \"Optimista \u2014 Reapertura Total\"\n\n**Sidebar** \u2014 all timeline events, GL-50A list, deals, debt labels\n\n**Footer** \u2014 all source categories and update cadence\n\n**News** \u2014 \"NEWS\" tags become \"NOTICIAS\"\n\n**KPIs, panel titles, context paragraphs, infra bars, map legend, filters** \u2014 all translated\n\nTable and chart re-render on toggle so everything updates instantly. Toggle back to EN and it all reverts."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. All news ribbon elements \u2014 tag, time, source, and headline link \u2014 are now uniform 11px IBM Plex Mono. The source text bumped from 8px to 11px, and the link explicitly inherits the monospace font. Everything should be aligned and same size now."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed both:\n\n**EN/ES toggle on mobile** \u2014 the old CSS `span:not(.brand){display:none}` was nuking everything including the toggle. Now it only hides the middle subtitle spans, and the lang toggle gets `display:inline!important` to stay visible. Shows as `EN / ES` next to the timestamp.\n\n**Sticky header on mobile** \u2014 topbar (`top:0`), nav with news ribbon (`top:30px`), and ticker (`top:56px`) are all `position:sticky` with stacking z-index. They stay pinned at the top as you scroll through the dashboard, same behavior as desktop."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Share column widened from 70px to 82px on mobile \u2014 should fit the bar + percentage text without clipping."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. All table text on mobile is now forced to 10px via `!important` \u2014 both `td`/`th` and all child elements. The inline `font-size:11px` on share and `font-size:12px` on key JVs no longer override the mobile rule."
   }
 ]

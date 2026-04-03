@@ -42,25 +42,36 @@ function parseRSS(xml: string, fallbackSource?: string): NewsItem[] {
 
 // Multiple feeds for maximum freshness — Google News has ~2h delay,
 // direct publisher feeds are near-real-time
-const RSS_FEEDS: { url: string; source?: string }[] = [
-  // Direct publisher feeds (fastest updates)
+const RSS_FEEDS_EN: { url: string; source?: string }[] = [
   { url: 'https://www.cnbc.com/id/20910258/device/rss/rss.html', source: 'CNBC Energy' },
   { url: 'https://oilprice.com/rss/main', source: 'OilPrice' },
   { url: 'https://feeds.bloomberg.com/markets/news.rss', source: 'Bloomberg' },
-  // Google News (broader, but 1-3h delay)
   { url: 'https://news.google.com/rss/search?q=venezuela+oil+PDVSA+sanctions+when:1d&hl=en-US&gl=US&ceid=US:en' },
   { url: 'https://news.google.com/rss/search?q=brent+crude+oil+hormuz+when:1d&hl=en-US&gl=US&ceid=US:en' },
   { url: 'https://news.google.com/rss/search?q=OPEC+oil+production+market+when:1d&hl=en-US&gl=US&ceid=US:en' },
   { url: 'https://news.google.com/rss/search?q=oil+price+crude+when:1d&hl=en-US&gl=US&ceid=US:en' },
 ];
 
+const RSS_FEEDS_ES: { url: string; source?: string }[] = [
+  { url: 'https://news.google.com/rss/search?q=venezuela+petroleo+PDVSA+produccion+when:1d&hl=es-419&gl=VE&ceid=VE:es-419' },
+  { url: 'https://news.google.com/rss/search?q=crudo+brent+petroleo+precio+when:1d&hl=es-419&gl=VE&ceid=VE:es-419' },
+  { url: 'https://news.google.com/rss/search?q=OPEP+produccion+petrolera+when:1d&hl=es-419&gl=VE&ceid=VE:es-419' },
+  { url: 'https://news.google.com/rss/search?q=sanciones+venezuela+petroleo+OFAC+when:1d&hl=es-419&gl=VE&ceid=VE:es-419' },
+  { url: 'https://news.google.com/rss/search?q=derrame+petroleo+venezuela+PDVSA+when:1d&hl=es-419&gl=VE&ceid=VE:es-419' },
+];
+
 // Oil-related keywords for filtering non-oil articles from general feeds
 const OIL_KEYWORDS = /oil|crude|brent|wti|opec|petroleum|barrel|refin|pipeline|lng|gas|energy|drill|sanctions|venezuela|pdvsa|hormuz|iran|saudi/i;
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const lang = url.searchParams.get('lang') || 'en';
+    const feeds = lang === 'es' ? RSS_FEEDS_ES : RSS_FEEDS_EN;
+    const oilKeywordsEs = /petr[oó]le|crudo|brent|wti|opep|barril|refin|oleoducto|gnl|gas|energ|sanciones|venezuela|pdvsa|ormuz|ir[aá]n|saudi/i;
+
     const results = await Promise.allSettled(
-      RSS_FEEDS.map(feed =>
+      feeds.map(feed =>
         fetch(feed.url, {
           headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
@@ -79,7 +90,8 @@ export async function GET() {
         const { xml, source } = result.value;
         for (const item of parseRSS(xml, source)) {
           // Filter: only oil/energy related from general feeds
-          if (source && !OIL_KEYWORDS.test(item.title)) continue;
+          const kw = lang === 'es' ? oilKeywordsEs : OIL_KEYWORDS;
+          if (source && !kw.test(item.title)) continue;
 
           const key = item.title.toLowerCase().substring(0, 50);
           if (!seen.has(key)) {
