@@ -772,17 +772,34 @@ function getDataForView(){
   // Find the last label that has visible data on any ACTIVE line
   var eiaKeys=liveDataLoaded?Object.keys(liveEia).sort():[];
   var latestEiaPeriod=eiaKeys.length>0?eiaKeys[eiaKeys.length-1]:'9999-99';
+  // Check if any live data exists for a key (handles monthly, quarterly, annual)
+  function hasLiveData(k,source){
+    if(!k)return false;
+    if(source[k])return true;
+    // For quarterly keys like '2026-Q1', check monthly keys within
+    if(k.includes('-Q')){
+      var qn=parseInt(k.split('-Q')[1]);var yr=k.split('-Q')[0];
+      for(var mi=(qn-1)*3+1;mi<=(qn-1)*3+3;mi++){
+        if(source[yr+'-'+String(mi).padStart(2,'0')])return true;
+      }
+    }
+    // For annual keys, check any month
+    if(k.length===4){
+      for(var mi=1;mi<=12;mi++){
+        if(source[k+'-'+String(mi).padStart(2,'0')])return true;
+      }
+    }
+    return false;
+  }
   function hasVisibleData(idx){
     var k=labelToKey(d.labels[idx]);
-    if(!liveDataLoaded){
-      // Before API loads, hardcoded vals are the only data
-      return d.vals[idx]!==null;
-    }
+    if(!liveDataLoaded)return d.vals[idx]!==null;
     if(!k)return d.vals[idx]!==null;
-    // EIA line: only shows data up to latestEiaPeriod
-    if(liveEia[k]||k<=latestEiaPeriod&&d.vals[idx]!==null)return true;
+    // EIA line: data up to latestEiaPeriod
+    if(hasLiveData(k,liveEia))return true;
+    if(k<=latestEiaPeriod&&d.vals[idx]!==null)return true;
     // Estimate line: only counts if toggled on
-    if(estOn&&liveEst[k])return true;
+    if(estOn&&hasLiveData(k,liveEst))return true;
     return false;
   }
   var lastVisIdx=d.labels.length-1;

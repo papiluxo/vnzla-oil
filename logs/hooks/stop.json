@@ -385,5 +385,23 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Done. The x-axis now dynamically adjusts based on what's visible:\n\n**EIA only (default):** Chart ends at **Dec 2025** (last EIA data point). No trailing empty space.\n\n**Toggle on Unofficial Est.:** Chart extends to **Mar 2026** (Kpler 1,090K). The green dashed line shows Jan 924K \u2192 Feb 903K \u2192 Mar 1,090K where EIA has no data yet.\n\n**Toggle on Projections:** Chart extends to **EOY 2026** with scenario line.\n\nThe 6M/1Y/3Y/5Y/Max ranges all anchor from the last visible data point too, so switching between them always shows a meaningful window."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Three changes:\n\n**X-axis fix** \u2014 `hasVisibleData()` now properly checks what's actually rendered after live data loads. When EIA is the only visible line, chart ends at Dec 2025. When unofficial est is on, extends to Mar 2026. No more empty trailing space.\n\n**Unofficial Est. default ON** \u2014 both lines show on initial load. The green dashed line overlaps EIA through historical data and diverges Jan-Mar 2026 where EIA hasn't published yet.\n\n**Pulsing live dot** \u2014 a subtle green pulse animates on the last data point of the unofficial estimate line (Mar 2026). Uses CSS `@keyframes livePulse` \u2014 gentle opacity/scale oscillation over 2 seconds. Disappears when you toggle the estimate off."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. Clicking the legend text now calls the same `toggleEst()` / `toggleProj()` functions as the header buttons \u2014 so the toggle dot, x-axis trim, scenario card collapse, and dataset visibility all stay in sync regardless of whether you click the legend or the button."
   }
 ]
