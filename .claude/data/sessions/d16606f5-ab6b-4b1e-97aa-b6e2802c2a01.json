@@ -52,6 +52,7 @@
     "also, eh english and spanish toggle dont show up on the mobile screen (make sure its visible withing the screen margins) an the header should have that same behavior as in desktop where it stays as you scroll through the site",
     "can we expand the width of the share of prod in the prod table on mobile, almost all producers show their bar but get the percent cut off, lets extend a few pixels to the right and i think itll fit and doesnt harm the key jvs column",
     "the font sizes in that table look all different in mobile",
-    "ok cool, is it possible to make the news ribbon and the headlines and all in spanish when the spanish toggle is on os even the news ribbon reads in spanish too? only for when spanish toggle is on"
+    "ok cool, is it possible to make the news ribbon and the headlines and all in spanish when the spanish toggle is on os even the news ribbon reads in spanish too? only for when spanish toggle is on",
+    "it doesnt re-fetch in spanish still. try again. also the revenue control text in the critical context box is not being translated to spanish w the toggle"
   ]
 }

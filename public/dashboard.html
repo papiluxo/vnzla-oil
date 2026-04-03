@@ -1295,6 +1295,7 @@ var i18n={
   // Context paragraphs
   'Captured Jan 3 by US forces. Rodríguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.':'Capturado el 3 de enero por fuerzas de EE.UU. Rodríguez (listada SDN) presidenta interina. Nueva ley de hidrocarburos elimina monopolio de PDVSA. Arbitraje independiente permitido.',
   'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 broadened access beyond Big Six.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B recaudado. $5B proyectado. $150B potencial en 10 años. GL-52 amplió acceso más allá de los Seis Grandes.',
+  'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 (Mar 18, 2026) broadened access beyond the Big Six — all established US entities now authorized for production & JVs with PDVSA.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B recaudado. $5B proyectado. $150B potencial en 10 años. GL-52 (Mar 18, 2026) amplió acceso más allá de los Seis Grandes — todas las entidades establecidas de EE.UU. ahora autorizadas para producción y JVs con PDVSA.',
   'Strait disrupted since Mar 2. Brent +60% MTD — largest monthly surge since \'88. Venezuela supply suddenly strategic to US.':'Estrecho interrumpido desde el 2 de marzo. Brent +60% mensual — mayor alza mensual desde el \'88. Suministro venezolano estratégico para EE.UU.',
   'Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.':'Exento de cuotas desde 2019. Podría producir 1.5M+ bpd libremente. Reservas: 303B bbl (#1). La limitante es capital, no geología.',
   // Sidebar — sanctions timeline
@@ -1439,14 +1440,15 @@ var fts=document.getElementById('footerTs');
 if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
 
 // ---- LIVE DATA FETCH ----
+// Global fetch with timeout
+function fetchT(url){
+  return Promise.race([
+    fetch(url),
+    new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},8000);})
+  ]).catch(function(){return null;});
+}
+
 (async function(){
-  // Fetch with 8s timeout — never let a slow API block the dashboard
-  function fetchT(url){
-    return Promise.race([
-      fetch(url),
-      new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},8000);})
-    ]).catch(function(){return null;});
-  }
   var [pricesRes, prodRes, newsRes, xRes] = await Promise.all([
     fetchT('/api/prices'),
     fetchT('/api/production'),
