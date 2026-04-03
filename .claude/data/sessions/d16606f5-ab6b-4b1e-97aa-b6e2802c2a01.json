@@ -3,6 +3,17 @@
   "prompts": [
     "still not visible [Image #1] and lets have the news be a ribbon on the top that slides w news articles related to venezuela oil prod or overall market news on oil",
     "the news ribbon says \"loading, fetching latest headlines...\" lets fix that",
-    "lets optimize for mobile ui now in case someone opens in phone. also the news ribbon speed is too fast, and they all seem somewhat old news. lets be more precise and intentional abt the news stories there, we could be tracking hormuz stuff or maybe even x posts that are mentioning venezuela oil prod (i like the x posts better cause its higher speed alpha)"
+    "lets optimize for mobile ui now in case someone opens in phone. also the news ribbon speed is too fast, and they all seem somewhat old news. lets be more precise and intentional abt the news stories there, we could be tracking hormuz stuff or maybe even x posts that are mentioning venezuela oil prod (i like the x posts better cause its higher speed alpha)",
+    "news ribbon speed is too fast",
+    "that ribbon should be sticky as i scroll down and make sure the footer data sources is always up to date",
+    "place the ribbon section below the vnzla oil | venezuelan crude oil prod intelligence | 2026 guidance dashboard, and remove the \"eia / opec / ofac / kpler / ceic\" to the right of the \"live\" text and place the news ribbon there so its next to the \"live\" text",
+    "also its still not optimized for a phone screen. a lot of things fall out of the screen",
+    "there HAS to be latest news too, they all seem multiple hours old",
+    "news ribbon isnt working on mobile and lets make sure the historical prod and 2026 scenarios chart (on mobile) has better in-line filter organization so all the time range options and time rate options are in one line and dont have some filters awkwardly below in a second line",
+    "the news ribbon on mobile seems to start coming into the screen for a bit and then disappears (its extremely slow in mobile and doesnt reveal past \"new..\" to show the actual news and stuff. also, allow for an option to switch languages from english to spanish so venezuelans can actually read this lol. default should be english. if this is too much, just lmk and we wont do it.",
+    "the prod table on mobile looks a bit messy, lets put vertical dividers per field so we can follow the info more clearly. forget the spanish translation thing and undo those edits we made for it. the news ribbon in mobile is working perfectly now!",
+    "i dont like the double dividers in the prod table. it was better before, its just in the mobile it was hard to follow. maybe its better if only in mobile each field starts at the same horizontal coordinate so that it can follow along as much cealry understood columns",
+    "ok much better but now the columns starting at prod (bpd) starts to ignore the x coordinate alignment",
+    "cool. to the infrastructure map, are you able to add oil spills (2025 to now), with info on their dimension and where obviously"
   ]
 }

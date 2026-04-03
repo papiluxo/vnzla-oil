@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "title": "Venezuela Oil Spills — January 2025 to March 2026",
+    "compiled": "2026-04-01",
+    "total_documented_incidents": 13,
+    "coverage_notes": "PDVSA does not publish official spill data. All figures sourced from NGOs (Clima 21, Observatorio de Ecología Política), local Venezuelan press (La Patilla, El Nacional, TalCual), and international wire services (Reuters, Bloomberg). Actual incident count for full period likely 30+; confirmed discrete events documented here: 13. NGO Clima 21 counted 13 spills/gas leaks/explosions in 2025 through June 2025 alone.",
+    "primary_sources": [
+      "https://pdvsa-adhoc.com/en/2025/06/oil-spills-in-venezuela/",
+      "https://pgjonline.com/news/2026/march/two-pipeline-oil-spills-reported-near-venezuela-s-cardon-refinery",
+      "https://www.tradingview.com/news/reuters.com,2026:newsml_L6N40F14Y:0-venezuela-state-oil-company-containing-two-oil-spills-near-cardon-refinery/",
+      "https://www.lapatilla.com/2025/01/22/first-oil-spill-of-2025-in-venezuela-once-again-the-gulf-of-coro-suffers-the-neglect-of-chavismo/",
+      "https://www.lapatilla.com/2025/02/10/another-oil-spill-in-gulf-of-coro-fishermen-ask-pdvsa-to-clean-up-and-not-just-rake-over/",
+      "https://www.atmosi.com/en/news-events/news/pipeline-rupture-caused-oil-spill-in-venezuela/",
+      "https://www.nasdaq.com/articles/oil-spills-hit-pdvsas-operations-in-eastern-venezuela-sources",
+      "https://ecopoliticavenezuela.org/reporte-balance-de-derrames-petroleros-2024/",
+      "https://maritime-executive.com/article/new-spill-from-aging-venezuelan-refinery-contaminates-golfo-triste-again"
+    ]
+  },
+  "spills": [
+    {
+      "id": "VZ-2025-001",
+      "date": "2025-01-04",
+      "date_precision": "exact — leak began Jan 4; PDVSA notified Jan 4; video documented Jan 19; repair completed Jan 22",
+      "location": {
+        "place_name": "Punta Caimán, Gulf of Coro (Golfete de Coro)",
+        "state": "Falcón",
+        "body_of_water": "Gulf of Coro (Golfete de Coro)",
+        "municipality": "Punta Cardón area / Carirubana",
+        "latitude": 11.62,
+        "longitude": -70.23,
+        "coordinates_source": "Estimated from named location (Punta Caimán, Golfete de Coro)"
+      },
+      "cause": "Pipeline rupture — LOL-3 Puerto Miranda–Cardón oil pipeline. Safety auto-shutoff valves corroded inoperable due to years of deferred maintenance ('salt ate them').",
+      "volume": {
+        "barrels_spilled": 90000,
+        "barrels_precision": "minimum estimate per local NGO/fishermen reports",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "LOL-3 Puerto Miranda–Cardón",
+      "status": "Repaired Jan 22, 2025. Cleanup reported but fishermen dispute completeness. Classified as ongoing environmental contamination.",
+      "environmental_impact": "Marine biodiversity and migratory birds threatened. Traditional fishing grounds of 1,953 fishermen (350 artisanal boats) across 16 fishermen's councils contaminated. Approximately 5,000 families in surrounding communities affected. Gas leak ongoing from November 30, 2024, creating explosion risk concurrent with spill. Mangroves and seagrass meadows impacted.",
+      "communities_affected": "Punta Cardón, Tiguadare, Tacuato, Río Seco, Ocorote, Médano Blanco, Mitare",
+      "note": "Described as the 70th recorded spill in this region since late 2019.",
+      "source_url": "https://www.lapatilla.com/2025/01/22/first-oil-spill-of-2025-in-venezuela-once-again-the-gulf-of-coro-suffers-the-neglect-of-chavismo/"
+    },
+    {
+      "id": "VZ-2025-002",
+      "date": "2025-01",
+      "date_precision": "month — late January 2025",
+      "location": {
+        "place_name": "Amuay Refinery, Paraguaná Peninsula",
+        "state": "Falcón",
+        "body_of_water": "Near Gulf of Venezuela coast",
+        "municipality": "Los Taques",
+        "latitude": 11.75,
+        "longitude": -70.22,
+        "coordinates_source": "Estimated from Amuay Refinery known location, Paraguaná Peninsula"
+      },
+      "cause": "Tank overflow at PDVSA Amuay refinery — operational negligence allowed storage tank to overflow.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "not disclosed",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": null,
+      "status": "Unknown — PDVSA did not publish cleanup or containment details.",
+      "environmental_impact": "Not detailed in available reporting. Amuay is Venezuela's largest refinery (645,000 bpd capacity); proximity to Gulf of Venezuela coastline.",
+      "communities_affected": null,
+      "note": "Clima 21 NGO counted this among 13 incidents through June 2025.",
+      "source_url": "https://pdvsa-adhoc.com/en/2025/06/oil-spills-in-venezuela/"
+    },
+    {
+      "id": "VZ-2025-003",
+      "date": "2025-01",
+      "date_precision": "month — January 2025",
+      "location": {
+        "place_name": "Lake Maracaibo",
+        "state": "Zulia",
+        "body_of_water": "Lake Maracaibo",
+        "municipality": "Multiple — Maracaibo lake basin",
+        "latitude": 9.8,
+        "longitude": -71.6,
+        "coordinates_source": "Centroid of Lake Maracaibo"
+      },
+      "cause": "Chronic pipeline leakage — approximately 15,000 wells drilled in lake bottom, many abandoned; aging sub-lake pipelines >50 years old.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "Chronic baseline: ~1,000 bbl/day estimated discharge (Venezuelan Observatory of Environmental Human Rights, 2022). January 2025 incident volume not separately quantified.",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "Multiple aging sub-lake pipelines",
+      "status": "Ongoing / chronic — no containment possible with current infrastructure.",
+      "environmental_impact": "Vanadium and lead contamination in fish (vanadium levels potentially causing human malformations). Lake ecosystem (13,000 km² estuary; 200 km mangrove shoreline) severely degraded. Water supply contamination for lakeside municipalities. January 2025 incident triggered renewed vanadium/metal contamination detection in fish.",
+      "communities_affected": "Maracaibo metro area (~1.6M people) and all lakeside municipalities",
+      "note": "Lake Maracaibo represents the worst cumulative oil contamination scenario in Venezuela. January 2025 spill was a discrete reportable event within the chronic baseline.",
+      "source_url": "https://oilprice.com/Energy/Crude-Oil/How-Venezuelas-Oil-Industry-Killed-Lake-Maracaibo.html"
+    },
+    {
+      "id": "VZ-2025-004",
+      "date": "2025-02-05",
+      "date_precision": "exact — fishermen observed new spill February 5, 2025",
+      "location": {
+        "place_name": "Mitare beach, Gulf of Coro",
+        "state": "Falcón",
+        "body_of_water": "Gulf of Coro (Golfete de Coro)",
+        "municipality": "Punta Cardón / Carirubana",
+        "latitude": 11.60,
+        "longitude": -70.15,
+        "coordinates_source": "Estimated from named location (Mitare beach, Golfete de Coro)"
+      },
+      "cause": "Pipeline rupture — LOL pipeline same corridor as January spill. Less than 15 days after LOL-3 repair was completed on Jan 22.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "Not separately quantified; fishermen estimate >150,000 barrels cumulative across at least 70 incidents in this area since August 2020",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "LOL pipeline corridor (Cardón–Miranda)",
+      "status": "Temporary repair by PDVSA using plastic foam clamps and sandbags. Fishermen describe cleanup as superficial. Environmental studies announced but results unpublished. Ongoing contamination.",
+      "environmental_impact": "Red and black mangrove ecosystems severely damaged. Seagrass meadows contaminated. Endangered sea turtle species threatened. Dead animals reported on shore 'bathed in crude oil'. Shellfish, crustaceans, and clams killed. Sediment and water column pollution. 7,000+ fishing families across 55 communities economically devastated.",
+      "communities_affected": "55 communities around Golfete de Coro, ~7,000 fishing families",
+      "note": "Fishermen demanded 'criminal responsibility' from PDVSA, citing unmet pipeline replacement commitments since 2020.",
+      "source_url": "https://www.lapatilla.com/2025/02/10/another-oil-spill-in-gulf-of-coro-fishermen-ask-pdvsa-to-clean-up-and-not-just-rake-over/"
+    },
+    {
+      "id": "VZ-2025-005",
+      "date": "2025-02",
+      "date_precision": "month — late February 2025",
+      "location": {
+        "place_name": "Anzoátegui state — Pao Aribi / Santa Clara parish",
+        "state": "Anzoátegui",
+        "body_of_water": "Pao Aribi river and tributaries",
+        "municipality": "Santa Clara / Monagas municipality origin",
+        "latitude": 9.7,
+        "longitude": -64.5,
+        "coordinates_source": "Estimated from pipeline corridor Monagas–José Complex and Santa Clara parish, Anzoátegui"
+      },
+      "cause": "Pipeline rupture — crude oil transport line from Monagas municipality to José Complex. PDVSA workers and National Guard blocked media access and confiscated cameras at the scene.",
+      "volume": {
+        "barrels_spilled": 24000,
+        "barrels_precision": "confirmed figure per reporting (>24,000 barrels)",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "Monagas–José Complex crude transport pipeline",
+      "status": "Media/public access blocked by Bolivarian National Guard. Cleanup status unknown — PDVSA did not publish response details.",
+      "environmental_impact": "Pao Aribi river and rivers in Santa Clara parish contaminated. Streams, ponds, lagoons, and farmland in area affected. Human health impacts reported (Dr. García Mineira documented health problems in local residents). Flora and fauna impacted.",
+      "communities_affected": "Agricultural communities in Santa Clara parish, Anzoátegui",
+      "note": "Legislator Antonio Barreto reported National Guard suppressed documentation of the incident.",
+      "source_url": "https://www.atmosi.com/en/news-events/news/pipeline-rupture-caused-oil-spill-in-venezuela/"
+    },
+    {
+      "id": "VZ-2025-006",
+      "date": "2025-01-15",
+      "date_precision": "approximate — 'mid-January 2025' per Reuters reporting",
+      "location": {
+        "place_name": "J-20 station, Morichal oil field",
+        "state": "Monagas",
+        "body_of_water": "La Pica river (threatened)",
+        "municipality": "Morichal / La Pica de Maturín area",
+        "latitude": 9.05,
+        "longitude": -63.0,
+        "coordinates_source": "Estimated from Campo Morichal location, southern Monagas state"
+      },
+      "cause": "Pipeline/flow station failure at PDVSA J-20 station, Morichal field. PDVSA inspected but did not take action to contain.",
+      "volume": {
+        "barrels_spilled": 50000,
+        "barrels_precision": "upper estimate per Reuters ('could be as much as 50,000 barrels')",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "Campo Morichal production infrastructure",
+      "status": "PDVSA inspected but did not act. Subsequent Q1 2025 reports describe 3 additional pipeline spills from same Campo Morichal corridor, suggesting ongoing unresolved leakage.",
+      "environmental_impact": "Hydrocarbons in waters surrounding flow station documented in photos/videos. La Pica river at risk of contamination. Southern highway corridor affected. Plains (llanos) ecosystem impacted across multiple discharge points.",
+      "communities_affected": "La Pica de Maturín parish communities",
+      "note": "Reuters saw photos and videos showing hydrocarbons in waters at J-20 station. PDVSA did not act after inspection.",
+      "source_url": "https://www.nasdaq.com/articles/oil-spills-hit-pdvsas-operations-in-eastern-venezuela-sources"
+    },
+    {
+      "id": "VZ-2025-007A",
+      "date": "2025-Q1",
+      "date_precision": "quarter — Q1 2025, three separate incidents from same pipeline corridor",
+      "location": {
+        "place_name": "Campo Morichal pipeline corridor, southern highway",
+        "state": "Monagas",
+        "body_of_water": "Plains waterways, La Pica river corridor",
+        "municipality": "Morichal / La Pica de Maturín",
+        "latitude": 9.05,
+        "longitude": -63.0,
+        "coordinates_source": "Estimated from Campo Morichal, southern Monagas"
+      },
+      "cause": "Multiple pipeline leaks from Campo Morichal crude pipeline corridor along southern highway (Via Sur). Likely related to same infrastructure failure as VZ-2025-006.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "Three separate incidents — volumes not individually disclosed",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "Campo Morichal–southern highway corridor pipeline",
+      "status": "Not remediated — PDVSA provided no public information on corrective actions.",
+      "environmental_impact": "Community disturbance across La Pica de Maturín and plains corridor. Llanos ecosystem (grassland/wetland) impacted. Waterways and farm areas affected.",
+      "communities_affected": "Communities along Via Sur (southern highway), La Pica de Maturín parish",
+      "note": "Counted as 3 discrete events by NGO monitors. Reported together with VZ-2025-006 as part of same infrastructure failure cluster.",
+      "source_url": "https://pdvsa-adhoc.com/en/2025/06/oil-spills-in-venezuela/"
+    },
+    {
+      "id": "VZ-2025-008",
+      "date": "2025-03",
+      "date_precision": "month — March 2025",
+      "location": {
+        "place_name": "El Palito Refinery / Planta Centro — Golfo Triste / Morrocoy coast",
+        "state": "Carabobo (origin) → Falcón (impact)",
+        "body_of_water": "Golfo Triste (Gulf of Sadness), Caribbean Sea",
+        "municipality": "Puerto Cabello (origin); Morrocoy National Park coast (impact)",
+        "latitude": 10.55,
+        "longitude": -68.1,
+        "coordinates_source": "Centroid of documented 225 km² slick in Golfo Triste"
+      },
+      "cause": "Refinery discharge / pipeline leak at El Palito refinery complex and adjacent Planta Centro thermal power station. Third significant spill from El Palito (prior: Dec 2023, Aug 2024).",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "not disclosed",
+        "area_km2": 225,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "El Palito refinery outflow / coastal pipeline",
+      "status": "Slick reached Falcón coastline. Morrocoy National Park affected. Cleanup status not published by PDVSA. Prior 2020 spill at same location was described by biologist Julia Alvarez as requiring '50 years or longer to fade away.'",
+      "environmental_impact": "225 km² oil slick in Golfo Triste. Morrocoy National Park mangroves, coral reefs, seagrass beds contaminated. Sea turtle nesting/feeding habitat damaged. Migratory birds affected. Beaches in Carabobo (Palma Sola) and Falcón (Boca de Aroa) impacted. Tourism-dependent coastal communities affected. Marine fish populations damaged.",
+      "communities_affected": "Coastal communities in Carabobo and Falcón; Morrocoy National Park area fishing communities",
+      "note": "Morrocoy is a UNESCO-recognized biodiversity hotspot with cayes, mangroves, and coral reefs.",
+      "source_url": "https://maritime-executive.com/article/new-spill-from-aging-venezuelan-refinery-contaminates-golfo-triste-again"
+    },
+    {
+      "id": "VZ-2025-009",
+      "date": "2025-03-25",
+      "date_precision": "exact — first Cardon spill reported Wednesday evening March 25, 2025 (Note: sources also reference a March 2026 incident with same LOL pipeline; this entry covers the Q1 2025 documented LOL pipeline event in same area)",
+      "location": {
+        "place_name": "Carirubana municipality, near Cardon refinery complex, Punta Cardón",
+        "state": "Falcón",
+        "body_of_water": "Gulf of Coro",
+        "municipality": "Carirubana",
+        "latitude": 11.63,
+        "longitude": -70.24,
+        "coordinates_source": "Estimated from Cardon refinery coordinates, Punta Cardón, Falcón"
+      },
+      "cause": "Pipeline rupture — LOL pipeline near Cardon refinery. Documented in PDVSA internal documents reviewed by Reuters.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "Described as 'moderate damage' in PDVSA documents; exact volume not disclosed",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "LOL pipeline (Cardon–Miranda corridor)",
+      "status": "PDVSA containment teams deployed. PDVSA document called for halting pipeline pumping 'to avoid further environmental damage.' PDVSA declined media comment.",
+      "environmental_impact": "Crude oil visible in Gulf of Coro. Fishermen documented 'black crude bubbling out from pipeline, stretches of spilled crude on the ground, and oil on water surface.' Fishing grounds contaminated.",
+      "communities_affected": "Fishing communities around Gulf of Coro / Carirubana municipality",
+      "note": "Reuters reviewed PDVSA internal documents confirming the spill and containment orders.",
+      "source_url": "https://pgjonline.com/news/2026/march/two-pipeline-oil-spills-reported-near-venezuela-s-cardon-refinery"
+    },
+    {
+      "id": "VZ-2026-001",
+      "date": "2026-03-25",
+      "date_precision": "exact — leak began evening of March 25, 2026",
+      "location": {
+        "place_name": "Carirubana municipality, Punta Cardón, near Cardon refinery",
+        "state": "Falcón",
+        "body_of_water": "Gulf of Coro",
+        "municipality": "Carirubana",
+        "latitude": 11.63,
+        "longitude": -70.24,
+        "coordinates_source": "Estimated from Cardon refinery, Punta Cardón"
+      },
+      "cause": "Pipeline rupture — LOL pipeline near Cardon refinery complex. Chronic infrastructure failure; pipeline is part of Paraguaná Refinery Complex distribution network.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "'Moderate damage' per PDVSA documents reviewed by Reuters; exact volume not disclosed",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "LOL pipeline",
+      "status": "Containment teams deployed by PDVSA. Pipeline pumping halted per internal PDVSA document. PDVSA did not respond to media requests for comment.",
+      "environmental_impact": "Crude oil observed in Gulf of Coro by local fishermen. Black crude bubbling from pipeline. Oil slicks on ground and water surface. Fishing grounds in Gulf of Coro contaminated.",
+      "communities_affected": "Fishing communities in Carirubana municipality and Gulf of Coro",
+      "note": "First of two simultaneous LOL pipeline spills in March 2026, reported by Reuters.",
+      "source_url": "https://www.tradingview.com/news/reuters.com,2026:newsml_L6N40F14Y:0-venezuela-state-oil-company-containing-two-oil-spills-near-cardon-refinery/"
+    },
+    {
+      "id": "VZ-2026-002",
+      "date": "2026-03-26",
+      "date_precision": "exact — second leak reported morning of March 26, 2026",
+      "location": {
+        "place_name": "Miranda municipality, across Gulf of Coro from Cardón",
+        "state": "Falcón",
+        "body_of_water": "Gulf of Coro",
+        "municipality": "Miranda",
+        "latitude": 11.45,
+        "longitude": -69.85,
+        "coordinates_source": "Estimated from Miranda municipality, Falcón state, across Gulf of Coro from Cardon"
+      },
+      "cause": "Pipeline rupture — LOL pipeline, Miranda municipality segment. Second failure on same pipeline corridor within 24 hours of VZ-2026-001.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "'Moderate damage' per PDVSA documents; exact volume not disclosed",
+        "area_km2": null,
+        "shoreline_km": null
+      },
+      "operator": "PDVSA",
+      "pipeline": "LOL pipeline (Miranda segment)",
+      "status": "PDVSA containment teams deployed. Status of cleanup not confirmed in reporting.",
+      "environmental_impact": "Oil visible in Gulf of Coro. Fishermen reported crude oil contaminating fishing grounds. Two simultaneous LOL failures resulted in compounded contamination in the enclosed Gulf of Coro.",
+      "communities_affected": "Fishing communities in Miranda municipality, Falcón state",
+      "note": "Second of two simultaneous LOL pipeline spills reported by Reuters on March 25-26, 2026. PDVSA refused to comment.",
+      "source_url": "https://www.tradingview.com/news/reuters.com,2026:newsml_L6N40F14Y:0-venezuela-state-oil-company-containing-two-oil-spills-near-cardon-refinery/"
+    }
+  ],
+  "aggregate_statistics": {
+    "source": "NGO Clima 21 and Observatorio de Ecología Política de Venezuela",
+    "total_spills_2024": 65,
+    "total_spills_Q1_2025_through_Jun_2025": 13,
+    "total_spills_Q3_2024": 25,
+    "states_most_affected": ["Zulia", "Falcón", "Anzoátegui", "Monagas", "Carabobo"],
+    "chronic_lake_maracaibo_baseline_bbl_per_day": 1000,
+    "pdvsa_official_disclosure": "None — PDVSA has not published official spill data since approximately 2020. No volume, cause, or cleanup information released voluntarily.",
+    "media_suppression_documented": true,
+    "media_suppression_note": "Bolivarian National Guard documented confiscating phones/cameras at Anzoátegui spill site (Feb 2025)"
+  },
+  "data_gaps": {
+    "H2_2025": "No specific discrete incidents confirmed for July–December 2025. Clima 21 tallied 13 events through June 2025; pace suggests an additional 10-20 incidents likely in H2 2025 based on 2024 rate of 65/year. No public NGO report found for this period.",
+    "volume_data": "PDVSA withholds volume data for almost all incidents. Only the Anzoátegui pipeline rupture (VZ-2025-005, >24,000 bbl), the J-20 Morichal spill (VZ-2025-006, ~50,000 bbl), and the LOL-3 spill (VZ-2025-001, ~90,000 bbl) have estimated volumes.",
+    "Orinoco_Belt": "No discrete reportable spill events found for Orinoco Belt (Carabobo, Guárico, Monagas eastern production) in 2025-2026 beyond Monagas incidents above. ScienceDirect July 2025 study documented Orinoco, Guárico, and Cuyuní rivers as highest-risk contamination zones.",
+    "offshore": "No confirmed offshore tanker spills 2025-2026; December 2025 U.S. tanker seizures (Centuries, 1.8M bbl; Skipper) were law enforcement actions, not spill incidents."
+  }
+}

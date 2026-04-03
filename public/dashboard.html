@@ -299,6 +299,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   <div class="tick"><span class="tick-l">BRENT JUN</span><span class="tick-v">$108.00</span><span class="tick-c t-up">+60% MTD</span></div>
   <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24</span><span class="tick-c t-up">+48% MTD</span></div>
   <div class="tick"><span class="tick-l">MEREY EST</span><span class="tick-v">~$99</span><span class="tick-c t-up">+75% vs 2025 avg</span></div>
+  <div class="tick"><span class="tick-l">PETCOKE</span><span class="tick-v">~$45</span><span class="tick-c t-fl">EST</span></div>
   <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">958–1,021K</span><span class="tick-c t-fl">FEB 26 RANGE</span></div>
   <div class="tick"><span class="tick-l">OFAC GLs</span><span class="tick-v">GL-52 OPEN</span><span class="tick-c t-up">ALL US ENTITIES</span></div>
   <div class="tick"><span class="tick-l">CHN/RUS</span><span class="tick-v">EXCLUDED</span><span class="tick-c t-dn">OFAC</span></div>
@@ -1058,6 +1059,26 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         ticks[2].querySelector('.tick-v').textContent='$'+fmt(d.wti.price);
         const c=ticks[2].querySelector('.tick-c');c.textContent=sign(d.wti.changePct)+fmt(d.wti.changePct)+'%';c.className='tick-c '+cls(d.wti.changePct);
       }
+      // Update Merey
+      if(d.merey) {
+        var mTick = Array.from(ticks).find(function(t){return t.querySelector('.tick-l').textContent.includes('MEREY');});
+        if(mTick) {
+          mTick.querySelector('.tick-v').textContent = '$' + fmt(d.merey.price);
+          var mc = mTick.querySelector('.tick-c');
+          mc.textContent = '-$' + fmt(d.merey.spread) + ' spread';
+          mc.className = 'tick-c t-fl';
+        }
+      }
+      // Update Petcoke
+      if(d.petcoke) {
+        var pTick = Array.from(ticks).find(function(t){return t.querySelector('.tick-l').textContent.includes('PETCOKE');});
+        if(pTick) {
+          pTick.querySelector('.tick-v').textContent = d.petcoke.live ? '$' + fmt(d.petcoke.price) : '~$' + fmt(d.petcoke.price);
+          var pc = pTick.querySelector('.tick-c');
+          pc.textContent = d.petcoke.live ? (d.petcoke.changePct >= 0 ? '+' : '') + fmt(d.petcoke.changePct) + '%' : 'EST';
+          pc.className = 'tick-c ' + (d.petcoke.live ? (d.petcoke.changePct >= 0 ? 't-up' : 't-dn') : 't-fl');
+        }
+      }
       // Update KPI
       const kpis=document.querySelectorAll('.kpi');
       if(kpis[1]){
@@ -1069,6 +1090,24 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
       if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
     }
   }catch(e){console.log('Price fetch failed:',e);}
+
+  // Fetch EIA production
+  try {
+    var pr = await fetch('/api/production');
+    if(pr.ok) {
+      var pd = await pr.json();
+      if(pd.data && pd.data.length > 0 && pd.source === 'eia') {
+        var latest = pd.data[0];
+        var kpi0 = document.querySelectorAll('.kpi')[0];
+        if(kpi0) {
+          var val = kpi0.querySelector('.kpi-v');
+          if(val) val.innerHTML = Math.round(latest.value * 1000).toLocaleString().replace(',','') + '<span style="font-size:11px;color:var(--t3)">–1,021K</span>';
+          var sub = kpi0.querySelector('.kpi-s');
+          if(sub) sub.textContent = latest.period + ' — EIA (live)';
+        }
+      }
+    }
+  } catch(e) { console.log('EIA fetch failed:', e); }
 
   // Fetch news + X posts
   try {

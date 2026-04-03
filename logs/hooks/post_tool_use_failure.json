@@ -1,0 +1,165 @@
+[
+  {
+    "timestamp": "2026-04-01T11:03:50.734664",
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "hook_event_name": "PostToolUseFailure",
+    "tool_name": "Read",
+    "tool_use_id": "toolu_0142KEreGhcBLAS8YitYmxUy",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html"
+    },
+    "error": "File content (32128 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "raw_input": {
+      "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+      "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+      "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+      "permission_mode": "bypassPermissions",
+      "agent_id": "ab02fdc4c11b584ed",
+      "agent_type": "builder",
+      "hook_event_name": "PostToolUseFailure",
+      "tool_name": "Read",
+      "tool_input": {
+        "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html"
+      },
+      "tool_use_id": "toolu_0142KEreGhcBLAS8YitYmxUy",
+      "error": "File content (32128 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+      "is_interrupt": false,
+      "logged_at": "2026-04-01T11:03:50.734664"
+    }
+  },
+  {
+    "timestamp": "2026-04-01T14:34:23.559586",
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "hook_event_name": "PostToolUseFailure",
+    "tool_name": "WebFetch",
+    "tool_use_id": "toolu_01FBKw3CrMNXAixyoPa7AVTB",
+    "tool_input": {
+      "url": "https://pgjonline.com/news/2026/march/two-pipeline-oil-spills-reported-near-venezuela-s-cardon-refinery",
+      "prompt": "Extract all details about the Cardon refinery pipeline oil spills: exact dates, locations, municipalities, pipeline names, volume spilled, environmental impact, PDVSA response, fishermen reports."
+    },
+    "error": "unable to verify the first certificate",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "raw_input": {
+      "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+      "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+      "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+      "permission_mode": "bypassPermissions",
+      "agent_id": "a564fff8cc54b4868",
+      "agent_type": "general-purpose",
+      "hook_event_name": "PostToolUseFailure",
+      "tool_name": "WebFetch",
+      "tool_input": {
+        "url": "https://pgjonline.com/news/2026/march/two-pipeline-oil-spills-reported-near-venezuela-s-cardon-refinery",
+        "prompt": "Extract all details about the Cardon refinery pipeline oil spills: exact dates, locations, municipalities, pipeline names, volume spilled, environmental impact, PDVSA response, fishermen reports."
+      },
+      "tool_use_id": "toolu_01FBKw3CrMNXAixyoPa7AVTB",
+      "error": "unable to verify the first certificate",
+      "is_interrupt": false,
+      "logged_at": "2026-04-01T14:34:23.559586"
+    }
+  },
+  {
+    "timestamp": "2026-04-01T14:35:02.041418",
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "hook_event_name": "PostToolUseFailure",
+    "tool_name": "WebFetch",
+    "tool_use_id": "toolu_01CMLpCU3NRKaQE3ZkXjF6og",
+    "tool_input": {
+      "url": "https://www.qcintel.com/article/crude-spill-hits-sensitive-orinoco-delta-in-venezuela-report-7476.html",
+      "prompt": "Extract all details about the Orinoco Delta crude spill: date, exact location, volume, operator, pipeline, environmental impact, status."
+    },
+    "error": "Request failed with status code 403",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "raw_input": {
+      "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+      "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+      "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+      "permission_mode": "bypassPermissions",
+      "agent_id": "a564fff8cc54b4868",
+      "agent_type": "general-purpose",
+      "hook_event_name": "PostToolUseFailure",
+      "tool_name": "WebFetch",
+      "tool_input": {
+        "url": "https://www.qcintel.com/article/crude-spill-hits-sensitive-orinoco-delta-in-venezuela-report-7476.html",
+        "prompt": "Extract all details about the Orinoco Delta crude spill: date, exact location, volume, operator, pipeline, environmental impact, status."
+      },
+      "tool_use_id": "toolu_01CMLpCU3NRKaQE3ZkXjF6og",
+      "error": "Request failed with status code 403",
+      "is_interrupt": false,
+      "logged_at": "2026-04-01T14:35:02.041418"
+    }
+  },
+  {
+    "timestamp": "2026-04-01T14:35:02.354681",
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "hook_event_name": "PostToolUseFailure",
+    "tool_name": "WebFetch",
+    "tool_use_id": "toolu_014aTvaUWdXYMgBUx5j7Jqj4",
+    "tool_input": {
+      "url": "https://talcualdigital.com/derrames-petroleros-quemas-y-explosiones-en-pdvsa-problemas-ambientales-en-el-pais/",
+      "prompt": "Extract all individual oil spill incidents listed: dates, locations, states, causes, volumes, operators, environmental impacts. Focus on 2025 incidents."
+    },
+    "error": "Request failed with status code 403",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "raw_input": {
+      "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+      "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+      "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+      "permission_mode": "bypassPermissions",
+      "agent_id": "a564fff8cc54b4868",
+      "agent_type": "general-purpose",
+      "hook_event_name": "PostToolUseFailure",
+      "tool_name": "WebFetch",
+      "tool_input": {
+        "url": "https://talcualdigital.com/derrames-petroleros-quemas-y-explosiones-en-pdvsa-problemas-ambientales-en-el-pais/",
+        "prompt": "Extract all individual oil spill incidents listed: dates, locations, states, causes, volumes, operators, environmental impacts. Focus on 2025 incidents."
+      },
+      "tool_use_id": "toolu_014aTvaUWdXYMgBUx5j7Jqj4",
+      "error": "Request failed with status code 403",
+      "is_interrupt": false,
+      "logged_at": "2026-04-01T14:35:02.354681"
+    }
+  },
+  {
+    "timestamp": "2026-04-01T14:36:21.544307",
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "hook_event_name": "PostToolUseFailure",
+    "tool_name": "WebFetch",
+    "tool_use_id": "toolu_01NRRMWGBLGQEFjGYn7Sn631",
+    "tool_input": {
+      "url": "https://www.nasdaq.com/articles/oil-spills-hit-pdvsas-operations-in-eastern-venezuela-sources",
+      "prompt": "Extract all details: exact dates of spills, locations (state, municipality, field names), pipeline/station names, volumes in barrels, rivers threatened, PDVSA response, environmental impacts, any coordinates mentioned."
+    },
+    "error": "timeout of 60000ms exceeded",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "raw_input": {
+      "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+      "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+      "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+      "permission_mode": "bypassPermissions",
+      "agent_id": "a564fff8cc54b4868",
+      "agent_type": "general-purpose",
+      "hook_event_name": "PostToolUseFailure",
+      "tool_name": "WebFetch",
+      "tool_input": {
+        "url": "https://www.nasdaq.com/articles/oil-spills-hit-pdvsas-operations-in-eastern-venezuela-sources",
+        "prompt": "Extract all details: exact dates of spills, locations (state, municipality, field names), pipeline/station names, volumes in barrels, rivers threatened, PDVSA response, environmental impacts, any coordinates mentioned."
+      },
+      "tool_use_id": "toolu_01NRRMWGBLGQEFjGYn7Sn631",
+      "error": "timeout of 60000ms exceeded",
+      "is_interrupt": false,
+      "logged_at": "2026-04-01T14:36:21.544307"
+    }
+  }
+]

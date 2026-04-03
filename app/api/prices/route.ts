@@ -1,16 +1,6 @@
 import { NextResponse } from 'next/server';
 
-interface YahooQuote {
-  regularMarketPrice: number;
-  regularMarketChange: number;
-  regularMarketChangePercent: number;
-}
-
 interface YahooResponse {
-  quoteSummary?: {
-    result?: Array<{ price?: YahooQuote }>;
-    error?: unknown;
-  };
   chart?: {
     result?: Array<{
       meta?: {
@@ -54,12 +44,15 @@ async function fetchTicker(symbol: string): Promise<{ price: number; change: num
 }
 
 export async function GET() {
-  const [brent, wti] = await Promise.all([
+  // Fetch Brent, WTI, and attempt petcoke symbols in parallel
+  const [brent, wti, petcokePc, petcokeMtf] = await Promise.all([
     fetchTicker('BZ=F'),
     fetchTicker('CL=F'),
+    fetchTicker('PC=F'),
+    fetchTicker('MTF=F'),
   ]);
 
-  // If both fetches fail, return 503 so the client falls back to static values
+  // If both primary feeds fail, return 503 so the client falls back to static values
   if (!brent && !wti) {
     return NextResponse.json(
       { error: 'Price feed unavailable' },
@@ -67,10 +60,28 @@ export async function GET() {
     );
   }
 
+  // Merey: derived from Brent minus configurable spread
+  const spread = parseFloat(process.env.MEREY_SPREAD ?? '9.0');
+  const brentPrice = (brent ?? { price: 118.35 }).price;
+  const mereyPrice = Math.round((brentPrice - spread) * 100) / 100;
+  const merey = {
+    price: mereyPrice,
+    spread,
+    note: `Derived: Brent minus $${spread.toFixed(2)} spread`,
+  };
+
+  // Petcoke: try Yahoo symbols, fall back to static estimate
+  const petcokeRaw = petcokePc ?? petcokeMtf;
+  const petcoke = petcokeRaw
+    ? { ...petcokeRaw, live: true, note: 'Yahoo Finance' }
+    : { price: 45, change: 0, changePct: 0, live: false, note: 'Estimate — no free live feed' };
+
   return NextResponse.json(
     {
       brent: brent ?? { price: 118.35, change: 5.61, changePct: 5.0 },
       wti: wti ?? { price: 102.24, change: 4.88, changePct: 5.02 },
+      merey,
+      petcoke,
       timestamp: new Date().toISOString(),
     },
     {
