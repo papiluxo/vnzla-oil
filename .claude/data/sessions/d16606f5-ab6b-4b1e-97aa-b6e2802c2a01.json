@@ -40,6 +40,7 @@
     "i see theres three active branches including main. the site still isnt loading properly",
     "lockdown-install.js:1 SES Removing unpermitted intrinsics\ndashboard.html:789 Uncaught ReferenceError: Cannot access 'estOn' before initialization\n    at getDataForView (dashboard.html:789:9)\n    at dashboard.html:875:16",
     "ok it loaded but the graph isnt loading. also are the brent may and june prices being live tracked like fetched every 5 mins type thing?",
-    "the unofficial estimate should include march in the line. and x axis limit should be determined by the last data point being shwon in the graph so if only the official line is being looked at, the latest official figure month is the x axis limit and end. it adjusts accordingly to the line/data and time range toggled on"
+    "the unofficial estimate should include march in the line. and x axis limit should be determined by the last data point being shwon in the graph so if only the official line is being looked at, the latest official figure month is the x axis limit and end. it adjusts accordingly to the line/data and time range toggled on",
+    "it worked for a split second when i opened the page and went back to the same empty space of no data but still x axis extending past the last data point. also, make the unofficial estimate line also part of the default state of the chart and make the green dot on the graph (the last one) blink like a live ticker but very subtly, in an elegant manner"
   ]
 }

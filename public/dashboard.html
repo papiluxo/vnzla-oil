@@ -169,6 +169,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .news-tag-news{color:var(--amber);}
 .news-src{color:var(--t4);font-size:8px;}
 @keyframes scrollNews{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes livePulse{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
 
 /* MOBILE */
 /* ---- MOBILE ---- */
@@ -367,8 +368,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
         <button class="ptab" onclick="setRng('MAX',this)">Max</button>
       </div>
       <span style="width:1px;height:14px;background:var(--t4)"></span>
-      <button id="estToggle" onclick="toggleEst()" class="ptab" style="display:flex;align-items:center;gap:4px;">
-        <span id="estDot" style="width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;"></span>
+      <button id="estToggle" onclick="toggleEst()" class="ptab on" style="display:flex;align-items:center;gap:4px;">
+        <span id="estDot" style="width:6px;height:6px;border-radius:50%;background:var(--green);transition:all .2s;"></span>
         Unofficial Est.
       </button>
       <button id="projToggle" onclick="toggleProj()" class="ptab" style="display:flex;align-items:center;gap:4px;">
@@ -734,7 +735,7 @@ let curGran='M';
 let curRange='6M';
 let curSc='bear';
 let projOn=false;
-let estOn=false;
+let estOn=true;
 
 // Parse a label like '2024', 'Q1 24', 'Jan 24', 'Q4 26E', 'Dec 26E' into a comparable year number
 function labelToYear(lbl){
@@ -768,12 +769,19 @@ function labelToKey(lbl){
 
 function getDataForView(){
   const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
-  // Find the last label that has ANY visible data — this anchors both range and trim
+  // Find the last label that has visible data on any ACTIVE line
+  var eiaKeys=liveDataLoaded?Object.keys(liveEia).sort():[];
+  var latestEiaPeriod=eiaKeys.length>0?eiaKeys[eiaKeys.length-1]:'9999-99';
   function hasVisibleData(idx){
-    if(d.vals[idx]!==null)return true;
     var k=labelToKey(d.labels[idx]);
-    if(!k)return false;
-    if(liveEia[k])return true;
+    if(!liveDataLoaded){
+      // Before API loads, hardcoded vals are the only data
+      return d.vals[idx]!==null;
+    }
+    if(!k)return d.vals[idx]!==null;
+    // EIA line: only shows data up to latestEiaPeriod
+    if(liveEia[k]||k<=latestEiaPeriod&&d.vals[idx]!==null)return true;
+    // Estimate line: only counts if toggled on
     if(estOn&&liveEst[k])return true;
     return false;
   }
@@ -805,9 +813,7 @@ function getDataForView(){
       eiaLine:vals.slice(), estLine:vals.slice()};
   }
 
-  // Find the latest EIA period to know where official data ends
-  var eiaKeys=Object.keys(liveEia).sort();
-  var latestEiaPeriod=eiaKeys.length>0?eiaKeys[eiaKeys.length-1]:'9999-99';
+  // latestEiaPeriod already computed above
 
   // EIA line: hardcoded baseline up to EIA's latest period, null after
   // Estimate line: same baseline, overwritten with estimate data where available
@@ -874,12 +880,40 @@ function buildChart(){
   hC.update();
 }
 
+// Plugin: subtle CSS-animated pulse on last estimate data point
+var livePulsePlugin={
+  id:'livePulse',
+  afterDraw:function(chart){
+    if(!estOn)return;
+    var ds=chart.data.datasets[1];
+    if(ds.hidden)return;
+    var meta=chart.getDatasetMeta(1);
+    if(!meta||!meta.data||meta.data.length===0)return;
+    var lastIdx=-1;
+    for(var i=ds.data.length-1;i>=0;i--){if(ds.data[i]!==null){lastIdx=i;break;}}
+    if(lastIdx<0||!meta.data[lastIdx])return;
+    var pt=meta.data[lastIdx];
+    // Position a CSS-animated pulse overlay
+    var el=document.getElementById('chartPulse');
+    if(!el){
+      el=document.createElement('div');
+      el.id='chartPulse';
+      el.style.cssText='position:absolute;pointer-events:none;width:12px;height:12px;border-radius:50%;background:rgba(0,210,106,.35);animation:livePulse 2s ease-in-out infinite;z-index:10;';
+      chart.canvas.parentElement.style.position='relative';
+      chart.canvas.parentElement.appendChild(el);
+    }
+    el.style.left=(pt.x-6)+'px';
+    el.style.top=(pt.y-6)+'px';
+    el.style.display=estOn?'block':'none';
+  }
+};
+
 const initView=getDataForView();
 const hC=new Chart(document.getElementById('hChart'),{
   type:'line',
   data:{labels:initView.labels,datasets:[
     {label:'EIA Official',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
-    {label:'Unofficial Est. (CEIC/Kpler)',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3],hidden:true},
+    {label:'Unofficial Est. (CEIC/Kpler)',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},
     {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}
   ]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},
@@ -913,7 +947,8 @@ const hC=new Chart(document.getElementById('hChart'),{
       }}
     },
     scales:{y:{title:{display:true,text:'K bpd',font:{size:9}},grid:{color:gridC},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45,maxTicksLimit:20}}}
-  }
+  },
+  plugins:[livePulsePlugin]
 });
 
 function pSc(el,s){document.querySelectorAll('.sc').forEach(b=>b.classList.remove('on'));el.classList.add('on');curSc=s;buildChart();}
@@ -984,7 +1019,8 @@ function toggleEst(){
   if(estOn){btn.classList.add('on');dot.style.background='var(--green)';}
   else{btn.classList.remove('on');dot.style.background='var(--t4)';}
   hC.data.datasets[1].hidden=!estOn;
-  // Rebuild to adjust x-axis range to match visible data
+  var pulse=document.getElementById('chartPulse');
+  if(pulse)pulse.style.display=estOn?'block':'none';
   buildChart();
 }
 
