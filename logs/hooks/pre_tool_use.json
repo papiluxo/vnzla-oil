@@ -4501,5 +4501,105 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01Vw3sEwQXd86EgjZLc35btt"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 312,
+      "limit": 42
+    },
+    "tool_use_id": "toolu_0139u3bHqLP1aGu8JphSxWpr"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "\\.kpi-v\\{|\\.kpi-s\\{|\\.kpi-c\\{|\\.kpi-l\\{",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01E1e8J4Q8LmrqUGCJs1vdF1"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "\"Mar 26\"",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01VGg2a24coq1VsXCthxEZ6Z"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Mar 26",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_012pDuX7vxHGuw4YA5adro17"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  if(!projOn){\n    let lastReal=labels.length-1;\n    while(lastReal>0&&vals[lastReal]===null)lastReal--;\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }",
+      "new_string": "  if(!projOn){\n    // Find last label that has ANY data (hardcoded or live estimate)\n    let lastReal=labels.length-1;\n    while(lastReal>0){\n      if(vals[lastReal]!==null)break;\n      var k=labelToKey(labels[lastReal]);\n      if(k&&(liveEia[k]||liveEst[k]))break;\n      lastReal--;\n    }\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01LQFGkqzzLacHhP41vCrLz2"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  <div class=\"kpi\">\n    <div class=\"kpi-l\">Production (Latest)</div>\n    <div class=\"kpi-v\">905<span style=\"font-size:11px;color:var(--t3)\">K bpd</span></div>\n    <div class=\"kpi-s\">Loading EIA data...</div>\n    <div class=\"kpi-c\"></div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Brent (May Contract)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$118<span style=\"font-size:11px\">.35</span></div>\n    <div class=\"kpi-s\">Hormuz premium</div>\n    <div class=\"kpi-c t-up\">+60% MTD \u2014 best since '88</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Merey Blend (est.)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$99<span style=\"font-size:11px\">.00</span></div>\n    <div class=\"kpi-s\">$9.00 discount to Brent</div>\n    <div class=\"kpi-c t-up\">+75% vs 2025 avg ($56.68)</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">GL-50A Operators</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">7+</div>\n    <div class=\"kpi-s\">GL-50A Big Six + GL-52 US entities</div>\n    <div class=\"kpi-c t-up\">GL-52 opened Mar 18</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Revenue (post-Jan 3)</div>\n    <div class=\"kpi-v\">$1<span style=\"font-size:11px;color:var(--t3)\">B+</span></div>\n    <div class=\"kpi-s\">US-controlled escrow</div>\n    <div class=\"kpi-c\">$5B projected near-term</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">External Debt</div>\n    <div class=\"kpi-v\" style=\"color:var(--red)\">$160<span style=\"font-size:11px\">B</span></div>\n    <div class=\"kpi-s\">Default since 2017</div>\n    <div class=\"kpi-c t-dn\">2x GDP (~$80B)</div>\n  </div>",
+      "new_string": "  <div class=\"kpi\">\n    <div class=\"kpi-l\">Production (Latest)</div>\n    <div class=\"kpi-v\" style=\"color:var(--t1)\">905<span style=\"font-size:11px;color:var(--t2)\">K bpd</span></div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">Loading EIA data...</div>\n    <div class=\"kpi-c\"></div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Brent (May Contract)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$118<span style=\"font-size:11px\">.35</span></div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">Hormuz premium</div>\n    <div class=\"kpi-c t-up\">+60% MTD \u2014 best since '88</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Merey Blend (est.)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$99<span style=\"font-size:11px\">.00</span></div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">$9.00 discount to Brent</div>\n    <div class=\"kpi-c t-up\">+75% vs 2025 avg ($56.68)</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">GL-50A Operators</div>\n    <div class=\"kpi-v\" style=\"color:var(--t1)\">7+</div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">GL-50A Big Six + GL-52 US entities</div>\n    <div class=\"kpi-c\" style=\"color:var(--green)\">GL-52 opened Mar 18</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">Revenue (post-Jan 3)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$1<span style=\"font-size:11px\">B+</span></div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">US-controlled escrow</div>\n    <div class=\"kpi-c\" style=\"color:var(--t2)\">$5B projected near-term</div>\n  </div>\n  <div class=\"kpi\">\n    <div class=\"kpi-l\">External Debt</div>\n    <div class=\"kpi-v\" style=\"color:var(--red)\">$160<span style=\"font-size:11px\">B</span></div>\n    <div class=\"kpi-s\" style=\"color:var(--t3)\">Default since 2017</div>\n    <div class=\"kpi-c t-dn\">2x GDP (~$80B)</div>\n  </div>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_019g6DG2Tmre3U4CgyuNJd2W"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nFix KPI colors, show March in live estimate line\n\nKPIs: consistent color scheme \u2014 green for prices/revenue, white for\nproduction/operators, red for debt. All subtexts use t3 (muted).\n\nChart: trim logic now checks live estimate data before cutting labels.\nMar 26 (1,090K Kpler) no longer trimmed when projections off \u2014 the\nlive estimate line extends to show the latest available data point.\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01Lc3SURtpKERSiNQZPYpCdF"
   }
 ]

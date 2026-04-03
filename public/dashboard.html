@@ -312,38 +312,38 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 <div class="kpi-strip">
   <div class="kpi">
     <div class="kpi-l">Production (Latest)</div>
-    <div class="kpi-v">905<span style="font-size:11px;color:var(--t3)">K bpd</span></div>
-    <div class="kpi-s">Loading EIA data...</div>
+    <div class="kpi-v" style="color:var(--t1)">905<span style="font-size:11px;color:var(--t2)">K bpd</span></div>
+    <div class="kpi-s" style="color:var(--t3)">Loading EIA data...</div>
     <div class="kpi-c"></div>
   </div>
   <div class="kpi">
     <div class="kpi-l">Brent (May Contract)</div>
     <div class="kpi-v" style="color:var(--green)">$118<span style="font-size:11px">.35</span></div>
-    <div class="kpi-s">Hormuz premium</div>
+    <div class="kpi-s" style="color:var(--t3)">Hormuz premium</div>
     <div class="kpi-c t-up">+60% MTD — best since '88</div>
   </div>
   <div class="kpi">
     <div class="kpi-l">Merey Blend (est.)</div>
     <div class="kpi-v" style="color:var(--green)">$99<span style="font-size:11px">.00</span></div>
-    <div class="kpi-s">$9.00 discount to Brent</div>
+    <div class="kpi-s" style="color:var(--t3)">$9.00 discount to Brent</div>
     <div class="kpi-c t-up">+75% vs 2025 avg ($56.68)</div>
   </div>
   <div class="kpi">
     <div class="kpi-l">GL-50A Operators</div>
-    <div class="kpi-v" style="color:var(--green)">7+</div>
-    <div class="kpi-s">GL-50A Big Six + GL-52 US entities</div>
-    <div class="kpi-c t-up">GL-52 opened Mar 18</div>
+    <div class="kpi-v" style="color:var(--t1)">7+</div>
+    <div class="kpi-s" style="color:var(--t3)">GL-50A Big Six + GL-52 US entities</div>
+    <div class="kpi-c" style="color:var(--green)">GL-52 opened Mar 18</div>
   </div>
   <div class="kpi">
     <div class="kpi-l">Revenue (post-Jan 3)</div>
-    <div class="kpi-v">$1<span style="font-size:11px;color:var(--t3)">B+</span></div>
-    <div class="kpi-s">US-controlled escrow</div>
-    <div class="kpi-c">$5B projected near-term</div>
+    <div class="kpi-v" style="color:var(--green)">$1<span style="font-size:11px">B+</span></div>
+    <div class="kpi-s" style="color:var(--t3)">US-controlled escrow</div>
+    <div class="kpi-c" style="color:var(--t2)">$5B projected near-term</div>
   </div>
   <div class="kpi">
     <div class="kpi-l">External Debt</div>
     <div class="kpi-v" style="color:var(--red)">$160<span style="font-size:11px">B</span></div>
-    <div class="kpi-s">Default since 2017</div>
+    <div class="kpi-s" style="color:var(--t3)">Default since 2017</div>
     <div class="kpi-c t-dn">2x GDP (~$80B)</div>
   </div>
 </div>
@@ -774,8 +774,14 @@ function getDataForView(){
   let vals=d.vals.slice(startIdx);
   let notes=d.notes.slice(startIdx);
   if(!projOn){
+    // Find last label that has ANY data (hardcoded or live estimate)
     let lastReal=labels.length-1;
-    while(lastReal>0&&vals[lastReal]===null)lastReal--;
+    while(lastReal>0){
+      if(vals[lastReal]!==null)break;
+      var k=labelToKey(labels[lastReal]);
+      if(k&&(liveEia[k]||liveEst[k]))break;
+      lastReal--;
+    }
     labels=labels.slice(0,lastReal+1);
     vals=vals.slice(0,lastReal+1);
     notes=notes.slice(0,lastReal+1);

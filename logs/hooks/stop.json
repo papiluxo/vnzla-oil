@@ -304,5 +304,14 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Fixed. The Merey KPI card now updates live from the same API as the ticker \u2014 price, spread, and YoY change all sync. Both the ticker `MEREY $100.05/bbl` and the KPI card `~$100` will show the same derived price."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Three fixes:\n\n**Chart**: EIA and Live Estimate lines now share the same historical data \u2014 they overlap completely through ~2023, then diverge only in recent months where estimates exist separately from EIA. The blended (amber) line only becomes visible where the two sources differ. Much cleaner.\n\n**Merey KPI**: Now matches Brent's format exactly \u2014 green color, `$100.05` (no tilde), cents as smaller text, spread shown below.\n\n**VNZLA PROD ticker**: Shows EIA official only \u2014 `905K DEC 25 EIA`. Updates live from the API filtering for `source=EIA` specifically, not the estimates."
   }
 ]
