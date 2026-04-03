@@ -300,7 +300,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   <div class="tick"><span class="tick-l">WTI</span><span class="tick-v">$102.24<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-up">+48% MTD</span></div>
   <div class="tick"><span class="tick-l">MEREY</span><span class="tick-v">~$99<span style="color:var(--t4)">/bbl</span></span><span class="tick-c t-fl">-$9 spread</span></div>
   <div class="tick"><span class="tick-l">PETCOKE</span><span class="tick-v">~$45<span style="color:var(--t4)">/st</span></span><span class="tick-c t-fl">EST</span></div>
-  <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">958–1,021K</span><span class="tick-c t-fl">FEB 26</span></div>
+  <div class="tick"><span class="tick-l">VNZLA PROD</span><span class="tick-v">905K</span><span class="tick-c t-fl">DEC 25 EIA</span></div>
   <div class="tick"><span class="tick-l">RESERVES</span><span class="tick-v">303B bbl</span><span class="tick-c">#1 GLOBAL</span></div>
 </div>
 
@@ -324,8 +324,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   </div>
   <div class="kpi">
     <div class="kpi-l">Merey Blend (est.)</div>
-    <div class="kpi-v">~$99</div>
-    <div class="kpi-s">$8-10 discount to Brent</div>
+    <div class="kpi-v" style="color:var(--green)">$99<span style="font-size:11px">.00</span></div>
+    <div class="kpi-s">$9.00 discount to Brent</div>
     <div class="kpi-c t-up">+75% vs 2025 avg ($56.68)</div>
   </div>
   <div class="kpi">
@@ -790,22 +790,24 @@ function getDataForView(){
   // After live data: EIA line = hardcoded baseline overwritten by live EIA where available
   // Estimate line = only where live estimates exist (recent months)
   // Blended = average where both exist, else whichever is available
-  var eiaLine=vals.slice(); // start with hardcoded as EIA baseline
-  var estLine=new Array(labels.length).fill(null);
-  var blendLine=vals.slice(); // start with hardcoded
+  // All three lines share the same historical baseline
+  // They only diverge where EIA and estimates have different recent values
+  var eiaLine=vals.slice();
+  var estLine=vals.slice(); // same baseline — diverges only in recent months
+  var blendLine=vals.slice();
 
   labels.forEach(function(lbl,i){
     var key=labelToKey(lbl);
     if(!key)return;
     var eV=null,esV=null;
 
-    if(key.length===4){ // annual — find latest month
+    if(key.length===4){
       for(var mi=12;mi>=1;mi--){
         var mk=key+'-'+String(mi).padStart(2,'0');
         if(!eV&&liveEia[mk])eV=liveEia[mk];
         if(!esV&&liveEst[mk])esV=liveEst[mk];
       }
-    } else if(key.includes('-Q')){ // quarterly
+    } else if(key.includes('-Q')){
       var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);
       var startM=(qn-1)*3+1;
       for(var mi=startM+2;mi>=startM;mi--){
@@ -813,20 +815,20 @@ function getDataForView(){
         if(!eV&&liveEia[mk])eV=liveEia[mk];
         if(!esV&&liveEst[mk])esV=liveEst[mk];
       }
-    } else { // monthly
+    } else {
       eV=liveEia[key]||null;
       esV=liveEst[key]||null;
     }
 
-    // Overwrite EIA line with live EIA if available
-    if(eV)eiaLine[i]=eV;
-    // Estimate line only shows where estimates exist
-    if(esV)estLine[i]=esV;
-    // Blended: average if both, else best available
-    if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);
-    else if(eV)blendLine[i]=eV;
-    else if(esV)blendLine[i]=esV;
-    // else keep hardcoded val
+    // Update each line with live data where available
+    if(eV) eiaLine[i]=eV;
+    if(esV) estLine[i]=esV;
+    else if(eV) estLine[i]=eV; // estimate follows EIA where no separate estimate exists
+
+    // Blended: average where both differ, else the value
+    if(eV&&esV&&eV!==esV) blendLine[i]=Math.round((eV+esV)/2);
+    else if(esV) blendLine[i]=esV;
+    else if(eV) blendLine[i]=eV;
   });
 
   return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};
@@ -1142,9 +1144,12 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style="font-size:11px">.'+fmt(d.brent.price).split('.')[1]+'</span>';
         const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);
       }
-      // Merey KPI
+      // Merey KPI — match Brent format
       if(kpis[2]&&d.merey){
-        kpis[2].querySelector('.kpi-v').innerHTML='~$'+Math.round(d.merey.price);
+        var mDollars=Math.floor(d.merey.price);
+        var mCents=fmt(d.merey.price).split('.')[1];
+        kpis[2].querySelector('.kpi-v').innerHTML='$'+mDollars+'<span style="font-size:11px">.'+mCents+'</span>';
+        kpis[2].querySelector('.kpi-v').style.color='var(--green)';
         kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';
         var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);
         kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';
@@ -1180,6 +1185,15 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
             chgEl.textContent = (chg >= 0 ? '+' : '') + chg + '% from ' + prevLabel + ' (' + Math.round(prev.value) + 'K)';
             chgEl.className = 'kpi-c ' + (chg >= 0 ? 't-up' : 't-dn');
           }
+        }
+
+        // Update VNZLA PROD ticker with latest EIA official
+        var eiaOnly=pd.data.filter(function(p){return p.source==='EIA';});
+        if(eiaOnly.length>0){
+          var eiaLatest=eiaOnly[0];
+          var ep=eiaLatest.period.split('-');
+          var eiaLabel=months[parseInt(ep[1])-1].toUpperCase()+' '+ep[0].slice(2)+' EIA';
+          updateTicks('VNZLA PROD',Math.round(eiaLatest.value)+'K',eiaLabel,'t-fl');
         }
 
         // Populate live data layers for chart

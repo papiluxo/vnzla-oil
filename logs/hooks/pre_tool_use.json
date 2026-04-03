@@ -4285,5 +4285,221 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_013jScDmtKofDuAqBGjFF6wz"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Merey Blend|MEREY|kpi-merey|~\\$99",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01RDsCx9UnACwXRzZvVhVVP6"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 324,
+      "limit": 8
+    },
+    "tool_use_id": "toolu_01L6Rt62NteQcpSwEWPk8nE6"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Update KPI",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01XidYdq3vEXve162j3sfYYe"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1139,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_014hDjdmdhBUJmM8acPP1oXC"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      // Update KPI\n      const kpis=document.querySelectorAll('.kpi');\n      if(kpis[1]){\n        kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style=\"font-size:11px\">.'+fmt(d.brent.price).split('.')[1]+'</span>';\n        const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);\n      }",
+      "new_string": "      // Update KPIs\n      const kpis=document.querySelectorAll('.kpi');\n      if(kpis[1]){\n        kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style=\"font-size:11px\">.'+fmt(d.brent.price).split('.')[1]+'</span>';\n        const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);\n      }\n      // Merey KPI\n      if(kpis[2]&&d.merey){\n        kpis[2].querySelector('.kpi-v').innerHTML='~$'+Math.round(d.merey.price);\n        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';\n        var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);\n        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';\n      }",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01LP1NniFTShX94YoAYerSx5"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add public/dashboard.html && git commit -m \"Merey KPI card now updates live from /api/prices (matches ticker)\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01LjH1Kyt3CxxfFzXUbzfSfT"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 786,
+      "limit": 30
+    },
+    "tool_use_id": "toolu_014GRLEg5kJQXvfkwK4oyXhc"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 815,
+      "limit": 20
+    },
+    "tool_use_id": "toolu_01GrxvmytvyPojBdWsYQ9N9h"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  var eiaLine=vals.slice(); // start with hardcoded as EIA baseline\n  var estLine=new Array(labels.length).fill(null);\n  var blendLine=vals.slice(); // start with hardcoded\n\n  labels.forEach(function(lbl,i){\n    var key=labelToKey(lbl);\n    if(!key)return;\n    var eV=null,esV=null;\n\n    if(key.length===4){ // annual \u2014 find latest month\n      for(var mi=12;mi>=1;mi--){\n        var mk=key+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else if(key.includes('-Q')){ // quarterly\n      var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);\n      var startM=(qn-1)*3+1;\n      for(var mi=startM+2;mi>=startM;mi--){\n        var mk=qy+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else { // monthly\n      eV=liveEia[key]||null;\n      esV=liveEst[key]||null;\n    }\n\n    // Overwrite EIA line with live EIA if available\n    if(eV)eiaLine[i]=eV;\n    // Estimate line only shows where estimates exist\n    if(esV)estLine[i]=esV;\n    // Blended: average if both, else best available\n    if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);\n    else if(eV)blendLine[i]=eV;\n    else if(esV)blendLine[i]=esV;\n    // else keep hardcoded val\n  });\n\n  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};",
+      "new_string": "  // All three lines share the same historical baseline\n  // They only diverge where EIA and estimates have different recent values\n  var eiaLine=vals.slice();\n  var estLine=vals.slice(); // same baseline \u2014 diverges only in recent months\n  var blendLine=vals.slice();\n\n  labels.forEach(function(lbl,i){\n    var key=labelToKey(lbl);\n    if(!key)return;\n    var eV=null,esV=null;\n\n    if(key.length===4){\n      for(var mi=12;mi>=1;mi--){\n        var mk=key+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else if(key.includes('-Q')){\n      var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);\n      var startM=(qn-1)*3+1;\n      for(var mi=startM+2;mi>=startM;mi--){\n        var mk=qy+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else {\n      eV=liveEia[key]||null;\n      esV=liveEst[key]||null;\n    }\n\n    // Update each line with live data where available\n    if(eV) eiaLine[i]=eV;\n    if(esV) estLine[i]=esV;\n    else if(eV) estLine[i]=eV; // estimate follows EIA where no separate estimate exists\n\n    // Blended: average where both differ, else the value\n    if(eV&&esV&&eV!==esV) blendLine[i]=Math.round((eV+esV)/2);\n    else if(esV) blendLine[i]=esV;\n    else if(eV) blendLine[i]=eV;\n  });\n\n  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01T4C8innZhx9qp3beknxVNw"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    <div class=\"kpi-l\">Merey Blend (est.)</div>\n    <div class=\"kpi-v\">~$99</div>\n    <div class=\"kpi-s\">$8-10 discount to Brent</div>\n    <div class=\"kpi-c t-up\">+75% vs 2025 avg ($56.68)</div>",
+      "new_string": "    <div class=\"kpi-l\">Merey Blend (est.)</div>\n    <div class=\"kpi-v\" style=\"color:var(--green)\">$99<span style=\"font-size:11px\">.00</span></div>\n    <div class=\"kpi-s\">$9.00 discount to Brent</div>\n    <div class=\"kpi-c t-up\">+75% vs 2025 avg ($56.68)</div>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01MG84yBnsvWKRPg3v5Q3fDS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      // Merey KPI\n      if(kpis[2]&&d.merey){\n        kpis[2].querySelector('.kpi-v').innerHTML='~$'+Math.round(d.merey.price);\n        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';\n        var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);\n        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';\n      }",
+      "new_string": "      // Merey KPI \u2014 match Brent format\n      if(kpis[2]&&d.merey){\n        var mDollars=Math.floor(d.merey.price);\n        var mCents=fmt(d.merey.price).split('.')[1];\n        kpis[2].querySelector('.kpi-v').innerHTML='$'+mDollars+'<span style=\"font-size:11px\">.'+mCents+'</span>';\n        kpis[2].querySelector('.kpi-v').style.color='var(--green)';\n        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';\n        var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);\n        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';\n      }",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_013vL8fp4q32Stu6GG7dV1yi"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  <div class=\"tick\"><span class=\"tick-l\">VNZLA PROD</span><span class=\"tick-v\">958\u20131,021K</span><span class=\"tick-c t-fl\">FEB 26</span></div>",
+      "new_string": "  <div class=\"tick\"><span class=\"tick-l\">VNZLA PROD</span><span class=\"tick-v\">905K</span><span class=\"tick-c t-fl\">DEC 25 EIA</span></div>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01LEz7mvhVFbMenVfHPSLKQc"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1186,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_01VLkDLkvkEgHhbgtGzEYJGF"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "        // Populate live data layers for chart",
+      "new_string": "        // Update VNZLA PROD ticker with latest EIA official\n        var eiaOnly=pd.data.filter(function(p){return p.source==='EIA';});\n        if(eiaOnly.length>0){\n          var eiaLatest=eiaOnly[0];\n          var ep=eiaLatest.period.split('-');\n          var eiaLabel=months[parseInt(ep[1])-1].toUpperCase()+' '+ep[0].slice(2)+' EIA';\n          updateTicks('VNZLA PROD',Math.round(eiaLatest.value)+'K',eiaLabel,'t-fl');\n        }\n\n        // Populate live data layers for chart",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01A381zP8GCVacf1XteTbWUQ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nFix chart lines, Merey KPI format, VNZLA PROD ticker\n\nChart: estimate line now shares full historical baseline with EIA \u2014\nboth lines overlap until recent months where they diverge. Blended\naverage only visible where EIA and estimates differ.\n\nMerey KPI: matches Brent format \u2014 green color, dollar sign without ~,\ncents decimal (e.g. $100.05 not ~$99).\n\nVNZLA PROD ticker: shows EIA official only (905K DEC 25 EIA), updates\nlive from /api/production filtering for source=EIA.\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01Vw3sEwQXd86EgjZLc35btt"
   }
 ]
