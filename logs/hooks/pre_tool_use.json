@@ -6921,5 +6921,259 @@
       "description": "Verify, commit, push, deploy"
     },
     "tool_use_id": "toolu_0178sTejQ2hz9PrcnAravdyN"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Agent",
+    "tool_input": {
+      "description": "Fix header sticky + translate sidebar/table/footer/news",
+      "prompt": "I need several changes to `/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html`. Read the file first.\n\n## 1. Make topbar + nav + ticker sticky on scroll\n\nThe page structure is: topbar \u2192 nav (with news ribbon) \u2192 ticker \u2192 page (main + sidebar). The `.page` div has `overflow:hidden` and `.main` is the scroll container with `overflow-y:auto`.\n\nThe topbar, nav, and ticker are OUTSIDE `.page` so they already stay fixed \u2014 BUT the `.main` div scrolls independently. The user wants the header (topbar + nav + ticker) to always be visible. Since they're already outside the scroll container, they should be visible. If they're not, it might be because `.page` has a calculated height that pushes content. Let me verify the CSS is correct \u2014 the header elements should remain static (not scroll with `.main`).\n\nActually, the issue might be that on some viewports, the `.page` height calculation leaves the header visible but scrolling inside `.main` is fine. The header should already be sticky. Let me check and ensure the topbar stays visible.\n\nJust verify the topbar/nav/ticker are NOT inside `.main` or `.page`. If they are, move them out. If they're already outside, the header is already sticky by layout.\n\n## 2. Add MORE translations to the i18n dictionary\n\nFind the `var i18n={` block in the JavaScript. Add these entries to the dictionary (add them before the closing `};`):\n\n### Sidebar translations\n```\n'Shell signs oil/gas cooperation deals with PDVSA \u2014 witnessed by US Interior Sec. Burgum':'Shell firma acuerdos de cooperaci\u00f3n petrolera con PDVSA \u2014 con presencia del Sec. de Interior de EE.UU. Burgum',\n'GL-50A: Maurel & Prom added to Big Six (Pertamina-owned, initially excluded)':'GL-50A: Maurel & Prom a\u00f1adido a los Seis Grandes (propiedad de Pertamina, inicialmente excluido)',\n'GL-49/50: Big Six authorized for full Venezuela oil/gas ops. GL-47 authorizes diluent exports':'GL-49/50: Seis Grandes autorizados para operaciones completas de petr\u00f3leo/gas en Venezuela. GL-47 autoriza exportaci\u00f3n de diluyentes',\n'Trump disavows Harry Sargeant III (NABEP) on Truth Social':'Trump desautoriza a Harry Sargeant III (NABEP) en Truth Social',\n'EO 14373: All Venezuelan oil revenue to US-controlled Treasury accounts':'EO 14373: Todos los ingresos petroleros venezolanos a cuentas del Tesoro controladas por EE.UU.',\n'Maduro captured by US special forces. Rodr\u00edguez assumes presidency':'Maduro capturado por fuerzas especiales de EE.UU. Rodr\u00edguez asume la presidencia',\n'Assembly approves 15-yr Russian JV extension through 2041':'Asamblea aprueba extensi\u00f3n de 15 a\u00f1os para JV rusa hasta 2041',\n'OFAC issues new license \u2014 Chevron JVs resume ops':'OFAC emite nueva licencia \u2014 JVs de Chevron reanudan operaciones',\n'25% US tariff on Venezuelan oil importers':'Arancel del 25% de EE.UU. a importadores de petr\u00f3leo venezolano',\n'OFAC revokes Repsol, ENI, M&P licenses':'OFAC revoca licencias de Repsol, ENI, M&P',\n'Trump revokes Chevron Biden-era GL-41':'Trump revoca GL-41 de la era Biden de Chevron',\n'GL-52: Broadest license yet \u2014 all established US entities authorized for production, JVs, and full oil/gas ops with PDVSA':'GL-52: Licencia m\u00e1s amplia \u2014 todas las entidades establecidas de EE.UU. autorizadas para producci\u00f3n, JVs y operaciones completas con PDVSA',\n'GL-46B/48A/49A updates: expanded oil trade, goods/services, and contingent contracts':'GL-46B/48A/49A: comercio petrolero ampliado, bienes/servicios y contratos contingentes',\n'UK \u00b7 New entrant':'RU \u00b7 Nuevo participante',\n'US \u00b7 242K bpd':'EE.UU. \u00b7 242K bpd',\n'IT \u00b7 Resuming':'IT \u00b7 Reanudando',\n'ES \u00b7 Resuming':'ES \u00b7 Reanudando',\n'NL \u00b7 Dragon Gas':'PB \u00b7 Gas Dragon',\n'FR \u00b7 Feb 18':'FR \u00b7 Feb 18',\n'US-law governed contracts only. Payments to OFAC Foreign Government Deposit Funds. No Chinese/Russian/Iranian counterparties. 10-day + 90-day reporting requirements.':'Solo contratos bajo ley de EE.UU. Pagos a Fondos de Dep\u00f3sito del Gobierno Extranjero de OFAC. Sin contrapartes chinas/rusas/iran\u00edes. Requisitos de reporte a 10 y 90 d\u00edas.',\n'Shell \u2014 Dragon Gas:':'Shell \u2014 Gas Dragon:',\n'350 mmcfd offshore to Trinidad LNG. FID possible 2026. First gas 2027\u201328.':'350 mmcfd costa afuera a Trinidad GNL. FID posible 2026. Primer gas 2027\u201328.',\n'Shell \u2014 Carito/Pirital:':'Shell \u2014 Carito/Pirital:',\n'94K bpd crude + 1 Bcfd gas. 350 mmcfd currently flared.':'94K bpd crudo + 1 Bcfd gas. 350 mmcfd actualmente quemados.',\n'Chevron \u2014 Ayacucho 8:':'Chevron \u2014 Ayacucho 8:',\n'Orinoco expansion. Reduced royalties. Review end-Mar.':'Expansi\u00f3n en el Orinoco. Regal\u00edas reducidas. Revisi\u00f3n fin de marzo.',\n'CCRC \u2014 Maracaibo:':'CCRC \u2014 Maracaibo:',\n'$1B, 500 wells, 60K target end-2026. Status uncertain post-Jan.':'$1B, 500 pozos, meta 60K fin-2026. Estado incierto post-enero.',\n'Bondholders (prin+int)':'Tenedores de bonos (prin+int)',\n'China (outstanding)':'China (pendiente)',\n'Russia (outstanding)':'Rusia (pendiente)',\n'ConocoPhillips (arb.)':'ConocoPhillips (arb.)',\n'Total external':'Total externo',\n```\n\n### Table header translations\n```\n'Company':'Empresa',\n'Origin':'Origen',\n'Prod (bpd)':'Prod (bpd)',\n'2026 Guidance':'Proyecci\u00f3n 2026',\n'Share':'Cuota',\n'Key JVs':'JVs Clave',\n```\n\n### Topbar translations\n```\n'Venezuela Crude Oil Production Intelligence':'Inteligencia de Producci\u00f3n de Petr\u00f3leo Crudo de Venezuela',\n'2026 Guidance Dashboard':'Panel de Proyecciones 2026',\n```\n\n### Footer translations  \n```\n'Production:':'Producci\u00f3n:',\n'Prices:':'Precios:',\n'Sanctions:':'Sanciones:',\n'Scenarios:':'Escenarios:',\n'News:':'Noticias:',\n'Geo:':'Geo:',\n'Prices update every 5 min':'Los precios se actualizan cada 5 min',\n'News every 30 min':'Noticias cada 30 min',\n'Production data monthly (OPEC/CEIC)':'Datos de producci\u00f3n mensuales (OPEP/CEIC)',\n```\n\n### Map legend\n```\n'Oil':'Petr\u00f3leo',\n'Upgrader':'Mejorador',\n'Refinery':'Refiner\u00eda',\n'Terminal':'Terminal',\n'Oil Spill':'Derrame de Petr\u00f3leo',\n```\n\n### Infra callout\n```\n'$10\u201320B and several years needed before output exceeds 1.5M bpd. Only 2/4 Orinoco upgraders partially functional. GL-47 authorizes diluent exports. \u2014 CFR, Rystad':'$10\u201320B y varios a\u00f1os necesarios antes de que la producci\u00f3n supere 1.5M bpd. Solo 2/4 mejoradores del Orinoco parcialmente funcionales. GL-47 autoriza exportaci\u00f3n de diluyentes. \u2014 CFR, Rystad',\n'ExxonMobil CEO: \"uninvestable.\" ConocoPhillips owed ~$10B. No firm capex commitments from Big Six. Trump\\'s $100B investment claim unverified. \u2014 Fortune, CNBC':'CEO de ExxonMobil: \"no invertible.\" ConocoPhillips adeuda ~$10B. Sin compromisos firmes de capex de los Seis Grandes. Reclamo de inversi\u00f3n de $100B de Trump no verificado. \u2014 Fortune, CNBC',\n```\n\n## 3. Translate news items dynamically\n\nIn the `toggleLang` function, after the TreeWalker section, add code to update news items if they're in the ribbon. Since news comes from RSS in English, we can't translate the actual headlines. But we CAN translate the \"NEWS\" tag labels. Find the toggleLang function and after the TreeWalker while loop, add:\n\n```javascript\n  // Translate news tags\n  document.querySelectorAll('.news-tag-news').forEach(function(el){\n    el.textContent=curLang==='es'?'NOTICIAS':'NEWS';\n  });\n```\n\nMake all these edits carefully using the Edit tool.",
+      "subagent_type": "builder"
+    },
+    "tool_use_id": "toolu_01V3GwwTCK2YVeYcFUicGyjh"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "limit": 100
+    },
+    "tool_use_id": "toolu_01F6oi24D48soJ6uBdsVAzm2"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 100,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_01EWZmPRZ9puP3pQV1vTwRv7"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 300,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_01NwyatAM15dMFrgRosbnrrB"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 500,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_01HKZYvgPWE3fpsYzkgMivQu"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 700,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_018fL32ex3CgmLgXYrDSrxdY"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 900,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_016rXNYx6F6jnaWGJJ5zNBgg"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1100,
+      "limit": 200
+    },
+    "tool_use_id": "toolu_01Fm1Jfe6QLLBELoRLffxXm8"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1299,
+      "limit": 150
+    },
+    "tool_use_id": "toolu_01KoYdPo3ffcCYjwTF5JU1YC"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1448,
+      "limit": 100
+    },
+    "tool_use_id": "toolu_01QYoBrj3vzBZnvECi7z2iRR"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  // Context paragraphs\n  'Captured Jan 3 by US forces. Rodr\u00edguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.':'Capturado el 3 de enero por fuerzas de EE.UU. Rodr\u00edguez (listada SDN) presidenta interina. Nueva ley de hidrocarburos elimina monopolio de PDVSA. Arbitraje independiente permitido.',\n  'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 broadened access beyond Big Six.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B recaudado. $5B proyectado. $150B potencial en 10 a\u00f1os. GL-52 ampli\u00f3 acceso m\u00e1s all\u00e1 de los Seis Grandes.',\n  'Strait disrupted since Mar 2. Brent +60% MTD \u2014 largest monthly surge since \\'88. Venezuela supply suddenly strategic to US.':'Estrecho interrumpido desde el 2 de marzo. Brent +60% mensual \u2014 mayor alza mensual desde el \\'88. Suministro venezolano estrat\u00e9gico para EE.UU.',\n  'Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.':'Exento de cuotas desde 2019. Podr\u00eda producir 1.5M+ bpd libremente. Reservas: 303B bbl (#1). La limitante es capital, no geolog\u00eda.'\n};",
+      "new_string": "  // Context paragraphs\n  'Captured Jan 3 by US forces. Rodr\u00edguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.':'Capturado el 3 de enero por fuerzas de EE.UU. Rodr\u00edguez (listada SDN) presidenta interina. Nueva ley de hidrocarburos elimina monopolio de PDVSA. Arbitraje independiente permitido.',\n  'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 broadened access beyond Big Six.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B recaudado. $5B proyectado. $150B potencial en 10 a\u00f1os. GL-52 ampli\u00f3 acceso m\u00e1s all\u00e1 de los Seis Grandes.',\n  'Strait disrupted since Mar 2. Brent +60% MTD \u2014 largest monthly surge since \\'88. Venezuela supply suddenly strategic to US.':'Estrecho interrumpido desde el 2 de marzo. Brent +60% mensual \u2014 mayor alza mensual desde el \\'88. Suministro venezolano estrat\u00e9gico para EE.UU.',\n  'Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.':'Exento de cuotas desde 2019. Podr\u00eda producir 1.5M+ bpd libremente. Reservas: 303B bbl (#1). La limitante es capital, no geolog\u00eda.',\n  // Sidebar \u2014 sanctions timeline\n  'Shell signs oil/gas cooperation deals with PDVSA \u2014 witnessed by US Interior Sec. Burgum':'Shell firma acuerdos de cooperaci\u00f3n petrolera con PDVSA \u2014 con presencia del Sec. de Interior de EE.UU. Burgum',\n  'GL-50A: Maurel & Prom added to Big Six (Pertamina-owned, initially excluded)':'GL-50A: Maurel & Prom a\u00f1adido a los Seis Grandes (propiedad de Pertamina, inicialmente excluido)',\n  'GL-49/50: Big Six authorized for full Venezuela oil/gas ops. GL-47 authorizes diluent exports':'GL-49/50: Seis Grandes autorizados para operaciones completas de petr\u00f3leo/gas en Venezuela. GL-47 autoriza exportaci\u00f3n de diluyentes',\n  'Trump disavows Harry Sargeant III (NABEP) on Truth Social':'Trump desautoriza a Harry Sargeant III (NABEP) en Truth Social',\n  'EO 14373: All Venezuelan oil revenue to US-controlled Treasury accounts':'EO 14373: Todos los ingresos petroleros venezolanos a cuentas del Tesoro controladas por EE.UU.',\n  'Maduro captured by US special forces. Rodr\u00edguez assumes presidency':'Maduro capturado por fuerzas especiales de EE.UU. Rodr\u00edguez asume la presidencia',\n  'Assembly approves 15-yr Russian JV extension through 2041':'Asamblea aprueba extensi\u00f3n de 15 a\u00f1os para JV rusa hasta 2041',\n  'OFAC issues new license \u2014 Chevron JVs resume ops':'OFAC emite nueva licencia \u2014 JVs de Chevron reanudan operaciones',\n  '25% US tariff on Venezuelan oil importers':'Arancel del 25% de EE.UU. a importadores de petr\u00f3leo venezolano',\n  'OFAC revokes Repsol, ENI, M&P licenses':'OFAC revoca licencias de Repsol, ENI, M&P',\n  'Trump revokes Chevron Biden-era GL-41':'Trump revoca GL-41 de la era Biden de Chevron',\n  'GL-52: Broadest license yet \u2014 all established US entities authorized for production, JVs, and full oil/gas ops with PDVSA':'GL-52: Licencia m\u00e1s amplia \u2014 todas las entidades establecidas de EE.UU. autorizadas para producci\u00f3n, JVs y operaciones completas con PDVSA',\n  'GL-46B/48A/49A updates: expanded oil trade, goods/services, and contingent contracts':'GL-46B/48A/49A: comercio petrolero ampliado, bienes/servicios y contratos contingentes',\n  // Sidebar \u2014 Big Six list\n  'UK \u00b7 New entrant':'RU \u00b7 Nuevo participante',\n  'US \u00b7 242K bpd':'EE.UU. \u00b7 242K bpd',\n  'IT \u00b7 Resuming':'IT \u00b7 Reanudando',\n  'ES \u00b7 Resuming':'ES \u00b7 Reanudando',\n  'NL \u00b7 Dragon Gas':'PB \u00b7 Gas Dragon',\n  'FR \u00b7 Feb 18':'FR \u00b7 Feb 18',\n  // Sidebar \u2014 Big Six callout\n  'US-law governed contracts only. Payments to OFAC Foreign Government Deposit Funds. No Chinese/Russian/Iranian counterparties. 10-day + 90-day reporting requirements.':'Solo contratos bajo ley de EE.UU. Pagos a Fondos de Dep\u00f3sito del Gobierno Extranjero de OFAC. Sin contrapartes chinas/rusas/iran\u00edes. Requisitos de reporte a 10 y 90 d\u00edas.',\n  // Sidebar \u2014 Active Deals\n  'Shell \u2014 Dragon Gas:':'Shell \u2014 Gas Dragon:',\n  '350 mmcfd offshore to Trinidad LNG. FID possible 2026. First gas 2027\u201328.':'350 mmcfd costa afuera a Trinidad GNL. FID posible 2026. Primer gas 2027\u201328.',\n  'Shell \u2014 Carito/Pirital:':'Shell \u2014 Carito/Pirital:',\n  '94K bpd crude + 1 Bcfd gas. 350 mmcfd currently flared.':'94K bpd crudo + 1 Bcfd gas. 350 mmcfd actualmente quemados.',\n  'Chevron \u2014 Ayacucho 8:':'Chevron \u2014 Ayacucho 8:',\n  'Orinoco expansion. Reduced royalties. Review end-Mar.':'Expansi\u00f3n en el Orinoco. Regal\u00edas reducidas. Revisi\u00f3n fin de marzo.',\n  'CCRC \u2014 Maracaibo:':'CCRC \u2014 Maracaibo:',\n  '$1B, 500 wells, 60K target end-2026. Status uncertain post-Jan.':'$1B, 500 pozos, meta 60K fin-2026. Estado incierto post-enero.',\n  // Sidebar \u2014 Debt Exposure\n  'Bondholders (prin+int)':'Tenedores de bonos (prin+int)',\n  'China (outstanding)':'China (pendiente)',\n  'Russia (outstanding)':'Rusia (pendiente)',\n  'ConocoPhillips (arb.)':'ConocoPhillips (arb.)',\n  'Total external':'Total externo',\n  // Table headers (mixed-case versions in HTML)\n  'Company':'Empresa',\n  'Origin':'Origen',\n  'Prod (bpd)':'Prod (bpd)',\n  '2026 Guidance':'Proyecci\u00f3n 2026',\n  'Share':'Cuota',\n  'Key JVs':'JVs Clave',\n  // Topbar\n  'Venezuela Crude Oil Production Intelligence':'Inteligencia de Producci\u00f3n de Petr\u00f3leo Crudo de Venezuela',\n  '2026 Guidance Dashboard':'Panel de Proyecciones 2026',\n  // Footer labels\n  'Production:':'Producci\u00f3n:',\n  'Prices:':'Precios:',\n  'Sanctions:':'Sanciones:',\n  'Scenarios:':'Escenarios:',\n  'News:':'Noticias:',\n  'Geo:':'Geo:',\n  'Prices update every 5 min':'Los precios se actualizan cada 5 min',\n  'News every 30 min':'Noticias cada 30 min',\n  'Production data monthly (OPEC/CEIC)':'Datos de producci\u00f3n mensuales (OPEP/CEIC)',\n  // Map legend\n  'Oil':'Petr\u00f3leo',\n  'Upgrader':'Mejorador',\n  'Refinery':'Refiner\u00eda',\n  'Terminal':'Terminal',\n  'Oil Spill':'Derrame de Petr\u00f3leo',\n  // Infra callouts\n  '$10\u201320B and several years needed before output exceeds 1.5M bpd. Only 2/4 Orinoco upgraders partially functional. GL-47 authorizes diluent exports. \u2014 CFR, Rystad':'$10\u201320B y varios a\u00f1os necesarios antes de que la producci\u00f3n supere 1.5M bpd. Solo 2/4 mejoradores del Orinoco parcialmente funcionales. GL-47 autoriza exportaci\u00f3n de diluyentes. \u2014 CFR, Rystad',\n  'ExxonMobil CEO: \"uninvestable.\" ConocoPhillips owed ~$10B. No firm capex commitments from Big Six. Trump\\'s $100B investment claim unverified. \u2014 Fortune, CNBC':'CEO de ExxonMobil: \"no invertible.\" ConocoPhillips adeuda ~$10B. Sin compromisos firmes de capex de los Seis Grandes. Reclamo de inversi\u00f3n de $100B de Trump no verificado. \u2014 Fortune, CNBC'\n};",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01TYCcfkgB3BXLzbQ5rC6UpE"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  var node;\n  while(node=walker.nextNode()){\n    var trimmed=node.textContent.trim();\n    if(trimmed&&dict[trimmed]){\n      node.textContent=node.textContent.replace(trimmed,dict[trimmed]);\n    }\n  }\n}",
+      "new_string": "  var node;\n  while(node=walker.nextNode()){\n    var trimmed=node.textContent.trim();\n    if(trimmed&&dict[trimmed]){\n      node.textContent=node.textContent.replace(trimmed,dict[trimmed]);\n    }\n  }\n  // Translate news tags\n  document.querySelectorAll('.news-tag-news').forEach(function(el){\n    el.textContent=curLang==='es'?'NOTICIAS':'NEWS';\n  });\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_019d6HvDd8qWBTgQM8jwvFqc"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "class=\"(topbar|nav|ticker|page)\"",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content",
+      "context": 0
+    },
+    "tool_use_id": "toolu_01UxeMF9pjT49JcCP6dh1ypi"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "NOTICIAS|news-tag-news",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01FHR13Qd2hfsg7MYDUh9E4A"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "agent_id": "a49e458f398a21269",
+    "agent_type": "builder",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Derrame de Petr\u00f3leo|Panel de Proyecciones|Inteligencia de Producci\u00f3n",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01VJJWUHJ6Q8zUu7g2UroUfS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"const fs=require('fs');const h=fs.readFileSync('public/dashboard.html','utf8');const m=h.match(/<script>([\\s\\S]*?)<\\/script>/);try{new Function(m[1]);console.log('JS OK');}catch(e){console.log(e.message);}\" && git add -A && git commit -m \"$(cat <<'EOF'\nExpand Spanish translations: sidebar, table, footer, news tags\n\nAdded ~55 new i18n entries covering:\n- Sidebar: all 11 timeline events, Big Six list, callout, deals, debt\n- Table headers: Company, Origin, Share, Key JVs, etc.\n- Topbar: title + subtitle\n- Footer: all category labels + update cadence text\n- Map legend: Oil, Upgrader, Refinery, Terminal, Oil Spill\n- Infra/financial callouts\n- News ribbon: \"NEWS\" tag \u2192 \"NOTICIAS\" in ES mode\n\nHeader already sticky by layout (outside scroll container).\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Verify, commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01Hsd8kEaqTKvBj77EDwfiVG"
   }
 ]
