@@ -4123,5 +4123,49 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01Szy28Ug1MiHSYwBVfH38iP"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "// Live production data layers \u2014 populated by /api/production fetch\nvar liveEia={};    // period \u2192 value (EIA official only)\nvar liveEst={};    // period \u2192 value (CEIC/TE/Kpler estimates)\n\nfunction getDataForView(){\n  const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;\n  let startIdx=0;\n  if(curRange!=='MAX'){\n    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    const lastYear=labelToYear(d.labels[d.labels.length-1]);\n    const cutoff=lastYear-yearsBack;\n    startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);\n    if(startIdx<0)startIdx=0;\n  }\n  let labels=d.labels.slice(startIdx);\n  let vals=d.vals.slice(startIdx);\n  let notes=d.notes.slice(startIdx);\n  if(!projOn){\n    let lastReal=labels.length-1;\n    while(lastReal>0&&vals[lastReal]===null)lastReal--;\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }\n  // Build EIA-only, estimate, and blended lines\n  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n  var eiaLine=new Array(labels.length).fill(null);\n  var estLine=new Array(labels.length).fill(null);\n  var blendLine=new Array(labels.length).fill(null);\n  labels.forEach(function(lbl,i){\n    // Convert label to period key: 'Jan 25' \u2192 '2025-01', '2025' \u2192 '2025', 'Q1 25' \u2192 approx\n    var key=null;\n    var mm=lbl.replace('E','').trim().match(/([A-Z][a-z]{2})\\s+(\\d{2})/);\n    if(mm)key='20'+mm[2]+'-'+String(months.indexOf(mm[1])+1).padStart(2,'0');\n    else if(/^\\d{4}$/.test(lbl.replace('E','')))key=lbl.replace('E','');\n    if(key){\n      var eV=null,esV=null;\n      // For annual keys, find best match\n      if(key.length===4){\n        // Find latest month in that year from each source\n        for(var mi=12;mi>=1;mi--){\n          var mk=key+'-'+String(mi).padStart(2,'0');\n          if(!eV&&liveEia[mk])eV=liveEia[mk];\n          if(!esV&&liveEst[mk])esV=liveEst[mk];\n        }\n      } else {\n        eV=liveEia[key]||null;\n        esV=liveEst[key]||null;\n      }\n      if(eV)eiaLine[i]=eV;\n      if(esV)estLine[i]=esV;\n      if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);\n      else if(eV)blendLine[i]=eV;\n      else if(esV)blendLine[i]=esV;\n    }\n  });\n  return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),eiaLine,estLine,blendLine};\n}",
+      "new_string": "// Live production data layers \u2014 populated by /api/production fetch\nvar liveEia={};    // period \u2192 value (EIA official only)\nvar liveEst={};    // period \u2192 value (CEIC/TE/Kpler estimates)\nvar liveDataLoaded=false;\n\nfunction labelToKey(lbl){\n  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n  var mm=lbl.replace('E','').trim().match(/([A-Z][a-z]{2})\\s+(\\d{2})/);\n  if(mm)return '20'+mm[2]+'-'+String(months.indexOf(mm[1])+1).padStart(2,'0');\n  if(/^\\d{4}$/.test(lbl.replace('E','')))return lbl.replace('E','');\n  var qm=lbl.replace('E','').trim().match(/Q(\\d)\\s+(\\d{2})/);\n  if(qm)return '20'+qm[2]+'-Q'+qm[1];\n  return null;\n}\n\nfunction getDataForView(){\n  const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;\n  let startIdx=0;\n  if(curRange!=='MAX'){\n    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    const lastYear=labelToYear(d.labels[d.labels.length-1]);\n    const cutoff=lastYear-yearsBack;\n    startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);\n    if(startIdx<0)startIdx=0;\n  }\n  let labels=d.labels.slice(startIdx);\n  let vals=d.vals.slice(startIdx);\n  let notes=d.notes.slice(startIdx);\n  if(!projOn){\n    let lastReal=labels.length-1;\n    while(lastReal>0&&vals[lastReal]===null)lastReal--;\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }\n\n  // Before live data loads, show single line (hardcoded vals as blended)\n  if(!liveDataLoaded){\n    return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),\n      eiaLine:vals.slice(), estLine:new Array(labels.length).fill(null), blendLine:vals.slice()};\n  }\n\n  // After live data: EIA line = hardcoded baseline overwritten by live EIA where available\n  // Estimate line = only where live estimates exist (recent months)\n  // Blended = average where both exist, else whichever is available\n  var eiaLine=vals.slice(); // start with hardcoded as EIA baseline\n  var estLine=new Array(labels.length).fill(null);\n  var blendLine=vals.slice(); // start with hardcoded\n\n  labels.forEach(function(lbl,i){\n    var key=labelToKey(lbl);\n    if(!key)return;\n    var eV=null,esV=null;\n\n    if(key.length===4){ // annual \u2014 find latest month\n      for(var mi=12;mi>=1;mi--){\n        var mk=key+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else if(key.includes('-Q')){ // quarterly\n      var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);\n      var startM=(qn-1)*3+1;\n      for(var mi=startM+2;mi>=startM;mi--){\n        var mk=qy+'-'+String(mi).padStart(2,'0');\n        if(!eV&&liveEia[mk])eV=liveEia[mk];\n        if(!esV&&liveEst[mk])esV=liveEst[mk];\n      }\n    } else { // monthly\n      eV=liveEia[key]||null;\n      esV=liveEst[key]||null;\n    }\n\n    // Overwrite EIA line with live EIA if available\n    if(eV)eiaLine[i]=eV;\n    // Estimate line only shows where estimates exist\n    if(esV)estLine[i]=esV;\n    // Blended: average if both, else best available\n    if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);\n    else if(eV)blendLine[i]=eV;\n    else if(esV)blendLine[i]=esV;\n    // else keep hardcoded val\n  });\n\n  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01TMy8hE1URA8LcRUfeZ3hpY"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "        // Populate live data layers for chart\n        pd.data.forEach(function(pt) {\n          var key = pt.period;\n          var val = Math.round(pt.value);\n          if(pt.source === 'EIA') {\n            liveEia[key] = val;\n          } else {\n            liveEst[key] = val;\n          }\n        });\n\n        // Rebuild the chart with live data layers\n        buildChart();",
+      "new_string": "        // Populate live data layers for chart\n        pd.data.forEach(function(pt) {\n          var key = pt.period;\n          var val = Math.round(pt.value);\n          if(pt.source === 'EIA') {\n            liveEia[key] = val;\n          } else {\n            liveEst[key] = val;\n          }\n        });\n        liveDataLoaded = true;\n\n        // Rebuild the chart with live data layers\n        buildChart();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01FJKTd3x4V4EsoDVQKwBvcG"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nFix chart: use hardcoded data as baseline, overlay live EIA + estimates\n\nBefore live data loads: all three lines show the hardcoded historical\ndata so the chart is fully populated 2015-2026.\n\nAfter live data loads:\n- EIA line: hardcoded baseline overwritten with live EIA where available\n- Estimate line: only appears where CEIC/TE/Kpler estimates exist (recent)\n- Blended: average of both where they overlap, else best available\n- Scenario projection anchors from the blended line\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01EiRRLjfS4ecpNzzUm56siC"
   }
 ]

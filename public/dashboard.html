@@ -748,6 +748,17 @@ function labelToYear(lbl){
 // Live production data layers — populated by /api/production fetch
 var liveEia={};    // period → value (EIA official only)
 var liveEst={};    // period → value (CEIC/TE/Kpler estimates)
+var liveDataLoaded=false;
+
+function labelToKey(lbl){
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var mm=lbl.replace('E','').trim().match(/([A-Z][a-z]{2})\s+(\d{2})/);
+  if(mm)return '20'+mm[2]+'-'+String(months.indexOf(mm[1])+1).padStart(2,'0');
+  if(/^\d{4}$/.test(lbl.replace('E','')))return lbl.replace('E','');
+  var qm=lbl.replace('E','').trim().match(/Q(\d)\s+(\d{2})/);
+  if(qm)return '20'+qm[2]+'-Q'+qm[1];
+  return null;
+}
 
 function getDataForView(){
   const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
@@ -769,39 +780,56 @@ function getDataForView(){
     vals=vals.slice(0,lastReal+1);
     notes=notes.slice(0,lastReal+1);
   }
-  // Build EIA-only, estimate, and blended lines
-  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var eiaLine=new Array(labels.length).fill(null);
+
+  // Before live data loads, show single line (hardcoded vals as blended)
+  if(!liveDataLoaded){
+    return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),
+      eiaLine:vals.slice(), estLine:new Array(labels.length).fill(null), blendLine:vals.slice()};
+  }
+
+  // After live data: EIA line = hardcoded baseline overwritten by live EIA where available
+  // Estimate line = only where live estimates exist (recent months)
+  // Blended = average where both exist, else whichever is available
+  var eiaLine=vals.slice(); // start with hardcoded as EIA baseline
   var estLine=new Array(labels.length).fill(null);
-  var blendLine=new Array(labels.length).fill(null);
+  var blendLine=vals.slice(); // start with hardcoded
+
   labels.forEach(function(lbl,i){
-    // Convert label to period key: 'Jan 25' → '2025-01', '2025' → '2025', 'Q1 25' → approx
-    var key=null;
-    var mm=lbl.replace('E','').trim().match(/([A-Z][a-z]{2})\s+(\d{2})/);
-    if(mm)key='20'+mm[2]+'-'+String(months.indexOf(mm[1])+1).padStart(2,'0');
-    else if(/^\d{4}$/.test(lbl.replace('E','')))key=lbl.replace('E','');
-    if(key){
-      var eV=null,esV=null;
-      // For annual keys, find best match
-      if(key.length===4){
-        // Find latest month in that year from each source
-        for(var mi=12;mi>=1;mi--){
-          var mk=key+'-'+String(mi).padStart(2,'0');
-          if(!eV&&liveEia[mk])eV=liveEia[mk];
-          if(!esV&&liveEst[mk])esV=liveEst[mk];
-        }
-      } else {
-        eV=liveEia[key]||null;
-        esV=liveEst[key]||null;
+    var key=labelToKey(lbl);
+    if(!key)return;
+    var eV=null,esV=null;
+
+    if(key.length===4){ // annual — find latest month
+      for(var mi=12;mi>=1;mi--){
+        var mk=key+'-'+String(mi).padStart(2,'0');
+        if(!eV&&liveEia[mk])eV=liveEia[mk];
+        if(!esV&&liveEst[mk])esV=liveEst[mk];
       }
-      if(eV)eiaLine[i]=eV;
-      if(esV)estLine[i]=esV;
-      if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);
-      else if(eV)blendLine[i]=eV;
-      else if(esV)blendLine[i]=esV;
+    } else if(key.includes('-Q')){ // quarterly
+      var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);
+      var startM=(qn-1)*3+1;
+      for(var mi=startM+2;mi>=startM;mi--){
+        var mk=qy+'-'+String(mi).padStart(2,'0');
+        if(!eV&&liveEia[mk])eV=liveEia[mk];
+        if(!esV&&liveEst[mk])esV=liveEst[mk];
+      }
+    } else { // monthly
+      eV=liveEia[key]||null;
+      esV=liveEst[key]||null;
     }
+
+    // Overwrite EIA line with live EIA if available
+    if(eV)eiaLine[i]=eV;
+    // Estimate line only shows where estimates exist
+    if(esV)estLine[i]=esV;
+    // Blended: average if both, else best available
+    if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);
+    else if(eV)blendLine[i]=eV;
+    else if(esV)blendLine[i]=esV;
+    // else keep hardcoded val
   });
-  return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),eiaLine,estLine,blendLine};
+
+  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};
 }
 
 function buildChart(){
@@ -1157,6 +1185,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
             liveEst[key] = val;
           }
         });
+        liveDataLoaded = true;
 
         // Rebuild the chart with live data layers
         buildChart();
