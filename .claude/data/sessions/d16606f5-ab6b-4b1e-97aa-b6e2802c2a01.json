@@ -47,6 +47,7 @@
     "it shouldnt be the last month of march it should be the averga eof the three estimated months... jan, feb and march",
     "ok increase the font size of the text in general so its easier to read for ppl above the age of 50 and translate the whole site to spanish, making it a toggle on the header, next to the date and time that allows you to switch between english and spanish",
     "the toggle appears for a split second when launching and then disappears. adjust the size of the font on the news ribbon, share percent in all producers table, and key jvs in that same table",
-    "the right panel w sanctions timelines, the gl-50a composition, active deals and debt exposure should also be translated to panish. the table of producers too, as well as the footer the header should always be present as i scroll, the footer is only in the bottom and does not follow as i scroll up. translate the footer and header too, as well as the news"
+    "the right panel w sanctions timelines, the gl-50a composition, active deals and debt exposure should also be translated to panish. the table of producers too, as well as the footer the header should always be present as i scroll, the footer is only in the bottom and does not follow as i scroll up. translate the footer and header too, as well as the news",
+    "when spansh is toggled on, there should be no english text visible on any text/copy, table/chart/graph and any detailed info like when i click on a producer to view detailed info from the table, it should still be in spanish"
   ]
 }

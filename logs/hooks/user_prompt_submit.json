@@ -374,5 +374,13 @@
     "permission_mode": "bypassPermissions",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "the right panel w sanctions timelines, the gl-50a composition, active deals and debt exposure should also be translated to panish. the table of producers too, as well as the footer the header should always be present as i scroll, the footer is only in the bottom and does not follow as i scroll up. translate the footer and header too, as well as the news"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "when spansh is toggled on, there should be no english text visible on any text/copy, table/chart/graph and any detailed info like when i click on a producer to view detailed info from the table, it should still be in spanish"
   }
 ]
