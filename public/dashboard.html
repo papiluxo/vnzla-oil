@@ -734,6 +734,7 @@ let curGran='M';
 let curRange='6M';
 let curSc='bear';
 let projOn=false;
+let estOn=false;
 
 // Parse a label like '2024', 'Q1 24', 'Jan 24', 'Q4 26E', 'Dec 26E' into a comparable year number
 function labelToYear(lbl){
@@ -873,7 +874,6 @@ function buildChart(){
 }
 
 const initView=getDataForView();
-let estOn=false;
 const hC=new Chart(document.getElementById('hChart'),{
   type:'line',
   data:{labels:initView.labels,datasets:[
