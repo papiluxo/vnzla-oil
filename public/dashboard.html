@@ -768,13 +768,22 @@ function labelToKey(lbl){
 
 function getDataForView(){
   const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
+  // Find the last label that has ANY visible data — this anchors both range and trim
+  function hasVisibleData(idx){
+    if(d.vals[idx]!==null)return true;
+    var k=labelToKey(d.labels[idx]);
+    if(!k)return false;
+    if(liveEia[k])return true;
+    if(estOn&&liveEst[k])return true;
+    return false;
+  }
+  var lastVisIdx=d.labels.length-1;
+  while(lastVisIdx>0&&!hasVisibleData(lastVisIdx))lastVisIdx--;
+
   let startIdx=0;
   if(curRange!=='MAX'){
     const yearsBack={'6M':0.5,'1Y':1,'3Y':3,'5Y':5}[curRange]||1;
-    // Find last label with actual data (not null) to anchor the range
-    var lastDataIdx=d.vals.length-1;
-    while(lastDataIdx>0&&d.vals[lastDataIdx]===null)lastDataIdx--;
-    const lastYear=labelToYear(d.labels[lastDataIdx]);
+    const lastYear=labelToYear(d.labels[lastVisIdx]);
     const cutoff=lastYear-yearsBack;
     startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);
     if(startIdx<0)startIdx=0;
@@ -782,23 +791,12 @@ function getDataForView(){
   let labels=d.labels.slice(startIdx);
   let vals=d.vals.slice(startIdx);
   let notes=d.notes.slice(startIdx);
+  // Trim to last visible data point (no trailing empty space)
   if(!projOn){
-    // Trim to last point that has data for any visible line
-    let lastReal=labels.length-1;
-    while(lastReal>0){
-      if(vals[lastReal]!==null)break;
-      var k=labelToKey(labels[lastReal]);
-      if(k){
-        // If unofficial est is on, extend to last estimate
-        if(estOn&&liveEst[k])break;
-        // Otherwise just extend to last EIA or hardcoded
-        if(liveEia[k])break;
-      }
-      lastReal--;
-    }
-    labels=labels.slice(0,lastReal+1);
-    vals=vals.slice(0,lastReal+1);
-    notes=notes.slice(0,lastReal+1);
+    var trimEnd=lastVisIdx-startIdx+1;
+    labels=labels.slice(0,trimEnd);
+    vals=vals.slice(0,trimEnd);
+    notes=notes.slice(0,trimEnd);
   }
 
   // Before live data loads, show single line (hardcoded vals as blended)
@@ -986,7 +984,8 @@ function toggleEst(){
   if(estOn){btn.classList.add('on');dot.style.background='var(--green)';}
   else{btn.classList.remove('on');dot.style.background='var(--t4)';}
   hC.data.datasets[1].hidden=!estOn;
-  hC.update();
+  // Rebuild to adjust x-axis range to match visible data
+  buildChart();
 }
 
 // ---- PROJECTION TOGGLE ----
