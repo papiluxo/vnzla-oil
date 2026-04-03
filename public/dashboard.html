@@ -917,7 +917,7 @@ const hC=new Chart(document.getElementById('hChart'),{
     {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}
   ]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},
-    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===1&&!estOn)return false;if(item.datasetIndex===2&&!projOn)return false;return true;}}},
+    plugins:{legend:{position:'top',onClick:function(e,item){if(item.datasetIndex===1)toggleEst();else if(item.datasetIndex===2)toggleProj();},labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===1&&!estOn)return false;if(item.datasetIndex===2&&!projOn)return false;return true;}}},
       tooltip:{...tt,callbacks:{
         label:function(ctx){
           if(ctx.raw===null)return '';
