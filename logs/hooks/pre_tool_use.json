@@ -4601,5 +4601,227 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01Lc3SURtpKERSiNQZPYpCdF"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 353,
+      "limit": 25
+    },
+    "tool_use_id": "toolu_01CrwUcTPcdBpMjwDDhQbud6"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      <button id=\"projToggle\" onclick=\"toggleProj()\" class=\"ptab\" style=\"display:flex;align-items:center;gap:4px;\">\n        <span id=\"projDot\" style=\"width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;\"></span>\n        Projections\n      </button>",
+      "new_string": "      <button id=\"estToggle\" onclick=\"toggleEst()\" class=\"ptab\" style=\"display:flex;align-items:center;gap:4px;\">\n        <span id=\"estDot\" style=\"width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;\"></span>\n        Unofficial Est.\n      </button>\n      <button id=\"projToggle\" onclick=\"toggleProj()\" class=\"ptab\" style=\"display:flex;align-items:center;gap:4px;\">\n        <span id=\"projDot\" style=\"width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;\"></span>\n        Projections\n      </button>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01GtCMxV8VkMXVYPq9LuAMxv"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "const initView=getDataForView();\nconst hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:initView.labels,datasets:[\n    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},\n    {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},\n    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}\n  ]},\n  options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},\n    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:\"'IBM Plex Mono'\"},filter:function(item){if(item.datasetIndex===3&&!projOn)return false;return true;}}},",
+      "new_string": "const initView=getDataForView();\nlet estOn=false;\nconst hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:initView.labels,datasets:[\n    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:'Unofficial Est. (CEIC/Kpler)',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3],hidden:true},\n    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}\n  ]},\n  options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},\n    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:\"'IBM Plex Mono'\"},filter:function(item){if(item.datasetIndex===1&&!estOn)return false;if(item.datasetIndex===2&&!projOn)return false;return true;}}},",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Rcv9zT4Tdr7NbcsBavWcDg"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "function buildChart(){\n  const v=getDataForView();\n  hC.data.labels=v.labels;\n  hC.data.datasets[0].data=v.eiaLine;   // EIA Official\n  hC.data.datasets[1].data=v.estLine;    // Live Estimate\n  hC.data.datasets[2].data=v.blendLine;  // Blended\n  hC.data.datasets[3].data=v.scenario;   // Scenario projection\n  hC.data.datasets[3].borderColor=scC[curSc];\n  hC.data.datasets[3].pointBackgroundColor=scC[curSc];\n  hC.data.datasets[3].label=scN[curSc];\n  const dense=v.labels.length>16;\n  [0,1,2].forEach(function(i){\n    hC.data.datasets[i].pointRadius=dense?1:2;\n    hC.data.datasets[i].pointHoverRadius=dense?4:6;\n    hC.data.datasets[i].pointHitRadius=dense?10:14;\n    hC.data.datasets[i].borderWidth=dense?1.5:2;\n  });\n  hC.data.datasets[3].pointHitRadius=dense?10:14;\n  hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;\n  hC.update();\n}",
+      "new_string": "function buildChart(){\n  const v=getDataForView();\n  hC.data.labels=v.labels;\n  hC.data.datasets[0].data=v.eiaLine;\n  hC.data.datasets[1].data=v.estLine;\n  hC.data.datasets[2].data=v.scenario;\n  hC.data.datasets[2].borderColor=scC[curSc];\n  hC.data.datasets[2].pointBackgroundColor=scC[curSc];\n  hC.data.datasets[2].label=scN[curSc];\n  const dense=v.labels.length>16;\n  [0,1].forEach(function(i){\n    hC.data.datasets[i].pointRadius=dense?1:2;\n    hC.data.datasets[i].pointHoverRadius=dense?4:6;\n    hC.data.datasets[i].pointHitRadius=dense?10:14;\n    hC.data.datasets[i].borderWidth=dense?1.5:2;\n  });\n  hC.data.datasets[2].pointHitRadius=dense?10:14;\n  hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;\n  hC.update();\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_0189SFrX4RMutiWTBmiCt5Mk"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "          if(ctx.datasetIndex<=2&&ctx.dataIndex>0){\n            const allVals=ctx.chart.data.datasets[ctx.datasetIndex].data;",
+      "new_string": "          if(ctx.datasetIndex<=1&&ctx.dataIndex>0){\n            const allVals=ctx.chart.data.datasets[ctx.datasetIndex].data;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_013UF9NhLVF4XUUz9xV8sJCE"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "          if(ctx.datasetIndex>2)return '';",
+      "new_string": "          if(ctx.datasetIndex>1)return '';",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01XGMaLNyhHVftf514Di9jwT"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "// ---- PROJECTION TOGGLE ----\nfunction toggleProj(){",
+      "new_string": "// ---- ESTIMATE TOGGLE ----\nfunction toggleEst(){\n  estOn=!estOn;\n  var btn=document.getElementById('estToggle');\n  var dot=document.getElementById('estDot');\n  if(estOn){btn.classList.add('on');dot.style.background='var(--green)';}\n  else{btn.classList.remove('on');dot.style.background='var(--t4)';}\n  hC.data.datasets[1].hidden=!estOn;\n  hC.update();\n}\n\n// ---- PROJECTION TOGGLE ----\nfunction toggleProj(){",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Qh3bYNk3uUdUL187L5N3wU"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "hC.data.datasets\\[1\\].hidden=!projOn",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_015TA9FF6ch47uQtw1NLqW6f"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  hC.data.datasets[1].hidden=!projOn;",
+      "new_string": "  hC.data.datasets[2].hidden=!projOn;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01W3JMj3a7MccpgkZjsh25B2"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};",
+      "new_string": "  return {labels,vals,notes,scenario:mkScenario(labels,eiaLine,curSc),eiaLine,estLine};",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_018JzVqSj44Uq8cky9NSkdfy"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  var eiaLine=vals.slice();\n  var estLine=vals.slice(); // same baseline \u2014 diverges only in recent months\n  var blendLine=vals.slice();",
+      "new_string": "  var eiaLine=vals.slice();\n  var estLine=vals.slice(); // same baseline \u2014 diverges only in recent months",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01SL9zHyrP6Go6GTAVjxGvdV"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    // Blended: average where both differ, else the value\n    if(eV&&esV&&eV!==esV) blendLine[i]=Math.round((eV+esV)/2);\n    else if(esV) blendLine[i]=esV;\n    else if(eV) blendLine[i]=eV;",
+      "new_string": "",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Bto4FmpsMHWvUF1WfuJ6vQ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),\n      eiaLine:vals.slice(), estLine:new Array(labels.length).fill(null), blendLine:vals.slice()};",
+      "new_string": "    return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),\n      eiaLine:vals.slice(), estLine:vals.slice()};",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_0113BmQ2SvS1QXfZXQi9JNNi"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    <div class=\"kpi-v\" style=\"color:var(--red)\">$160<span style=\"font-size:11px\">B</span></div>",
+      "new_string": "    <div class=\"kpi-v\" style=\"color:var(--red)\">-$160<span style=\"font-size:11px\">B</span></div>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_019PRiP269dYdKJc29MvsyCE"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nSimplify chart: remove blended, add Unofficial Est. toggle\n\n- Removed blended line entirely (was averaging EIA + estimates)\n- Renamed \"Live Estimate\" \u2192 \"Unofficial Est. (CEIC/Kpler)\"\n- Added toggle button in chart header: \"Unofficial Est.\" with green dot\n- Default: OFF (only EIA Official blue line visible)\n- Toggle on to see green dashed line diverge in recent months\n- Projections toggle unchanged, also defaults OFF\n- External debt KPI: added \"-\" prefix (-$160B)\n- Chart now has 3 datasets: EIA, Unofficial Est., Scenario\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01TxGdnHe4Y4gfhEAqc9LQH2"
   }
 ]

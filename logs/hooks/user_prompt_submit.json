@@ -262,5 +262,13 @@
     "permission_mode": "bypassPermissions",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "fix the colors on the kpi text and subtexts and also the live estimate does not show march"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "honestly i think the best way to do this is to keep the default view as is but remove the live estimate and blended lines--these should be turned into toggles on the same menu where we can select the time rate and range and projections toggle. clicking on blended or live estimate toggles turns both on but once they are on you can turn either off to concentrate on just two lines. actually fuck it, remove the blended line. just live estimate and change the name to unofficial figure or number idk, whichever one is better in your opinion. finally, give the external debt kpi a \"-\" sig before the number"
   }
 ]

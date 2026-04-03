@@ -33,6 +33,7 @@
     "i think the default should be the eia official, live estimate and blended on the monthly 3y view and have the projections toggled off",
     "ok fix the merey blend price estimate of ~99 to match the merey ticker in the ribbon above",
     "its hard to see the three default lines in the chart, the blue seems to be the one covering the whole thing and make the live estimate have the same historical data as the official eia but only diverts in the estimated months where we can see the average third line. also make the merey kpi have the same format as the brent kpi next to it w the green color and the dollar sign without the \"~\". the vnzla prod ticker should be the eia official",
-    "fix the colors on the kpi text and subtexts and also the live estimate does not show march"
+    "fix the colors on the kpi text and subtexts and also the live estimate does not show march",
+    "honestly i think the best way to do this is to keep the default view as is but remove the live estimate and blended lines--these should be turned into toggles on the same menu where we can select the time rate and range and projections toggle. clicking on blended or live estimate toggles turns both on but once they are on you can turn either off to concentrate on just two lines. actually fuck it, remove the blended line. just live estimate and change the name to unofficial figure or number idk, whichever one is better in your opinion. finally, give the external debt kpi a \"-\" sig before the number"
   ]
 }

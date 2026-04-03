@@ -342,7 +342,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   </div>
   <div class="kpi">
     <div class="kpi-l">External Debt</div>
-    <div class="kpi-v" style="color:var(--red)">$160<span style="font-size:11px">B</span></div>
+    <div class="kpi-v" style="color:var(--red)">-$160<span style="font-size:11px">B</span></div>
     <div class="kpi-s" style="color:var(--t3)">Default since 2017</div>
     <div class="kpi-c t-dn">2x GDP (~$80B)</div>
   </div>
@@ -366,6 +366,10 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
         <button class="ptab" onclick="setRng('MAX',this)">Max</button>
       </div>
       <span style="width:1px;height:14px;background:var(--t4)"></span>
+      <button id="estToggle" onclick="toggleEst()" class="ptab" style="display:flex;align-items:center;gap:4px;">
+        <span id="estDot" style="width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;"></span>
+        Unofficial Est.
+      </button>
       <button id="projToggle" onclick="toggleProj()" class="ptab" style="display:flex;align-items:center;gap:4px;">
         <span id="projDot" style="width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;"></span>
         Projections
@@ -790,7 +794,7 @@ function getDataForView(){
   // Before live data loads, show single line (hardcoded vals as blended)
   if(!liveDataLoaded){
     return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),
-      eiaLine:vals.slice(), estLine:new Array(labels.length).fill(null), blendLine:vals.slice()};
+      eiaLine:vals.slice(), estLine:vals.slice()};
   }
 
   // After live data: EIA line = hardcoded baseline overwritten by live EIA where available
@@ -800,7 +804,6 @@ function getDataForView(){
   // They only diverge where EIA and estimates have different recent values
   var eiaLine=vals.slice();
   var estLine=vals.slice(); // same baseline — diverges only in recent months
-  var blendLine=vals.slice();
 
   labels.forEach(function(lbl,i){
     var key=labelToKey(lbl);
@@ -831,55 +834,50 @@ function getDataForView(){
     if(esV) estLine[i]=esV;
     else if(eV) estLine[i]=eV; // estimate follows EIA where no separate estimate exists
 
-    // Blended: average where both differ, else the value
-    if(eV&&esV&&eV!==esV) blendLine[i]=Math.round((eV+esV)/2);
-    else if(esV) blendLine[i]=esV;
-    else if(eV) blendLine[i]=eV;
   });
 
-  return {labels,vals,notes,scenario:mkScenario(labels,blendLine,curSc),eiaLine,estLine,blendLine};
+  return {labels,vals,notes,scenario:mkScenario(labels,eiaLine,curSc),eiaLine,estLine};
 }
 
 function buildChart(){
   const v=getDataForView();
   hC.data.labels=v.labels;
-  hC.data.datasets[0].data=v.eiaLine;   // EIA Official
-  hC.data.datasets[1].data=v.estLine;    // Live Estimate
-  hC.data.datasets[2].data=v.blendLine;  // Blended
-  hC.data.datasets[3].data=v.scenario;   // Scenario projection
-  hC.data.datasets[3].borderColor=scC[curSc];
-  hC.data.datasets[3].pointBackgroundColor=scC[curSc];
-  hC.data.datasets[3].label=scN[curSc];
+  hC.data.datasets[0].data=v.eiaLine;
+  hC.data.datasets[1].data=v.estLine;
+  hC.data.datasets[2].data=v.scenario;
+  hC.data.datasets[2].borderColor=scC[curSc];
+  hC.data.datasets[2].pointBackgroundColor=scC[curSc];
+  hC.data.datasets[2].label=scN[curSc];
   const dense=v.labels.length>16;
-  [0,1,2].forEach(function(i){
+  [0,1].forEach(function(i){
     hC.data.datasets[i].pointRadius=dense?1:2;
     hC.data.datasets[i].pointHoverRadius=dense?4:6;
     hC.data.datasets[i].pointHitRadius=dense?10:14;
     hC.data.datasets[i].borderWidth=dense?1.5:2;
   });
-  hC.data.datasets[3].pointHitRadius=dense?10:14;
+  hC.data.datasets[2].pointHitRadius=dense?10:14;
   hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;
   hC.update();
 }
 
 const initView=getDataForView();
+let estOn=false;
 const hC=new Chart(document.getElementById('hChart'),{
   type:'line',
   data:{labels:initView.labels,datasets:[
-    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
-    {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},
-    {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},
+    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
+    {label:'Unofficial Est. (CEIC/Kpler)',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3],hidden:true},
     {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}
   ]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},
-    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===3&&!projOn)return false;return true;}}},
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===1&&!estOn)return false;if(item.datasetIndex===2&&!projOn)return false;return true;}}},
       tooltip:{...tt,callbacks:{
         label:function(ctx){
           if(ctx.raw===null)return '';
           const v=ctx.raw;
           let s=`${ctx.dataset.label}: ${v.toLocaleString()}K bpd`;
           // Period-over-period change
-          if(ctx.datasetIndex<=2&&ctx.dataIndex>0){
+          if(ctx.datasetIndex<=1&&ctx.dataIndex>0){
             const allVals=ctx.chart.data.datasets[ctx.datasetIndex].data;
             const prev=allVals[ctx.dataIndex-1];
             if(prev&&v){
@@ -891,7 +889,7 @@ const hC=new Chart(document.getElementById('hChart'),{
           return s;
         },
         afterLabel:function(ctx){
-          if(ctx.datasetIndex>2)return '';
+          if(ctx.datasetIndex>1)return '';
           const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
           // find the matching note
           const label=ctx.label;
@@ -965,6 +963,17 @@ new Chart(document.getElementById('finChart'),{
     scales:{x:{title:{display:true,text:'$B',font:{size:9}},grid:{color:gridC}},y:{grid:{display:false},ticks:{font:{size:9}}}}}
 });
 
+// ---- ESTIMATE TOGGLE ----
+function toggleEst(){
+  estOn=!estOn;
+  var btn=document.getElementById('estToggle');
+  var dot=document.getElementById('estDot');
+  if(estOn){btn.classList.add('on');dot.style.background='var(--green)';}
+  else{btn.classList.remove('on');dot.style.background='var(--t4)';}
+  hC.data.datasets[1].hidden=!estOn;
+  hC.update();
+}
+
 // ---- PROJECTION TOGGLE ----
 function toggleProj(){
   projOn=!projOn;
@@ -977,7 +986,7 @@ function toggleProj(){
     btn.classList.remove('on');
     dot.style.background='var(--t4)';
   }
-  hC.data.datasets[1].hidden=!projOn;
+  hC.data.datasets[2].hidden=!projOn;
   // Collapse scenario cards
   const row=document.getElementById('scRow');
   row.style.maxHeight=projOn?'200px':'0';
