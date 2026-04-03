@@ -360,8 +360,9 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
       </div>
       <span style="width:1px;height:14px;background:var(--t4)"></span>
       <div class="ptabs" id="rangeTabs">
+        <button class="ptab on" onclick="setRng('6M',this)">6M</button>
         <button class="ptab" onclick="setRng('1Y',this)">1Y</button>
-        <button class="ptab on" onclick="setRng('3Y',this)">3Y</button>
+        <button class="ptab" onclick="setRng('3Y',this)">3Y</button>
         <button class="ptab" onclick="setRng('5Y',this)">5Y</button>
         <button class="ptab" onclick="setRng('MAX',this)">Max</button>
       </div>
@@ -730,7 +731,7 @@ const scC={bear:'#ff4d4d',base:'#ff9f1a',bull:'#00d26a'};
 const scN={bear:'Bear 900K',base:'Base 1.2M',bull:'Bull 1.4M'};
 
 let curGran='M';
-let curRange='3Y';
+let curRange='6M';
 let curSc='bear';
 let projOn=false;
 
@@ -768,7 +769,7 @@ function getDataForView(){
   const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;
   let startIdx=0;
   if(curRange!=='MAX'){
-    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;
+    const yearsBack={'6M':0.5,'1Y':1,'3Y':3,'5Y':5}[curRange]||1;
     const lastYear=labelToYear(d.labels[d.labels.length-1]);
     const cutoff=lastYear-yearsBack;
     startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);
@@ -778,12 +779,17 @@ function getDataForView(){
   let vals=d.vals.slice(startIdx);
   let notes=d.notes.slice(startIdx);
   if(!projOn){
-    // Find last label that has ANY data (hardcoded or live estimate)
+    // Trim to last point that has data for any visible line
     let lastReal=labels.length-1;
     while(lastReal>0){
       if(vals[lastReal]!==null)break;
       var k=labelToKey(labels[lastReal]);
-      if(k&&(liveEia[k]||liveEst[k]))break;
+      if(k){
+        // If unofficial est is on, extend to last estimate
+        if(estOn&&liveEst[k])break;
+        // Otherwise just extend to last EIA or hardcoded
+        if(liveEia[k])break;
+      }
       lastReal--;
     }
     labels=labels.slice(0,lastReal+1);
@@ -797,13 +803,14 @@ function getDataForView(){
       eiaLine:vals.slice(), estLine:vals.slice()};
   }
 
-  // After live data: EIA line = hardcoded baseline overwritten by live EIA where available
-  // Estimate line = only where live estimates exist (recent months)
-  // Blended = average where both exist, else whichever is available
-  // All three lines share the same historical baseline
-  // They only diverge where EIA and estimates have different recent values
+  // Find the latest EIA period to know where official data ends
+  var eiaKeys=Object.keys(liveEia).sort();
+  var latestEiaPeriod=eiaKeys.length>0?eiaKeys[eiaKeys.length-1]:'9999-99';
+
+  // EIA line: hardcoded baseline up to EIA's latest period, null after
+  // Estimate line: same baseline, overwritten with estimate data where available
   var eiaLine=vals.slice();
-  var estLine=vals.slice(); // same baseline — diverges only in recent months
+  var estLine=vals.slice();
 
   labels.forEach(function(lbl,i){
     var key=labelToKey(lbl);
@@ -829,11 +836,16 @@ function getDataForView(){
       esV=liveEst[key]||null;
     }
 
-    // Update each line with live data where available
-    if(eV) eiaLine[i]=eV;
-    if(esV) estLine[i]=esV;
-    else if(eV) estLine[i]=eV; // estimate follows EIA where no separate estimate exists
+    // EIA line: only show data up to EIA's latest period
+    if(eV){
+      eiaLine[i]=eV;
+    } else if(key>latestEiaPeriod){
+      eiaLine[i]=null; // beyond EIA coverage — don't show hardcoded estimates as official
+    }
 
+    // Estimate line: overwrite with live estimates, follow EIA where no estimate exists
+    if(esV) estLine[i]=esV;
+    else if(eV) estLine[i]=eV;
   });
 
   return {labels,vals,notes,scenario:mkScenario(labels,eiaLine,curSc),eiaLine,estLine};
@@ -865,7 +877,7 @@ let estOn=false;
 const hC=new Chart(document.getElementById('hChart'),{
   type:'line',
   data:{labels:initView.labels,datasets:[
-    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
+    {label:'EIA Official',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
     {label:'Unofficial Est. (CEIC/Kpler)',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3],hidden:true},
     {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}
   ]},

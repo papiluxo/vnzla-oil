@@ -322,5 +322,14 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Fixed both:\n\n**KPI colors** \u2014 consistent scheme:\n- **Production**: white value, muted unit\n- **Brent**: green value\n- **Merey**: green value (matching Brent format)\n- **Operators**: white value, green subtext\n- **Revenue**: green value\n- **Debt**: red value, red change\n- All subtexts: `t3` (muted gray)\n\n**March in chart** \u2014 the trim logic now checks `liveEst` before cutting trailing labels. So when projections are off, `Mar 26` stays visible because the API has Kpler's 1,090K estimate for it. The live estimate (green dashed) line now extends through March showing the divergence from where EIA stops at December."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Here's the new setup:\n\n**Chart header controls:**\n`Monthly | Quarterly | Annual | 1Y | 3Y | 5Y | Max | \u25cf Unofficial Est. | \u25cf Projections`\n\n**Default view:** Monthly 3Y with just the **EIA Official** blue line. Clean, single line.\n\n**Toggles:**\n- **Unofficial Est.** (green dot) \u2014 turns on the green dashed line showing CEIC/Kpler data. Overlaps EIA historically, diverges in recent months where EIA hasn't published yet (Jan-Mar 2026)\n- **Projections** (amber dot) \u2014 turns on scenario line + bear/base/bull cards\n\n**External debt KPI:** Now shows `-$160B` with the negative sign."
   }
 ]
