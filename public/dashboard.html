@@ -1101,7 +1101,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         var kpi0 = document.querySelectorAll('.kpi')[0];
         if(kpi0) {
           var val = kpi0.querySelector('.kpi-v');
-          if(val) val.innerHTML = Math.round(latest.value * 1000).toLocaleString().replace(',','') + '<span style="font-size:11px;color:var(--t3)">–1,021K</span>';
+          if(val) val.innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t3)">K bpd</span>';
           var sub = kpi0.querySelector('.kpi-s');
           if(sub) sub.textContent = latest.period + ' — EIA (live)';
         }
