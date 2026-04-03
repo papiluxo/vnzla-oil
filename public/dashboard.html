@@ -1096,7 +1096,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
           var periodLabel = months[parseInt(parts[1])-1] + ' ' + parts[0];
           kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + ')';
           kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t3)">K bpd</span>';
-          kpi0.querySelector('.kpi-s').textContent = pd.source === 'eia' ? 'EIA (live)' : 'Estimate';
+          kpi0.querySelector('.kpi-s').textContent = latest.source || (pd.source === 'eia' ? 'EIA' : 'Estimate');
           // MoM change
           if(prev) {
             var chg = ((latest.value - prev.value) / prev.value * 100).toFixed(1);

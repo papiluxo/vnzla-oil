@@ -14,6 +14,18 @@
     "the prod table on mobile looks a bit messy, lets put vertical dividers per field so we can follow the info more clearly. forget the spanish translation thing and undo those edits we made for it. the news ribbon in mobile is working perfectly now!",
     "i dont like the double dividers in the prod table. it was better before, its just in the mobile it was hard to follow. maybe its better if only in mobile each field starts at the same horizontal coordinate so that it can follow along as much cealry understood columns",
     "ok much better but now the columns starting at prod (bpd) starts to ignore the x coordinate alignment",
-    "cool. to the infrastructure map, are you able to add oil spills (2025 to now), with info on their dimension and where obviously"
+    "cool. to the infrastructure map, are you able to add oil spills (2025 to now), with info on their dimension and where obviously",
+    "the manual data is a huge part of the alpha that we should provide here and not wait to hear about it. we should be checking every day, just once",
+    "the api key is in my notion (https://www.notion.so/EIA-3373162ba9cc803e9322e7b9f7533338?source=copy_link)",
+    "ok the production number is showing 6 digits, thats too much, use the k or m units to reduce digits",
+    "also include the unit for the price tickers like petcoke is 1.84 per what? do that for all price tickers",
+    "rearrange that ticker bar or make it multi line or something cause everything after \"chi/rus exclud\" doesnt show up, not even that whole ticker",
+    "looks fine on mobile but not on desktop--it should fill the full width of the screen with smart spacing between ticker",
+    "nahhh i dont like it. maybe its another ribbon that is moving like the live news ribbon and its just one line so we fit all that info. same for mobile.",
+    "nah i dont like it. lets make it a static ribbon like we had it before this update and the two lines, and the way we will fit it is by removing these tickers (\nOFAC\nGL-52 OPEN\nALL US ENTITIES\n|\nCHN/RUS\nEXCLUDED\nOFAC\n|\nHORMUZ\nDISRUPTED\nSINCE MAR 2\n)",
+    "remove this GL-50A\nBIG SIX\nBP CHV ENI REP SHL M&P\nGL-52\nOPEN\nALL US ENTITIES and make it one line",
+    "i still wanted to see the vnzla prod and reserves. you deleted those i didnt specify",
+    "does this ticker make sense? Production (Feb 26)\n905K bpd\n2025-12 \u2014 EIA (live)\nUp from Jan 924K post-disruption",
+    "do we not have newer data for that?"
   ]
 }

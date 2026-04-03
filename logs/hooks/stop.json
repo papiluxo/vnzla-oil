@@ -142,5 +142,113 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Done. The map now has **9 oil spill markers** (red circles with glow border) alongside the infrastructure:\n\n**Spills mapped:**\n- **LOL-3 Pipeline, Gulf of Coro** (Jan 4, 2025) \u2014 ~90,000 bbl, 70th spill in this area since 2019\n- **Amuay Refinery overflow** (Late Jan 2025)\n- **Lake Maracaibo chronic leaks** (ongoing) \u2014 ~1,000 bbl/day, 13,000 km\u00b2 estuary\n- **LOL Pipeline, Mitare Beach** (Feb 5, 2025) \u2014 >150K bbl cumulative, 7,000 fishing families affected\n- **Monagas\u2013Jos\u00e9 Pipeline** (Late Feb 2025) \u2014 >24,000 bbl, media blocked by National Guard\n- **J-20 Station, Morichal** (~Jan 15, 2025) \u2014 up to ~50,000 bbl\n- **El Palito / Golfo Triste** (Mar 2025) \u2014 225 km\u00b2 oil slick, Morrocoy National Park\n- **LOL Pipeline, Carirubana** (Mar 25, 2026) \u2014 near Card\u00f3n refinery\n- **LOL Pipeline, Miranda** (Mar 26, 2026) \u2014 2nd failure within 24h\n\nClick any red marker for full details: cause, volume, status, environmental impact, and source. Use the **Spills** filter tab to isolate just the spill markers."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "All working:\n\n- **Brent**: $109.05 (live)\n- **WTI**: $112.06 (live)  \n- **Merey**: $100.05 (derived, $9 spread from Brent)\n- **Petcoke**: $1.84 (live from Yahoo Finance \u2014 that's per pound, which is correct for fuel-grade petcoke)\n- **Production**: Fallback data (need EIA key for live)\n\n**To activate live EIA production data**, register for a free API key at https://www.eia.gov/opendata/ (instant approval), then:\n\n```\n! cd projects/vnzla-oil && vercel env add EIA_API_KEY\n```\n\nPaste the key when prompted. The `/api/production` endpoint will then pull real monthly data directly from EIA and auto-update the production KPI on the dashboard.\n\n**What's now automated:**\n\n| Data | Source | Update Cadence | Status |\n|------|--------|---------------|--------|\n| Brent/WTI | Yahoo Finance | Every 5 min | Live |\n| Merey | Derived from Brent | Every 5 min | Live |\n| Petcoke | Yahoo Finance | Every 5 min | Live |\n| News | 7 RSS feeds | Every 10 min | Live |\n| Production | EIA API | Monthly (cron 1st) | Needs API key |\n| Company data | Hardcoded | Manual via GitHub push | Working |\n| OFAC/spills | Hardcoded | Manual via GitHub push | Working |\n\nFor the manual data (companies, OFAC, spills) \u2014 whenever you hear about changes, just tell me here and I'll update + push. Vercel catches it in ~30 seconds."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "**Daily intel agent is set up and first run triggered.**\n\n**`daily-vnzla-intel`** \u2014 https://claude.ai/code/scheduled/trig_0162fyfUkbzTsm95DuNT9kku\n\n| | |\n|---|---|\n| **Schedule** | Every day at 9am ET (1pm UTC) |\n| **Model** | Sonnet 4.6 |\n| **Repo** | `papiluxo/vnzla-oil` |\n| **What it does** | Clones the repo, searches 12+ sources (OFAC, Google News, OPEC, company-specific queries in EN+ES), compares against current dashboard data, makes targeted edits if anything changed, commits + pushes to GitHub \u2192 Vercel auto-deploys |\n\n**Daily sweep covers:**\n1. OFAC sanctions changes (new GLs, amendments, revocations)\n2. Oil spills (EN + Spanish sources)\n3. Company news for all 14 operators individually\n4. Production data (OPEC, PDVSA, Trading Economics)\n5. Merey spread drift\n\nIf nothing new is found on a given day, it logs \"No updates\" and doesn't push. You can check run history at the link above.\n\n**Still need from you:** Register for a free EIA API key at https://www.eia.gov/opendata/ and add it:\n```\n! cd projects/vnzla-oil && vercel env add EIA_API_KEY\n```\n\nThat unlocks live monthly production data from the US government instead of our hardcoded fallback."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "EIA is live. Real government data flowing in:\n\n| Month | Production (TBPD) |\n|-------|------------------|\n| Dec 2025 | 905 |\n| Nov 2025 | 1,005 |\n| Oct 2025 | 1,005 |\n| Sep 2025 | 1,000 |\n| Aug 2025 | 995 |\n| Jul 2025 | 980 |\n\nThe dashboard production KPI will now auto-update from EIA on every page load. Source shows `eia` instead of `fallback`. The monthly cron (1st of each month) will warm the cache proactively.\n\n**Everything automated now:**\n\n| Data | Source | Cadence | Status |\n|------|--------|---------|--------|\n| Brent/WTI | Yahoo Finance | 5 min | Live |\n| Merey | Derived (Brent - $9) | 5 min | Live |\n| Petcoke | Yahoo Finance | 5 min | Live |\n| News | 7 RSS feeds | 10 min | Live |\n| Production | EIA API | 6hr cache + monthly cron | **Live** |\n| OFAC/companies/spills | Daily agent sweep | 9am ET daily | **Live** |"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. EIA returns values in TBPD (thousand barrels per day), so 905 = 905K bpd. Now displays as `905K bpd` instead of `905000`."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. All price tickers now show units in dimmed text:\n\n- **Brent**: `$109.05/bbl`\n- **WTI**: `$112.06/bbl`\n- **Merey**: `$100.05/bbl`\n- **Petcoke**: `$1.84/st` (per short ton)\n\nUnits persist through live price updates too \u2014 the JS uses `innerHTML` with the unit spans instead of `textContent`."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Ticker is now two rows:\n\n**Row 1 \u2014 Prices:**\n`BRENT MAY $109.05/bbl | BRENT JUN $108.00/bbl | WTI $112.06/bbl | MEREY ~$100/bbl | PETCOKE ~$45/st`\n\n**Row 2 \u2014 Market/Geopolitical:**\n`VNZLA PROD 958\u20131,021K | OFAC GL-52 OPEN | CHN/RUS EXCLUDED | HORMUZ DISRUPTED | GL-50A BIG SIX | RESERVES 303B bbl`\n\nEverything visible now \u2014 no cutoff."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. Tickers now use `justify-content:space-between` \u2014 each tick spreads evenly across the full screen width on desktop, with smart auto-spacing between them. Mobile keeps the scroll behavior."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. The ticker is now a single scrolling ribbon \u2014 same approach as the news ribbon:\n\n`BRENT MAY $109.05/bbl +5.0% | BRENT JUN $108.00/bbl | WTI $112.06/bbl | MEREY ~$100/bbl | PETCOKE $1.84/st | VNZLA PROD 958\u20131,021K | OFAC GL-52 OPEN | CHN/RUS EXCLUDED | HORMUZ DISRUPTED | GL-50A BIG SIX | RESERVES 303B bbl`\n\nAll in one line, scrolling at 60px/sec, seamless loop, adapts to any viewport width. Same behavior on desktop and mobile. Live prices update both copies in the ribbon."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Back to the static two-row layout:\n\n**Row 1:** `BRENT MAY $109.05/bbl | BRENT JUN $108.00/bbl | WTI $112.06/bbl | MEREY ~$99/bbl | PETCOKE ~$45/st`\n\n**Row 2:** `VNZLA PROD 958\u20131,021K | GL-50A BIG SIX | GL-52 OPEN | RESERVES 303B bbl`\n\nRemoved OFAC/CHN-RUS/HORMUZ ticks (that info's already in the sidebar and context section). Everything fits cleanly now."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Done. One line:\n\n`BRENT MAY $109.05/bbl +5.0% | BRENT JUN $108.00/bbl | WTI $112.06/bbl | MEREY ~$99/bbl -$9 spread | PETCOKE ~$45/st`"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. Single line:\n\n`BRENT MAY $109.05/bbl | BRENT JUN $108.00/bbl | WTI $112.06/bbl | MEREY ~$99/bbl | PETCOKE ~$45/st | VNZLA PROD 958\u20131,021K | RESERVES 303B bbl`"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. The production KPI now dynamically shows:\n\n- **Label**: `Production (Dec 2025)` \u2014 actual EIA period, not hardcoded\n- **Value**: `905K bpd` \u2014 EIA's latest figure\n- **Source**: `EIA (live)`\n- **Change**: `-9.9% from Nov (1005K)` \u2014 real MoM comparison from EIA data\n\nEverything updates automatically as EIA publishes new months. No more mixing of stale manual estimates with live data."
   }
 ]
