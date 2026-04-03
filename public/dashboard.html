@@ -18,14 +18,14 @@
   --t1:#e8eaed;--t2:#9aa0a6;--t3:#5f6368;--t4:#3c4043;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);font-size:12px;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);font-size:13px;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--t4);border-radius:2px;}
 .mono{font-family:'IBM Plex Mono',monospace;}
 
 /* TOPBAR */
-.topbar{height:30px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:16px;font-size:10px;color:var(--t3);}
+.topbar{height:30px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:16px;font-size:11px;color:var(--t3);}
 .topbar .brand{color:var(--amber);font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;}
 .topbar .sep{width:1px;height:14px;background:var(--t4);}
 
@@ -38,7 +38,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .nav-r .live{color:var(--green);font-weight:600;}
 
 /* TICKER */
-.ticker{height:26px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:20px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:10px;white-space:nowrap;}
+.ticker{height:26px;background:#000;border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 16px;gap:20px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:11px;white-space:nowrap;}
 .tick{display:flex;align-items:center;gap:5px;}
 .tick-l{color:var(--t4);font-weight:500;}
 .tick-v{color:var(--t1);font-weight:600;}
@@ -55,20 +55,20 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 /* PANELS */
 .pnl{background:var(--panel);border:1px solid var(--rule);margin-bottom:6px;}
 .pnl-h{padding:5px 10px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.015);}
-.pnl-t{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;}
+.pnl-t{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;}
 .pnl-b{padding:8px 10px;}
 .ptabs{display:flex;gap:1px;}
-.ptab{padding:2px 9px;font-size:10px;font-weight:500;background:transparent;border:none;color:var(--t3);cursor:pointer;transition:all .1s;}
+.ptab{padding:2px 9px;font-size:11px;font-weight:500;background:transparent;border:none;color:var(--t3);cursor:pointer;transition:all .1s;}
 .ptab:hover{color:var(--t2);}
 .ptab.on{color:var(--amber);background:var(--amber-dim);}
 
 /* KPI */
 .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px;}
 .kpi{background:var(--panel);border:1px solid var(--rule);padding:8px 10px;}
-.kpi-l{font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:3px;}
-.kpi-v{font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace;line-height:1.1;}
-.kpi-s{font-size:9px;color:var(--t3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
-.kpi-c{font-size:9px;font-weight:600;margin-top:1px;font-family:'IBM Plex Mono',monospace;}
+.kpi-l{font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:3px;}
+.kpi-v{font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;line-height:1.1;}
+.kpi-s{font-size:11px;color:var(--t3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+.kpi-c{font-size:11px;font-weight:600;margin-top:1px;font-family:'IBM Plex Mono',monospace;}
 
 /* GRID */
 .row{display:grid;gap:6px;margin-bottom:6px;}
@@ -79,8 +79,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse;}
-.tbl th{text-align:left;font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:4px 7px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--panel);z-index:1;}
-.tbl td{padding:5px 7px;border-bottom:1px solid var(--rule-2);font-size:11px;}
+.tbl th{text-align:left;font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:4px 7px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--panel);z-index:1;}
+.tbl td{padding:5px 7px;border-bottom:1px solid var(--rule-2);font-size:12px;}
 .tbl tbody tr{cursor:pointer;transition:background .1s;}
 .tbl tbody tr:hover{background:var(--amber-dim);}
 .nm{font-weight:600;color:var(--t1);}
@@ -106,22 +106,22 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 
 /* SIDEBAR */
 .sb-s{border-bottom:1px solid var(--rule);padding:10px 12px;}
-.sb-t{font-size:9px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.sb-t{font-size:10px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
 .sb-item{margin-bottom:8px;}
-.sb-date{font-size:9px;color:var(--t4);font-family:'IBM Plex Mono',monospace;font-weight:500;}
-.sb-text{font-size:10px;color:var(--t2);line-height:1.35;margin-top:1px;}
+.sb-date{font-size:10px;color:var(--t4);font-family:'IBM Plex Mono',monospace;font-weight:500;}
+.sb-text{font-size:11px;color:var(--t2);line-height:1.35;margin-top:1px;}
 .sb-dot{display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:4px;}
 
 /* INFRA */
 .inf{margin-bottom:6px;}
-.inf-r{display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;}
+.inf-r{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;}
 .inf-r span:first-child{color:var(--t2);}
-.inf-r span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--t1);font-weight:500;font-size:10px;}
+.inf-r span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--t1);font-weight:500;font-size:11px;}
 .inf-bar{height:3px;background:var(--t4);border-radius:1px;overflow:hidden;}
 .inf-fill{height:100%;border-radius:1px;transition:width 1s ease;}
 
 /* CALLOUT */
-.co{padding:7px 9px;border-left:2px solid;font-size:10px;line-height:1.4;color:var(--t2);margin-top:6px;}
+.co{padding:7px 9px;border-left:2px solid;font-size:11px;line-height:1.4;color:var(--t2);margin-top:6px;}
 .co-r{border-color:var(--red);background:rgba(255,77,77,.03);}
 .co-a{border-color:var(--amber);background:var(--amber-dim);}
 .co-g{border-color:var(--green);background:rgba(0,210,106,.03);}
@@ -129,8 +129,8 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 /* SOURCES */
 .src-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
 .src-box{padding:8px 10px;border:1px solid var(--rule);background:var(--panel);}
-.src-tl{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:5px;}
-.src-a{display:block;font-size:10px;color:var(--blue);text-decoration:none;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.src-tl{font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:5px;}
+.src-a{display:block;font-size:11px;color:var(--blue);text-decoration:none;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .src-a:hover{color:var(--amber);}
 .src-tag{font-size:8px;color:var(--t4);background:var(--panel-2);padding:0 3px;border-radius:2px;margin-right:3px;font-weight:600;display:inline-block;}
 
@@ -150,7 +150,12 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .ds h3{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600;}
 .ds p{font-size:11px;color:var(--t2);line-height:1.55;}
 
-.footer{padding:10px 16px;font-size:9px;color:var(--t4);border-top:1px solid var(--rule);background:var(--panel);text-align:center;}
+.footer{padding:10px 16px;font-size:10px;color:var(--t4);border-top:1px solid var(--rule);background:var(--panel);text-align:center;}
+
+.lang-toggle{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;user-select:none;}
+.lang-opt{color:var(--t4);transition:color .15s;}
+.lang-active{color:var(--amber);}
+.lang-sep{color:var(--t4);margin:0 1px;}
 
 /* Mobile helpers */
 .show-mobile{display:none;}
@@ -160,7 +165,7 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 .news-ribbon{flex:1;height:24px;background:transparent;overflow:hidden;position:relative;}
 .news-ribbon-inner{display:flex;gap:48px;align-items:center;height:100%;white-space:nowrap;position:absolute;left:0;}
 .news-ribbon-inner:hover{animation-play-state:paused;}
-.news-item{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
+.news-item{font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--t2);display:flex;align-items:center;gap:6px;}
 .news-item a{color:var(--blue);text-decoration:none;transition:color .15s;}
 .news-item a:hover{color:var(--amber);}
 .news-time{color:var(--t4);font-size:9px;}
@@ -283,7 +288,11 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
   <span class="brand">VNZLA OIL</span><span class="sep"></span>
   <span>Venezuela Crude Oil Production Intelligence</span><span class="sep"></span>
   <span>2026 Guidance Dashboard</span>
-  <span style="margin-left:auto">31 Mar 2026 15:42 EST</span>
+  <span style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+    <span id="topbarTs">31 Mar 2026 15:42 EST</span>
+    <span class="sep"></span>
+    <span class="lang-toggle" onclick="toggleLang()"><span id="langEN" class="lang-opt lang-active">EN</span><span class="lang-sep">/</span><span id="langES" class="lang-opt">ES</span></span>
+  </span>
 </div>
 
 <div class="nav">
@@ -1183,6 +1192,125 @@ function mapFilter(f,el){
       else m.setRadius(3);
     }
   });
+}
+
+// ---- i18n ----
+var curLang='en';
+var i18n={
+  // KPIs
+  'Production (Latest)':'Producción (Último)',
+  'Production':'Producción',
+  'est.':'est.',
+  'Brent (May Contract)':'Brent (Contrato Mayo)',
+  'Hormuz premium':'Prima de Ormuz',
+  'Merey Blend (est.)':'Mezcla Merey (est.)',
+  'discount to Brent':'descuento vs Brent',
+  'GL-50A Operators':'Operadores GL-50A',
+  'GL-50A Big Six + GL-52 US entities':'GL-50A Seis Grandes + GL-52 entidades EE.UU.',
+  'GL-52 opened Mar 18':'GL-52 abierto Mar 18',
+  'Revenue (post-Jan 3)':'Ingresos (post-3 Ene)',
+  'US-controlled escrow':'Custodia controlada por EE.UU.',
+  '$5B projected near-term':'$5B proyectado a corto plazo',
+  'External Debt':'Deuda Externa',
+  'Default since 2017':'En default desde 2017',
+  // Panel titles
+  'Historical Production & 2026 Scenarios':'Producción Histórica y Escenarios 2026',
+  'Prod & Scenarios':'Prod y Escenarios',
+  'All Producers':'Todos los Productores',
+  'Export Destinations (2025 Avg)':'Destinos de Exportación (Prom. 2025)',
+  'Output by Country of Origin + Upside':'Producción por País + Potencial',
+  'Empresas Mixtas — JV Output (K bpd)':'Empresas Mixtas — Producción (K bpd)',
+  'Infrastructure Utilization':'Utilización de Infraestructura',
+  'Financial Overview':'Panorama Financiero',
+  'Critical Context':'Contexto Crítico',
+  'Infrastructure Map':'Mapa de Infraestructura',
+  // Chart controls
+  'Monthly':'Mensual',
+  'Quarterly':'Trimestral',
+  'Annual':'Anual',
+  'Unofficial Est.':'Est. No Oficial',
+  'Projections':'Proyecciones',
+  // Scenarios
+  'Bear — Sanctions Hold':'Pesimista — Sanciones Vigentes',
+  'No new licenses · Infra decay · China/Russia excluded':'Sin nuevas licencias · Infraestructura deteriorada · China/Rusia excluidos',
+  'Goldman Sachs base case':'Caso base Goldman Sachs',
+  'Base — GL-50A Ramp':'Base — Rampa GL-50A',
+  'Big Six ramp · Shell Dragon FID · Chevron Ayacucho-8':'Rampa Seis Grandes · Shell Dragon FID · Chevron Ayacucho-8',
+  'Kpler / analyst consensus':'Kpler / consenso de analistas',
+  'Bull — Full Reopening':'Optimista — Reapertura Total',
+  'Broad relief · $10B+ capex · Upgrader restarts':'Alivio amplio · $10B+ capex · Reactivación de mejoradores',
+  'JPMorgan 24-month horizon':'JPMorgan horizonte 24 meses',
+  // Table headers
+  'COMPANY':'EMPRESA',
+  'ORIGIN':'ORIGEN',
+  'OFAC':'OFAC',
+  'PROD (BPD)':'PROD (BPD)',
+  '2026 GUIDANCE':'PROYECCIÓN 2026',
+  'SHARE':'CUOTA',
+  'KEY JVS':'JVs CLAVE',
+  // Map filters
+  'All':'Todos',
+  'Fields':'Campos',
+  'Gas':'Gas',
+  'Infra':'Infra',
+  'GL-50A':'GL-50A',
+  'Excluded':'Excluidos',
+  'Spills':'Derrames',
+  'Click to interact with map':'Haz clic para interactuar con el mapa',
+  // Sidebar
+  'Sanctions & Policy Timeline':'Cronología de Sanciones',
+  'GL-50A — "Big Six"':'GL-50A — "Seis Grandes"',
+  'Active Deals (Q1 2026)':'Acuerdos Activos (T1 2026)',
+  'Debt Exposure':'Exposición de Deuda',
+  // Context
+  'POST-MADURO':'POST-MADURO',
+  'REVENUE CONTROL':'CONTROL DE INGRESOS',
+  'HORMUZ CRISIS':'CRISIS DE ORMUZ',
+  'OPEC STATUS':'ESTATUS OPEP',
+  // Infra bars
+  'Paraguana Refinery (955K design)':'Refinería Paraguaná (955K diseño)',
+  'Petropiar Upgrader':'Mejorador Petropiar',
+  'Petrocedeño Upgrader (key upside)':'Mejorador Petrocedeño (potencial clave)',
+  'Storage Tanks':'Tanques de Almacenamiento',
+  'Pipeline Network':'Red de Oleoductos',
+  'Technical Workforce (vs 2014)':'Fuerza Laboral Técnica (vs 2014)',
+  // Footer
+  'View All Sources':'Ver Todas las Fuentes',
+  'Sources & References':'Fuentes y Referencias',
+  'Prices update every 5 min':'Precios se actualizan cada 5 min',
+  'News every 30 min':'Noticias cada 30 min',
+  'Production data monthly (OPEC/CEIC)':'Datos de producción mensuales (OPEP/CEIC)',
+  'Last loaded:':'Última carga:',
+  // Context paragraphs
+  'Captured Jan 3 by US forces. Rodríguez (SDN-listed) acting president. New hydrocarbon law ends PDVSA monopoly. Independent arbitration allowed.':'Capturado el 3 de enero por fuerzas de EE.UU. Rodríguez (listada SDN) presidenta interina. Nueva ley de hidrocarburos elimina monopolio de PDVSA. Arbitraje independiente permitido.',
+  'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B collected. $5B projected. $150B potential over 10yr. GL-52 broadened access beyond Big Six.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B recaudado. $5B proyectado. $150B potencial en 10 años. GL-52 amplió acceso más allá de los Seis Grandes.',
+  'Strait disrupted since Mar 2. Brent +60% MTD — largest monthly surge since \'88. Venezuela supply suddenly strategic to US.':'Estrecho interrumpido desde el 2 de marzo. Brent +60% mensual — mayor alza mensual desde el \'88. Suministro venezolano estratégico para EE.UU.',
+  'Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). Constraint is capital, not geology.':'Exento de cuotas desde 2019. Podría producir 1.5M+ bpd libremente. Reservas: 303B bbl (#1). La limitante es capital, no geología.'
+};
+
+// Reverse map for ES→EN
+var i18nReverse={};
+Object.keys(i18n).forEach(function(k){i18nReverse[i18n[k]]=k;});
+
+function translateText(text,toLang){
+  if(toLang==='es')return i18n[text]||text;
+  return i18nReverse[text]||text;
+}
+
+function toggleLang(){
+  curLang=curLang==='en'?'es':'en';
+  document.getElementById('langEN').className='lang-opt'+(curLang==='en'?' lang-active':'');
+  document.getElementById('langES').className='lang-opt'+(curLang==='es'?' lang-active':'');
+  // Translate all text nodes that match dictionary keys
+  var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
+  var dict=curLang==='es'?i18n:i18nReverse;
+  var node;
+  while(node=walker.nextNode()){
+    var trimmed=node.textContent.trim();
+    if(trimmed&&dict[trimmed]){
+      node.textContent=node.textContent.replace(trimmed,dict[trimmed]);
+    }
+  }
 }
 
 // INIT

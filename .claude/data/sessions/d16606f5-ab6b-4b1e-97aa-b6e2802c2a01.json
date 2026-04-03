@@ -44,6 +44,7 @@
     "it worked for a split second when i opened the page and went back to the same empty space of no data but still x axis extending past the last data point. also, make the unofficial estimate line also part of the default state of the chart and make the green dot on the graph (the last one) blink like a live ticker but very subtly, in an elegant manner",
     "clicking the unofficial est legend text on the graph should behave the same way as untoggling. they are not behaving the same rn. the toggle button is the correct behavior",
     "the unofficial estimate should apply to quarterly time rate as its a 3 month estimate (bcause of the 3 month lag), which is a quarter",
-    "it shouldnt be the last month of march it should be the averga eof the three estimated months... jan, feb and march"
+    "it shouldnt be the last month of march it should be the averga eof the three estimated months... jan, feb and march",
+    "ok increase the font size of the text in general so its easier to read for ppl above the age of 50 and translate the whole site to spanish, making it a toggle on the header, next to the date and time that allows you to switch between english and spanish"
   ]
 }
