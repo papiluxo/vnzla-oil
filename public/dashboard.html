@@ -1080,7 +1080,7 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
     }
   }catch(e){console.log('Price fetch failed:',e);}
 
-  // Fetch EIA production
+  // Fetch EIA + estimates production — update KPI + charts
   try {
     var pr = await fetch('/api/production');
     if(pr.ok) {
@@ -1088,16 +1088,16 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
       if(pd.data && pd.data.length > 0) {
         var latest = pd.data[0];
         var prev = pd.data[1];
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        // Update KPI
         var kpi0 = document.querySelectorAll('.kpi')[0];
         if(kpi0) {
-          // Format period: "2025-12" → "Dec 2025"
           var parts = latest.period.split('-');
-          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
           var periodLabel = months[parseInt(parts[1])-1] + ' ' + parts[0];
           kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + ')';
           kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t3)">K bpd</span>';
           kpi0.querySelector('.kpi-s').textContent = latest.source || (pd.source === 'eia' ? 'EIA' : 'Estimate');
-          // MoM change
           if(prev) {
             var chg = ((latest.value - prev.value) / prev.value * 100).toFixed(1);
             var prevLabel = months[parseInt(prev.period.split('-')[1])-1];
@@ -1106,9 +1106,45 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
             chgEl.className = 'kpi-c ' + (chg >= 0 ? 't-up' : 't-dn');
           }
         }
+
+        // Update chart data arrays with live production values
+        pd.data.forEach(function(pt) {
+          var pp = pt.period.split('-');
+          var yr = pp[0]; var mo = parseInt(pp[1]);
+          var val = Math.round(pt.value);
+          var moShort = yr.slice(2); // '25' from '2025'
+          var mLabel = months[mo-1] + ' ' + moShort; // 'Dec 25'
+
+          // Update monthly data
+          var mIdx = dataM.labels.indexOf(mLabel);
+          if(mIdx >= 0 && dataM.vals[mIdx] !== val) {
+            dataM.vals[mIdx] = val;
+          }
+
+          // Update quarterly data — map month to quarter
+          var qNum = Math.ceil(mo / 4 + 0.01); // Q1=Jan-Mar etc
+          // Actually: Q1=1-3, Q2=4-6, Q3=7-9, Q4=10-12
+          qNum = Math.ceil(mo / 3);
+          var qLabel = 'Q' + qNum + ' ' + moShort;
+          var qIdx = dataQ.labels.indexOf(qLabel);
+          if(qIdx >= 0) {
+            // Use this month's value (last month in quarter wins)
+            dataQ.vals[qIdx] = val;
+          }
+
+          // Update annual data
+          var aIdx = dataA.labels.indexOf(yr);
+          if(aIdx >= 0) {
+            // Use latest month's value for the year
+            dataA.vals[aIdx] = val;
+          }
+        });
+
+        // Rebuild the chart with updated data
+        buildChart();
       }
     }
-  } catch(e) { console.log('EIA fetch failed:', e); }
+  } catch(e) { console.log('Production fetch failed:', e); }
 
   // Fetch news + X posts
   try {
