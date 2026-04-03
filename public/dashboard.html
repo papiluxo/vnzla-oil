@@ -1136,11 +1136,18 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
 
 // ---- LIVE DATA FETCH ----
 (async function(){
-  // Fetch live prices
+  // Run all fetches in parallel — none blocks the others
+  var [pricesRes, prodRes, newsRes, xRes] = await Promise.all([
+    fetch('/api/prices').catch(function(){return null;}),
+    fetch('/api/production').catch(function(){return null;}),
+    fetch('/api/news').catch(function(){return null;}),
+    fetch('/api/x').catch(function(){return null;})
+  ]);
+
+  // --- PRICES ---
   try {
-    const r=await fetch('/api/prices');
-    if(r.ok){
-      const d=await r.json();
+    if(pricesRes&&pricesRes.ok){
+      const d=await pricesRes.json();
       const fmt=n=>n.toFixed(2);
       const sign=n=>n>=0?'+':'';
       const cls=n=>n>=0?'t-up':'t-dn';
@@ -1185,13 +1192,12 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
       const ts=document.querySelector('.topbar span:last-child');
       if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
     }
-  }catch(e){console.log('Price fetch failed:',e);}
+  }catch(e){console.log('Prices error:',e);}
 
   // Fetch EIA + estimates production — update KPI + charts
   try {
-    var pr = await fetch('/api/production');
-    if(pr.ok) {
-      var pd = await pr.json();
+    if(prodRes&&prodRes.ok) {
+      var pd = await prodRes.json();
       if(pd.data && pd.data.length > 0) {
         var latest = pd.data[0];
         var prev = pd.data[1];
@@ -1202,9 +1208,10 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         if(kpi0) {
           var parts = latest.period.split('-');
           var periodLabel = months[parseInt(parts[1])-1] + ' ' + parts[0];
-          kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + ')';
-          kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t3)">K bpd</span>';
-          kpi0.querySelector('.kpi-s').textContent = latest.source || (pd.source === 'eia' ? 'EIA' : 'Estimate');
+          var isEst = latest.source && latest.source !== 'EIA';
+          kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + (isEst ? ' est.' : '') + ')';
+          kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t2)">K bpd</span>';
+          kpi0.querySelector('.kpi-s').textContent = latest.source || 'EIA';
           if(prev) {
             var chg = ((latest.value - prev.value) / prev.value * 100).toFixed(1);
             var prevLabel = months[parseInt(prev.period.split('-')[1])-1];
@@ -1246,13 +1253,11 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
     var allItems=[];
     // Fetch X posts first (higher alpha)
     try {
-      var xr=await fetch('/api/x');
-      if(xr.ok){var xd=await xr.json();(xd.items||[]).forEach(function(t){allItems.push({type:'x',title:t.text,link:t.url,time:t.created_at,author:t.author});});}
+      if(xRes&&xRes.ok){var xd=await xRes.json();(xd.items||[]).forEach(function(t){allItems.push({type:'x',title:t.text,link:t.url,time:t.created_at,author:t.author});});}
     }catch(e){}
     // Fetch news
     try {
-      var nr=await fetch('/api/news');
-      if(nr.ok){var nd=await nr.json();(nd.items||[]).forEach(function(n){allItems.push({type:'news',title:n.title,link:n.link,time:n.pubDate,author:n.source});});}
+      if(newsRes&&newsRes.ok){var nd=await newsRes.json();(nd.items||[]).forEach(function(n){allItems.push({type:'news',title:n.title,link:n.link,time:n.pubDate,author:n.source});});}
     }catch(e){}
     // Sort by recency
     allItems.sort(function(a,b){return new Date(b.time)-new Date(a.time);});

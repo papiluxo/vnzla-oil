@@ -4941,5 +4941,330 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01QMTh6PALvw3ZrQTnPVv9Zn"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s https://vnzla-oil.vercel.app/api/prices | head -20",
+      "description": "Check if APIs are responding"
+    },
+    "tool_use_id": "toolu_01JjeLH1BCoQuKmCRKKwG1cx"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s https://vnzla-oil.vercel.app/api/production | head -5",
+      "description": "Check production API"
+    },
+    "tool_use_id": "toolu_01CSF8Nz5z2EXbnZoa8JUaDR"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "timeout 15 curl -s https://vnzla-oil.vercel.app/api/news | head -100 || echo \"TIMED OUT\"",
+      "description": "Check news API response time"
+    },
+    "tool_use_id": "toolu_01DuRZJxeC1Xf3cKgL1k7bF8"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s --max-time 15 https://vnzla-oil.vercel.app/api/news | head -50 || echo \"TIMED OUT\"",
+      "description": "Check news API with timeout"
+    },
+    "tool_use_id": "toolu_01JoF8k8G7SyEuDZzd6M7cDC"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1096,
+      "limit": 10
+    },
+    "tool_use_id": "toolu_01UHTFJGdKb6jULCgPVEvFRk"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "\\(async function",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_016Epv7sd7vHsvN4KxvXPcrS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1138,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_015Yu4NpYkyhaMfMY8QeCmGY"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Production \\(.*periodLabel",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01Shjbsj1aAxyPDPgn9MC49P"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1198,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_01ByevKqXRdnGaw8pYqYPVmK"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "          kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + ')';\n          kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style=\"font-size:11px;color:var(--t3)\">K bpd</span>';\n          kpi0.querySelector('.kpi-s').textContent = latest.source || (pd.source === 'eia' ? 'EIA' : 'Estimate');",
+      "new_string": "          var isEst = latest.source && latest.source !== 'EIA';\n          kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + (isEst ? ' est.' : '') + ')';\n          kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style=\"font-size:11px;color:var(--t2)\">K bpd</span>';\n          kpi0.querySelector('.kpi-s').textContent = latest.source || 'EIA';",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_013jV28Dv98zqFwgoS4qM3DX"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "(async function(){\n  // Fetch live prices\n  try {",
+      "new_string": "// All fetches run in parallel \u2014 no blocking\n(function(){\n  // Prices\n  fetch('/api/prices').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d)return;try{",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_017UCcpDFwbiJpSD81MmSP5d"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "// All fetches run in parallel \u2014 no blocking\n(function(){\n  // Prices\n  fetch('/api/prices').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d)return;try{",
+      "new_string": "(async function(){\n  // Run all fetches in parallel \u2014 none blocks the others\n  var [pricesRes, prodRes, newsRes, xRes] = await Promise.all([\n    fetch('/api/prices').catch(function(){return null;}),\n    fetch('/api/production').catch(function(){return null;}),\n    fetch('/api/news').catch(function(){return null;}),\n    fetch('/api/x').catch(function(){return null;})\n  ]);\n\n  // --- PRICES ---\n  try {\n    if(pricesRes&&pricesRes.ok){\n      var d=await pricesRes.json();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01XKZZURGJmQjRUVvX9G3TaB"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "await fetch\\('/api/production'\\)|await fetch\\('/api/news'\\)|await fetch\\('/api/x'\\)",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01Vd4ZTTsk9UFcCjeK9i5RoJ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    var pr = await fetch('/api/production');\n    if(pr.ok) {\n      var pd = await pr.json();",
+      "new_string": "    if(prodRes&&prodRes.ok) {\n      var pd = await prodRes.json();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_019NFLr3CD2S8xz98KGjct3X"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      var xr=await fetch('/api/x');\n      if(xr.ok){var xd=await xr.json();",
+      "new_string": "      if(xRes&&xRes.ok){var xd=await xRes.json();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01Nymf6ffqd1PeJCXGHtRqUJ"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      var nr=await fetch('/api/news');\n      if(nr.ok){var nd=await nr.json();",
+      "new_string": "      if(newsRes&&newsRes.ok){var nd=await newsRes.json();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_012DXxMpfEBDHTBbFGtFJDyK"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1145,
+      "limit": 15
+    },
+    "tool_use_id": "toolu_01LLFZqr5wREMCpQpNo2FEsF"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "  // --- PRICES ---\n  try {\n    if(pricesRes&&pricesRes.ok){\n      var d=await pricesRes.json();\n    const r=await fetch('/api/prices');\n    if(r.ok){\n      const d=await r.json();",
+      "new_string": "  // --- PRICES ---\n  try {\n    if(pricesRes&&pricesRes.ok){\n      const d=await pricesRes.json();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01FH9nxrtuGP5ZD7JmTBZH1F"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "Price fetch failed|catch.*Price",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01VYGjw8aUJvdddZrbwAdhH7"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 1190,
+      "limit": 6
+    },
+    "tool_use_id": "toolu_01WxS9hYvcXF1GJEnsi8qeg8"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});\n    }\n  }catch(e){console.log('Price fetch failed:',e);}",
+      "new_string": "      if(ts)ts.textContent=new Date(d.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});\n    }\n  }catch(e){console.log('Prices error:',e);}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01X67G5rMGFHsQZqLLomYVUM"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "node -e \"\nconst fs=require('fs');\nconst html=fs.readFileSync('public/dashboard.html','utf8');\nconst m=html.match(/<script>([\\s\\S]*?)<\\/script>/);\ntry{new Function(m[1]);console.log('JS OK');}\ncatch(e){console.log('ERROR:',e.message);}\n\"",
+      "description": "Verify JS syntax"
+    },
+    "tool_use_id": "toolu_01Hvun3eWpUvZJbSJZqiRc8Y"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nFix: parallel fetches, prod KPI shows est. label, no stuck loading\n\n- All 4 API fetches (prices, production, news, x) run via Promise.all\n  instead of sequential await \u2014 no single fetch can block the others\n- Production KPI label shows \"est.\" suffix when source is not EIA\n  (e.g. \"Production (Mar 2026 est.)\") with source name below\n- KPI sub text shows actual source (Kpler/vessel exports, CEIC, etc.)\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_018DAYTXaUn4YgubmD1qeQvg"
   }
 ]
