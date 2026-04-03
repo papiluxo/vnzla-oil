@@ -843,19 +843,27 @@ function getDataForView(){
     var eV=null,esV=null;
 
     if(key.length===4){
-      for(var mi=12;mi>=1;mi--){
+      // Annual: average all available months
+      var eSum=0,eCnt=0,esSum=0,esCnt=0;
+      for(var mi=1;mi<=12;mi++){
         var mk=key+'-'+String(mi).padStart(2,'0');
-        if(!eV&&liveEia[mk])eV=liveEia[mk];
-        if(!esV&&liveEst[mk])esV=liveEst[mk];
+        if(liveEia[mk]){eSum+=liveEia[mk];eCnt++;}
+        if(liveEst[mk]){esSum+=liveEst[mk];esCnt++;}
       }
+      if(eCnt)eV=Math.round(eSum/eCnt);
+      if(esCnt)esV=Math.round(esSum/esCnt);
     } else if(key.includes('-Q')){
-      var qy='20'+key.split('-Q')[0].slice(2);var qn=parseInt(key.split('-Q')[1]);
+      // Quarterly: average all available months in the quarter
+      var qy=key.split('-Q')[0];var qn=parseInt(key.split('-Q')[1]);
       var startM=(qn-1)*3+1;
-      for(var mi=startM+2;mi>=startM;mi--){
+      var eSum=0,eCnt=0,esSum=0,esCnt=0;
+      for(var mi=startM;mi<=startM+2;mi++){
         var mk=qy+'-'+String(mi).padStart(2,'0');
-        if(!eV&&liveEia[mk])eV=liveEia[mk];
-        if(!esV&&liveEst[mk])esV=liveEst[mk];
+        if(liveEia[mk]){eSum+=liveEia[mk];eCnt++;}
+        if(liveEst[mk]){esSum+=liveEst[mk];esCnt++;}
       }
+      if(eCnt)eV=Math.round(eSum/eCnt);
+      if(esCnt)esV=Math.round(esSum/esCnt);
     } else {
       eV=liveEia[key]||null;
       esV=liveEst[key]||null;

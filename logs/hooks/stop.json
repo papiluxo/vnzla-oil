@@ -403,5 +403,14 @@
     "hook_event_name": "Stop",
     "stop_hook_active": false,
     "last_assistant_message": "Fixed. Clicking the legend text now calls the same `toggleEst()` / `toggleProj()` functions as the header buttons \u2014 so the toggle dot, x-axis trim, scenario card collapse, and dataset visibility all stay in sync regardless of whether you click the legend or the button."
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false,
+    "last_assistant_message": "Fixed. The quarterly view now shows the unofficial estimate for Q1 2026. The issue was that `hasVisibleData` was looking for `liveEst['2026-Q1']` (which doesn't exist) instead of checking the monthly keys within the quarter (`2026-01`, `2026-02`, `2026-03`). The new `hasLiveData` helper resolves quarterly/annual keys down to their constituent monthly keys when checking either EIA or estimate data sources.\n\nSo on the quarterly view with unofficial est on, Q1 2026 shows the green dashed line with the latest monthly value from that quarter (Mar 2026: 1,090K from Kpler)."
   }
 ]
