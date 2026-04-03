@@ -1136,11 +1136,18 @@ if(fts)fts.textContent='Last loaded: '+new Date().toLocaleString('en-US',{month:
         var pcc=d.petcoke.live?cls(d.petcoke.changePct):'t-fl';
         updateTicks('PETCOKE',pv+unitSt,pc,pcc);
       }
-      // Update KPI
+      // Update KPIs
       const kpis=document.querySelectorAll('.kpi');
       if(kpis[1]){
         kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style="font-size:11px">.'+fmt(d.brent.price).split('.')[1]+'</span>';
         const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);
+      }
+      // Merey KPI
+      if(kpis[2]&&d.merey){
+        kpis[2].querySelector('.kpi-v').innerHTML='~$'+Math.round(d.merey.price);
+        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';
+        var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);
+        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';
       }
       // Update timestamp
       const ts=document.querySelector('.topbar span:last-child');
