@@ -29,6 +29,7 @@
     "do we not have newer data for that?",
     "logically, this data should then feed the historical prod & 2026 scenarios chart so that its actually visibly updating too",
     "it would be great if the chart can also have three lines (the official number w the 3 month lag, the live estimate we are using for the ticker w the latest data, and then a third derived or average of those two)",
-    "no that fucked up the graph. troubleshoot it. look.[Image #5]"
+    "no that fucked up the graph. troubleshoot it. look.[Image #5]",
+    "i think the default should be the eia official, live estimate and blended on the monthly 3y view and have the projections toggled off"
   ]
 }

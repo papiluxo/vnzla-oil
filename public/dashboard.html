@@ -354,26 +354,26 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
     <span class="pnl-t"><span class="hide-mobile">Historical Production & 2026 Scenarios</span><span class="show-mobile">Prod & Scenarios</span></span>
     <div style="display:flex;gap:10px;align-items:center;">
       <div class="ptabs" id="granTabs">
-        <button class="ptab" onclick="setGran('M',this)">Monthly</button>
+        <button class="ptab on" onclick="setGran('M',this)">Monthly</button>
         <button class="ptab" onclick="setGran('Q',this)">Quarterly</button>
-        <button class="ptab on" onclick="setGran('A',this)">Annual</button>
+        <button class="ptab" onclick="setGran('A',this)">Annual</button>
       </div>
       <span style="width:1px;height:14px;background:var(--t4)"></span>
       <div class="ptabs" id="rangeTabs">
         <button class="ptab" onclick="setRng('1Y',this)">1Y</button>
-        <button class="ptab" onclick="setRng('3Y',this)">3Y</button>
+        <button class="ptab on" onclick="setRng('3Y',this)">3Y</button>
         <button class="ptab" onclick="setRng('5Y',this)">5Y</button>
-        <button class="ptab on" onclick="setRng('MAX',this)">Max</button>
+        <button class="ptab" onclick="setRng('MAX',this)">Max</button>
       </div>
       <span style="width:1px;height:14px;background:var(--t4)"></span>
-      <button id="projToggle" onclick="toggleProj()" class="ptab on" style="display:flex;align-items:center;gap:4px;">
-        <span id="projDot" style="width:6px;height:6px;border-radius:50%;background:var(--amber);transition:all .2s;"></span>
+      <button id="projToggle" onclick="toggleProj()" class="ptab" style="display:flex;align-items:center;gap:4px;">
+        <span id="projDot" style="width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;"></span>
         Projections
       </button>
     </div>
   </div>
   <div class="pnl-b">
-    <div class="sc-row" id="scRow">
+    <div class="sc-row" id="scRow" style="max-height:0;opacity:0;margin-bottom:0;overflow:hidden;transition:all .25s ease;">
       <div class="sc on" onclick="pSc(this,'bear')"><div class="sc-tag" style="color:var(--red)">Bear — Sanctions Hold</div><div class="sc-v" style="color:var(--red)">900K</div><div class="sc-d">No new licenses · Infra decay · China/Russia excluded</div><div class="sc-s">Goldman Sachs base case</div></div>
       <div class="sc" onclick="pSc(this,'base')"><div class="sc-tag" style="color:var(--amber)">Base — GL-50A Ramp</div><div class="sc-v" style="color:var(--amber)">1.2M</div><div class="sc-d">Big Six ramp · Shell Dragon FID · Chevron Ayacucho-8</div><div class="sc-s">Kpler / analyst consensus</div></div>
       <div class="sc" onclick="pSc(this,'bull')"><div class="sc-tag" style="color:var(--green)">Bull — Full Reopening</div><div class="sc-v" style="color:var(--green)">1.4M</div><div class="sc-d">Broad relief · $10B+ capex · Upgrader restarts</div><div class="sc-s">JPMorgan 24-month horizon</div></div>
@@ -725,10 +725,10 @@ function mkScenario(labels,vals,sc){
 const scC={bear:'#ff4d4d',base:'#ff9f1a',bull:'#00d26a'};
 const scN={bear:'Bear 900K',base:'Base 1.2M',bull:'Bull 1.4M'};
 
-let curGran='A';
-let curRange='MAX';
+let curGran='M';
+let curRange='3Y';
 let curSc='bear';
-let projOn=true;
+let projOn=false;
 
 // Parse a label like '2024', 'Q1 24', 'Jan 24', 'Q4 26E', 'Dec 26E' into a comparable year number
 function labelToYear(lbl){
@@ -861,7 +861,7 @@ const hC=new Chart(document.getElementById('hChart'),{
     {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},
     {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},
     {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},
-    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false}
+    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}
   ]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:"'IBM Plex Mono'"},filter:function(item){if(item.datasetIndex===3&&!projOn)return false;return true;}}},

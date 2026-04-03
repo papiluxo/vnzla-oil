@@ -4167,5 +4167,123 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01EiRRLjfS4ecpNzzUm56siC"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Grep",
+    "tool_input": {
+      "pattern": "let curGran|let curRange|let projOn",
+      "path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "output_mode": "content"
+    },
+    "tool_use_id": "toolu_01YbwskAq5NzjZqeVvM2RaJS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "let curGran='A';\nlet curRange='MAX';\nlet curSc='bear';\nlet projOn=true;",
+      "new_string": "let curGran='M';\nlet curRange='3Y';\nlet curSc='bear';\nlet projOn=false;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01EPtndziRWqW6w5GCXhhNZP"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "        <button class=\"ptab\" onclick=\"setGran('M',this)\">Monthly</button>\n        <button class=\"ptab\" onclick=\"setGran('Q',this)\">Quarterly</button>\n        <button class=\"ptab on\" onclick=\"setGran('A',this)\">Annual</button>",
+      "new_string": "        <button class=\"ptab on\" onclick=\"setGran('M',this)\">Monthly</button>\n        <button class=\"ptab\" onclick=\"setGran('Q',this)\">Quarterly</button>\n        <button class=\"ptab\" onclick=\"setGran('A',this)\">Annual</button>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_011Hz9aR6mxeitifNuowkDb7"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "        <button class=\"ptab\" onclick=\"setRng('3Y',this)\">3Y</button>\n        <button class=\"ptab\" onclick=\"setRng('5Y',this)\">5Y</button>\n        <button class=\"ptab on\" onclick=\"setRng('MAX',this)\">Max</button>",
+      "new_string": "        <button class=\"ptab on\" onclick=\"setRng('3Y',this)\">3Y</button>\n        <button class=\"ptab\" onclick=\"setRng('5Y',this)\">5Y</button>\n        <button class=\"ptab\" onclick=\"setRng('MAX',this)\">Max</button>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_013AonnxaRT4dUb34z9RFjs2"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "      <button id=\"projToggle\" onclick=\"toggleProj()\" class=\"ptab on\" style=\"display:flex;align-items:center;gap:4px;\">\n        <span id=\"projDot\" style=\"width:6px;height:6px;border-radius:50%;background:var(--amber);transition:all .2s;\"></span>",
+      "new_string": "      <button id=\"projToggle\" onclick=\"toggleProj()\" class=\"ptab\" style=\"display:flex;align-items:center;gap:4px;\">\n        <span id=\"projDot\" style=\"width:6px;height:6px;border-radius:50%;background:var(--t4);transition:all .2s;\"></span>",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01WatKTubDMYqvuq8VJg3uuv"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "    <div class=\"sc-row\" id=\"scRow\">",
+      "new_string": "    <div class=\"sc-row\" id=\"scRow\" style=\"max-height:0;opacity:0;margin-bottom:0;overflow:hidden;transition:all .25s ease;\">",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01995bUkWj8VA2mLemsWdJBj"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "const initView=getDataForView();\nconst hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:initView.labels,datasets:[\n    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},\n    {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},\n    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false}\n  ]},",
+      "new_string": "const initView=getDataForView();\nconst hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:initView.labels,datasets:[\n    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},\n    {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},\n    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false,hidden:true}\n  ]},",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01SMypmt9KriQMqkwoSFSeYS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nDefault view: Monthly 3Y, projections off\n\n- curGran='M', curRange='3Y', projOn=false\n- Button active states match: Monthly highlighted, 3Y highlighted\n- Projections toggle starts off (dot gray, cards collapsed, scenario hidden)\n- Chart initializes with scenario dataset hidden:true\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_013jScDmtKofDuAqBGjFF6wz"
   }
 ]
