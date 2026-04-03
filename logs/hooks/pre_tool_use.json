@@ -3991,5 +3991,137 @@
       "description": "Commit, push, deploy"
     },
     "tool_use_id": "toolu_01C3PxBfSAyPevYjpUpBRKiS"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 738,
+      "limit": 50
+    },
+    "tool_use_id": "toolu_01KURsrgYnmALZionWbmjSbN"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "offset": 788,
+      "limit": 35
+    },
+    "tool_use_id": "toolu_01RsHG37YzNbFdAM1ooC8G49"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "function getDataForView(){\n  const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;\n  let startIdx=0;\n  if(curRange!=='MAX'){\n    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    // Find the last label's year, then cut to (lastYear - yearsBack)\n    const lastYear=labelToYear(d.labels[d.labels.length-1]);\n    const cutoff=lastYear-yearsBack;\n    startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);\n    if(startIdx<0)startIdx=0;\n  }\n  let labels=d.labels.slice(startIdx);\n  let vals=d.vals.slice(startIdx);\n  let notes=d.notes.slice(startIdx);\n  // When projections off, trim trailing nulls so the line fills the chart\n  if(!projOn){\n    let lastReal=labels.length-1;\n    while(lastReal>0&&vals[lastReal]===null)lastReal--;\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }\n  return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc)};\n}",
+      "new_string": "// Live production data layers \u2014 populated by /api/production fetch\nvar liveEia={};    // period \u2192 value (EIA official only)\nvar liveEst={};    // period \u2192 value (CEIC/TE/Kpler estimates)\n\nfunction getDataForView(){\n  const d=curGran==='A'?dataA:curGran==='Q'?dataQ:dataM;\n  let startIdx=0;\n  if(curRange!=='MAX'){\n    const yearsBack={'1Y':1,'3Y':3,'5Y':5}[curRange]||1;\n    const lastYear=labelToYear(d.labels[d.labels.length-1]);\n    const cutoff=lastYear-yearsBack;\n    startIdx=d.labels.findIndex(l=>labelToYear(l)>=cutoff);\n    if(startIdx<0)startIdx=0;\n  }\n  let labels=d.labels.slice(startIdx);\n  let vals=d.vals.slice(startIdx);\n  let notes=d.notes.slice(startIdx);\n  if(!projOn){\n    let lastReal=labels.length-1;\n    while(lastReal>0&&vals[lastReal]===null)lastReal--;\n    labels=labels.slice(0,lastReal+1);\n    vals=vals.slice(0,lastReal+1);\n    notes=notes.slice(0,lastReal+1);\n  }\n  // Build EIA-only, estimate, and blended lines\n  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n  var eiaLine=new Array(labels.length).fill(null);\n  var estLine=new Array(labels.length).fill(null);\n  var blendLine=new Array(labels.length).fill(null);\n  labels.forEach(function(lbl,i){\n    // Convert label to period key: 'Jan 25' \u2192 '2025-01', '2025' \u2192 '2025', 'Q1 25' \u2192 approx\n    var key=null;\n    var mm=lbl.replace('E','').trim().match(/([A-Z][a-z]{2})\\s+(\\d{2})/);\n    if(mm)key='20'+mm[2]+'-'+String(months.indexOf(mm[1])+1).padStart(2,'0');\n    else if(/^\\d{4}$/.test(lbl.replace('E','')))key=lbl.replace('E','');\n    if(key){\n      var eV=null,esV=null;\n      // For annual keys, find best match\n      if(key.length===4){\n        // Find latest month in that year from each source\n        for(var mi=12;mi>=1;mi--){\n          var mk=key+'-'+String(mi).padStart(2,'0');\n          if(!eV&&liveEia[mk])eV=liveEia[mk];\n          if(!esV&&liveEst[mk])esV=liveEst[mk];\n        }\n      } else {\n        eV=liveEia[key]||null;\n        esV=liveEst[key]||null;\n      }\n      if(eV)eiaLine[i]=eV;\n      if(esV)estLine[i]=esV;\n      if(eV&&esV)blendLine[i]=Math.round((eV+esV)/2);\n      else if(eV)blendLine[i]=eV;\n      else if(esV)blendLine[i]=esV;\n    }\n  });\n  return {labels,vals,notes,scenario:mkScenario(labels,vals,curSc),eiaLine,estLine,blendLine};\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01ErbK4u6CKngaVSz3KfVdut"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "function buildChart(){\n  const v=getDataForView();\n  hC.data.labels=v.labels;\n  hC.data.datasets[0].data=v.vals;\n  hC.data.datasets[1].data=v.scenario;\n  hC.data.datasets[1].borderColor=scC[curSc];\n  hC.data.datasets[1].pointBackgroundColor=scC[curSc];\n  hC.data.datasets[1].label=scN[curSc];\n  // adjust point size for density\n  const dense=v.labels.length>16;\n  hC.data.datasets[0].pointRadius=dense?1.5:3;\n  hC.data.datasets[0].pointHoverRadius=dense?5:7;\n  hC.data.datasets[0].pointHitRadius=dense?12:15;\n  hC.data.datasets[0].borderWidth=dense?1.5:2;\n  hC.data.datasets[1].pointHitRadius=dense?12:15;\n  hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;\n  hC.update();\n}",
+      "new_string": "function buildChart(){\n  const v=getDataForView();\n  hC.data.labels=v.labels;\n  hC.data.datasets[0].data=v.eiaLine;   // EIA Official\n  hC.data.datasets[1].data=v.estLine;    // Live Estimate\n  hC.data.datasets[2].data=v.blendLine;  // Blended\n  hC.data.datasets[3].data=v.scenario;   // Scenario projection\n  hC.data.datasets[3].borderColor=scC[curSc];\n  hC.data.datasets[3].pointBackgroundColor=scC[curSc];\n  hC.data.datasets[3].label=scN[curSc];\n  const dense=v.labels.length>16;\n  [0,1,2].forEach(function(i){\n    hC.data.datasets[i].pointRadius=dense?1:2;\n    hC.data.datasets[i].pointHoverRadius=dense?4:6;\n    hC.data.datasets[i].pointHitRadius=dense?10:14;\n    hC.data.datasets[i].borderWidth=dense?1.5:2;\n  });\n  hC.data.datasets[3].pointHitRadius=dense?10:14;\n  hC.options.scales.x.ticks.maxTicksLimit=dense?12:20;\n  hC.update();\n}",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01SY7BywTAnAq8DJQD1dTRvP"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "const hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:dataA.labels,datasets:[\n    {label:'Actual (K bpd)',data:dataA.vals,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.06)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:7,pointHitRadius:15,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:scN.bear,data:mkScenario(dataA.labels,dataA.vals,'bear'),borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:15,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false}\n  ]},\n  options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},\n    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:\"'IBM Plex Mono'\"},filter:function(item){if(item.datasetIndex===1&&!projOn)return false;return true;}}},",
+      "new_string": "const initView=getDataForView();\nconst hC=new Chart(document.getElementById('hChart'),{\n  type:'line',\n  data:{labels:initView.labels,datasets:[\n    {label:'EIA Official (3-mo lag)',data:initView.eiaLine,borderColor:'#5b9cf6',backgroundColor:'rgba(91,156,246,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#5b9cf6'},\n    {label:'Live Estimate',data:initView.estLine,borderColor:'#00d26a',backgroundColor:'rgba(0,210,106,.04)',fill:false,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2,pointBackgroundColor:'#00d26a',borderDash:[4,3]},\n    {label:'Blended',data:initView.blendLine,borderColor:'#ff9f1a',backgroundColor:'rgba(255,159,26,.06)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:6,pointHitRadius:14,borderWidth:2.5,pointBackgroundColor:'#ff9f1a'},\n    {label:scN.bear,data:initView.scenario,borderColor:'#ff4d4d',borderDash:[5,3],pointRadius:5,pointHoverRadius:9,pointHitRadius:14,pointBackgroundColor:'#ff4d4d',borderWidth:1.5,fill:false}\n  ]},\n  options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:true,mode:'point'},hover:{intersect:true,mode:'point'},\n    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:9,family:\"'IBM Plex Mono'\"},filter:function(item){if(item.datasetIndex===3&&!projOn)return false;return true;}}},",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01WN8ByybrT4jyPYhfsfwwXx"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "          if(ctx.datasetIndex===0&&ctx.dataIndex>0){\n            const allVals=ctx.chart.data.datasets[0].data;",
+      "new_string": "          if(ctx.datasetIndex<=2&&ctx.dataIndex>0){\n            const allVals=ctx.chart.data.datasets[ctx.datasetIndex].data;",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01XkgPssXNcxVRphQ1tANXqb"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "          if(ctx.datasetIndex!==0)return '';",
+      "new_string": "          if(ctx.datasetIndex>2)return '';",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_011yCubm18Ua72VfHVLD1mPr"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/Johnsonpampers/samus/projects/vnzla-oil/public/dashboard.html",
+      "old_string": "        // Update chart data arrays with live production values\n        pd.data.forEach(function(pt) {\n          var pp = pt.period.split('-');\n          var yr = pp[0]; var mo = parseInt(pp[1]);\n          var val = Math.round(pt.value);\n          var moShort = yr.slice(2); // '25' from '2025'\n          var mLabel = months[mo-1] + ' ' + moShort; // 'Dec 25'\n\n          // Update monthly data\n          var mIdx = dataM.labels.indexOf(mLabel);\n          if(mIdx >= 0 && dataM.vals[mIdx] !== val) {\n            dataM.vals[mIdx] = val;\n          }\n\n          // Update quarterly data \u2014 map month to quarter\n          var qNum = Math.ceil(mo / 4 + 0.01); // Q1=Jan-Mar etc\n          // Actually: Q1=1-3, Q2=4-6, Q3=7-9, Q4=10-12\n          qNum = Math.ceil(mo / 3);\n          var qLabel = 'Q' + qNum + ' ' + moShort;\n          var qIdx = dataQ.labels.indexOf(qLabel);\n          if(qIdx >= 0) {\n            // Use this month's value (last month in quarter wins)\n            dataQ.vals[qIdx] = val;\n          }\n\n          // Update annual data\n          var aIdx = dataA.labels.indexOf(yr);\n          if(aIdx >= 0) {\n            // Use latest month's value for the year\n            dataA.vals[aIdx] = val;\n          }\n        });\n\n        // Rebuild the chart with updated data\n        buildChart();",
+      "new_string": "        // Populate live data layers for chart\n        pd.data.forEach(function(pt) {\n          var key = pt.period;\n          var val = Math.round(pt.value);\n          if(pt.source === 'EIA') {\n            liveEia[key] = val;\n          } else {\n            liveEst[key] = val;\n          }\n        });\n\n        // Rebuild the chart with live data layers\n        buildChart();",
+      "replace_all": false
+    },
+    "tool_use_id": "toolu_01S4DZvw76eW8K6FkjKfLe92"
+  },
+  {
+    "session_id": "d16606f5-ab6b-4b1e-97aa-b6e2802c2a01",
+    "transcript_path": "/Users/Johnsonpampers/.claude/projects/-Users-Johnsonpampers-samus/d16606f5-ab6b-4b1e-97aa-b6e2802c2a01.jsonl",
+    "cwd": "/Users/Johnsonpampers/samus/projects/vnzla-oil",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"$(cat <<'EOF'\nChart: three production lines (EIA official, live estimate, blended)\n\n- Blue solid: EIA Official (3-month lag, government data)\n- Green dashed: Live Estimate (CEIC/Trading Economics/Kpler)\n- Amber filled: Blended average of both (or whichever is available)\n- Red dashed: Scenario projection (toggleable)\n\nEach line independently sourced from /api/production response.\nWhere only one source exists for a period, blended = that source.\nWhere both exist, blended = average. Tooltips show period-over-period\nchange for all three lines.\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\nEOF\n)\" && git push origin main && npx vercel --prod --yes 2>&1 | tail -2",
+      "timeout": 120000,
+      "description": "Commit, push, deploy"
+    },
+    "tool_use_id": "toolu_01Szy28Ug1MiHSYwBVfH38iP"
   }
 ]

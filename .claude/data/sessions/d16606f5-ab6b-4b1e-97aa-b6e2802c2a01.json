@@ -27,6 +27,7 @@
     "i still wanted to see the vnzla prod and reserves. you deleted those i didnt specify",
     "does this ticker make sense? Production (Feb 26)\n905K bpd\n2025-12 \u2014 EIA (live)\nUp from Jan 924K post-disruption",
     "do we not have newer data for that?",
-    "logically, this data should then feed the historical prod & 2026 scenarios chart so that its actually visibly updating too"
+    "logically, this data should then feed the historical prod & 2026 scenarios chart so that its actually visibly updating too",
+    "it would be great if the chart can also have three lines (the official number w the 3 month lag, the live estimate we are using for the ticker w the latest data, and then a third derived or average of those two)"
   ]
 }
