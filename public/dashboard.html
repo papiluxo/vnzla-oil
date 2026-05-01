@@ -568,16 +568,16 @@ body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color
 </div>
 
 <div class="footer">
-  Production: EIA, OPEC MOMR, CEIC, Trading Economics, Kpler &nbsp;|&nbsp;
-  Prices: Yahoo Finance (live) &nbsp;|&nbsp;
-  Sanctions: OFAC, Mayer Brown, Cleary Gottlieb, Crowell &amp; Moring, Morgan Lewis, Hogan Lovells, Sullivan &amp; Cromwell &nbsp;|&nbsp;
-  Scenarios: Goldman Sachs, JPMorgan, Kpler, Rystad Energy &nbsp;|&nbsp;
-  News: Google News RSS, X/Twitter API &nbsp;|&nbsp;
-  Geo: OpenStreetMap, CARTO
+  <span>Production:</span> EIA, OPEC MOMR, CEIC, Trading Economics, Kpler &nbsp;|&nbsp;
+  <span>Prices:</span> Yahoo Finance (live) &nbsp;|&nbsp;
+  <span>Sanctions:</span> OFAC, Mayer Brown, Cleary Gottlieb, Crowell &amp; Moring, Morgan Lewis, Hogan Lovells, Sullivan &amp; Cromwell &nbsp;|&nbsp;
+  <span>Scenarios:</span> Goldman Sachs, JPMorgan, Kpler, Rystad Energy &nbsp;|&nbsp;
+  <span>News:</span> Google News RSS, X/Twitter API &nbsp;|&nbsp;
+  <span>Geo:</span> OpenStreetMap, CARTO
   <br>
-  Prices update every 5 min &nbsp;|&nbsp; News every 30 min &nbsp;|&nbsp; Production data monthly (OPEC/CEIC) &nbsp;|&nbsp;
+  <span>Prices update every 5 min</span> &nbsp;|&nbsp; <span>News every 30 min</span> &nbsp;|&nbsp; <span>Production data monthly (OPEC/CEIC)</span> &nbsp;|&nbsp;
   <span id="footerTs"></span>
-  &nbsp;|&nbsp; <a href="#" onclick="document.getElementById('srcBg').classList.add('open');return false;" style="color:var(--blue);text-decoration:none;">View All Sources &rarr;</a>
+  &nbsp;|&nbsp; <a href="#" onclick="document.getElementById('srcBg').classList.add('open');return false;" style="color:var(--blue);text-decoration:none;"><span>View All Sources</span> &rarr;</a>
 </div>
 
 <!-- Sources Modal -->
@@ -1397,7 +1397,93 @@ var i18n={
   // Chart dataset labels
   'EIA Official':'EIA Oficial',
   'Unofficial Est. (CEIC/Kpler)':'Est. No Oficial (CEIC/Kpler)',
-  'K bpd':'K bpd'
+  'K bpd':'K bpd',
+  // ===== May 2026 refresh additions =====
+  // Producer table filter labels
+  'All (15)':'Todos (15)',
+  'Active':'Activo',
+  'Max':'Máx',
+  // KPI subtitles and change captions (replace KPI text on prices/production fetch)
+  'Mar 2026 — OPEC secondary / TE':'Mar 2026 — OPEP secundaria / TE',
+  '+7% vs Feb (1,021K) · EIA latest: Dec 25 (905K)':'+7% vs Feb (1,021K) · EIA último: Dic 25 (905K)',
+  'Brent (Jun Contract)':'Brent (Contrato Jun)',
+  'Brent (Jul Contract)':'Brent (Contrato Jul)',
+  'Off Mar peak ($118)':'Bajo el pico de mar ($118)',
+  '-2.9% · Hormuz on/off Apr 17':'-2.9% · Ormuz on/off 17 abr',
+  '$9.00 discount to Brent':'Descuento de $9.00 vs Brent',
+  '+73% vs 2025 avg ($56.68)':'+73% vs prom 2025 ($56.68)',
+  'Big Six + GL-52/56/57 expansions':'Seis Grandes + ampliaciones GL-52/56/57',
+  'GL-56 contingent contracts (Apr 14)':'GL-56 contratos contingentes (14 abr)',
+  'US-controlled Treasury escrow':'Custodia del Tesoro controlada por EE.UU.',
+  '$5B projected near-term · $150B / 10yr':'$5B proyectado a corto plazo · $150B / 10 años',
+  '2x GDP (~$80B)':'2x PIB (~$80B)',
+  // Ticker labels (commodity codes stay; status caption translated)
+  'Hormuz volatile':'Ormuz volátil',
+  'MAR 26 OPEC/TE':'MAR 26 OPEP/TE',
+  // Critical Context — updated paragraphs
+  'EO 14373: All oil revenue settles in US-controlled Treasury accounts. $1B+ collected (mid-Feb). $5B projected near-term. $150B potential over 10yr. GL-52 (Mar 18) broadened to all established US entities. GL-56 (Apr 14) authorizes contingent contract negotiations.':'EO 14373: Todos los ingresos petroleros se depositan en cuentas del Tesoro controladas por EE.UU. $1B+ recaudado (mediados de feb). $5B proyectado a corto plazo. $150B potencial en 10 años. GL-52 (18 mar) ampliado a todas las entidades establecidas de EE.UU. GL-56 (14 abr) autoriza negociaciones de contratos contingentes.',
+  'Strait disrupted Mar 2. Iran declared "completely open" Apr 17 → Brent -9% to $90; restrictions reimposed within days. Brent now $107 (off $118 peak). Venezuela supply remains strategic to US.':'Estrecho interrumpido el 2 de marzo. Irán declaró "completamente abierto" el 17 de abril → Brent -9% a $90; restricciones reimpuestas en días. Brent ahora $107 (bajo el pico de $118). Suministro venezolano sigue estratégico para EE.UU.',
+  'Exempt from quotas since 2019. Could produce 1.5M+ bpd freely. Reserves: 303B bbl (#1). US Energy Sec Wright projects 30–40% growth in 2026 (+300–400K bpd).':'Exento de cuotas desde 2019. Podría producir 1.5M+ bpd libremente. Reservas: 303B bbl (#1). Sec. de Energía Wright proyecta crecimiento del 30–40% en 2026 (+300–400K bpd).',
+  // Date strings used in sidebar timeline
+  'APR 28, 2026':'28 ABR 2026',
+  'APR 26':'26 ABR',
+  'APR 17':'17 ABR',
+  'APR 16':'16 ABR',
+  'APR 14':'14 ABR',
+  'APR 13':'13 ABR',
+  'MAR 27':'27 MAR',
+  'MAR 25':'25 MAR',
+  'MAR 24':'24 MAR',
+  'MAR 18, 2026':'18 MAR 2026',
+  'MAR 13':'13 MAR',
+  'MAR 5, 2026':'5 MAR 2026',
+  'MAR 2':'2 MAR',
+  'FEB 18':'18 FEB',
+  'FEB 13':'13 FEB',
+  'FEB 12':'12 FEB',
+  'JAN 9':'9 ENE',
+  'JAN 3':'3 ENE',
+  'NOV 2025':'NOV 2025',
+  'JUL 2025':'JUL 2025',
+  'APR 2025':'ABR 2025',
+  'MAR 2025':'MAR 2025',
+  'FEB 2025':'FEB 2025',
+  // Sidebar timeline — new April / late-March 2026 entries
+  'Eni signs Junin-5 development contract with PDVSA at Miraflores — 35Bbbl reserves, 40/60 with PDVSA, Orinoco heavy oil restart':'Eni firma contrato de desarrollo de Junin-5 con PDVSA en Miraflores — 35Bbbl reservas, 40/60 con PDVSA, reinicio de crudo pesado del Orinoco',
+  'Iran-US talks unravel; Brent reclimbs to $108. Hormuz remains contested':'Conversaciones Irán-EE.UU. fracasan; Brent vuelve a $108. Ormuz sigue en disputa',
+  'Iran declares Strait of Hormuz "completely open" — Brent -9% to $90; US blockade continues, Iran reimposes restrictions days later':'Irán declara el Estrecho de Ormuz "completamente abierto" — Brent -9% a $90; bloqueo de EE.UU. continúa, Irán reimpone restricciones días después',
+  'Repsol regains operational control of Petroquiriquire (45K bpd, target 135K in 3 yrs)':'Repsol recupera control operativo de Petroquiriquire (45K bpd, meta 135K en 3 años)',
+  'GL-56 issued: authorizes commercial-related negotiations of contingent contracts with the Government of Venezuela':'GL-56 emitida: autoriza negociaciones comerciales de contratos contingentes con el Gobierno de Venezuela',
+  'Chevron, Shell move to sign oil/gas agreements covering Loran gas field and Orinoco Belt (Ayacucho-8, Petropiar expansion)':'Chevron y Shell avanzan para firmar acuerdos petroleros/gas cubriendo el campo de gas Loran y la Faja del Orinoco (Ayacucho-8, expansión Petropiar)',
+  'GL-54 issued + amendments: expanded authorized activities in Venezuelan mining/minerals sectors':'GL-54 emitida + enmiendas: actividades autorizadas ampliadas en sectores minero/minerales de Venezuela',
+  'Exxon\'s technical team on the ground in Venezuela evaluating resources/infrastructure — Dan Ammann (Upstream head) confirms at CERAWeek. Woods softens from Jan "uninvestable" stance.':'Equipo técnico de Exxon en terreno en Venezuela evaluando recursos/infraestructura — Dan Ammann (jefe de Upstream) confirma en CERAWeek. Woods suaviza su postura de "no invertible" de enero.',
+  'GL-53 issued: official Venezuelan government missions to the US':'GL-53 emitida: misiones oficiales del Gobierno de Venezuela a EE.UU.',
+  'GL-52: All established US entities authorized for production, JVs, and full oil/gas ops with PDVSA':'GL-52: Todas las entidades establecidas de EE.UU. autorizadas para producción, JVs y operaciones petroleras/gas completas con PDVSA',
+  'Strait of Hormuz disrupted; Brent surges, +60% MTD (largest monthly move since \'88)':'Estrecho de Ormuz interrumpido; Brent sube, +60% mensual (mayor movimiento mensual desde el \'88)',
+  // Active Deals — new entries
+  'Eni — Junin-5 (signed Apr 28):':'Eni — Junin-5 (firmado 28 abr):',
+  '35Bbbl certified reserves. Eni 40% / PDVSA 60%. Orinoco heavy oil restart framework agreement.':'35Bbbl reservas certificadas. Eni 40% / PDVSA 60%. Acuerdo marco para reinicio de crudo pesado del Orinoco.',
+  'Repsol — Petroquiriquire (Apr 16):':'Repsol — Petroquiriquire (16 abr):',
+  'Operational control regained. 45K bpd current → 135K bpd target in 3 years.':'Control operativo recuperado. 45K bpd actual → meta 135K bpd en 3 años.',
+  'Chevron — Ayacucho-8:':'Chevron — Ayacucho-8:',
+  'Orinoco expansion + Petropiar growth. Agreements moved forward Apr 13. Reduced royalties.':'Expansión del Orinoco + crecimiento de Petropiar. Acuerdos avanzaron el 13 abr. Regalías reducidas.',
+  '4.2 tcf offshore to Trinidad Atlantic LNG. FID possible end-2026. First gas 2027–28.':'4.2 tcf costa afuera a Trinidad Atlantic GNL. FID posible fin de 2026. Primer gas 2027–28.',
+  'Shell — Carito/Pirital + Loran:':'Shell — Carito/Pirital + Loran:',
+  '94K bpd crude + 1 Bcfd gas (350 mmcfd flared). Loran offshore gas added Apr 13.':'94K bpd crudo + 1 Bcfd gas (350 mmcfd quemados). Gas costa afuera de Loran añadido 13 abr.',
+  // Footnote under chart
+  'Sources vary: CEIC crude-only ~903K (+ ~55K NABEP = ~958K) vs Trading Economics incl. condensates ~1,021K for Feb 2026. OPEC secondary vs IEA can differ by 70K+ bpd. Hover for period-over-period change.':'Las fuentes varían: CEIC solo crudo ~903K (+ ~55K NABEP = ~958K) vs Trading Economics incl. condensados ~1,021K para feb 2026. OPEP secundaria vs IEA pueden diferir en 70K+ bpd. Pasa el cursor para ver cambio entre períodos.',
+  // Sources modal
+  'Sources & References':'Fuentes y Referencias',
+  'OFAC & Legal':'OFAC y Legal',
+  'Market & Industry':'Mercado e Industria',
+  'Data & Government':'Datos y Gobierno',
+  // Sidebar — Big Six rows: more readable Spanish
+  'BP':'BP',
+  // Header subtitles
+  'Loading EIA data...':'Cargando datos de EIA...',
+  'LOADING':'CARGANDO',
+  'Fetching latest headlines...':'Cargando últimos titulares...',
+  '-$9 spread':'-$9 diferencial'
 };
 
 // Reverse map for ES→EN
@@ -1454,6 +1540,8 @@ function toggleLang(){
   // Re-render table with translated fields
   renderT('tbl','all',false);
   buildChart();
+  // Re-fetch live data so JS-overwritten KPI/ticker text picks up new language
+  if(typeof loadLiveData==='function')loadLiveData();
 }
 
 // INIT
@@ -1477,7 +1565,7 @@ function fetchT(url){
   ]).catch(function(){return null;});
 }
 
-(async function(){
+async function loadLiveData(){
   var [pricesRes, prodRes, newsRes, xRes] = await Promise.all([
     fetchT('/api/prices'),
     fetchT('/api/production'),
@@ -1518,7 +1606,7 @@ function fetchT(url){
       const kpis=document.querySelectorAll('.kpi');
       if(kpis[1]){
         kpis[1].querySelector('.kpi-v').innerHTML='$'+Math.floor(d.brent.price)+'<span style="font-size:11px">.'+fmt(d.brent.price).split('.')[1]+'</span>';
-        const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% today';sub.className='kpi-c '+cls(d.brent.changePct);
+        const sub=kpis[1].querySelector('.kpi-c');sub.textContent=sign(d.brent.changePct)+fmt(d.brent.changePct)+'% '+(curLang==='es'?'hoy':'today');sub.className='kpi-c '+cls(d.brent.changePct);
       }
       // Merey KPI — match Brent format
       if(kpis[2]&&d.merey){
@@ -1526,9 +1614,9 @@ function fetchT(url){
         var mCents=fmt(d.merey.price).split('.')[1];
         kpis[2].querySelector('.kpi-v').innerHTML='$'+mDollars+'<span style="font-size:11px">.'+mCents+'</span>';
         kpis[2].querySelector('.kpi-v').style.color='var(--green)';
-        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+' discount to Brent';
+        kpis[2].querySelector('.kpi-s').textContent='$'+fmt(d.merey.spread)+(curLang==='es'?' descuento vs Brent':' discount to Brent');
         var mereyChg=((d.merey.price-56.68)/56.68*100).toFixed(0);
-        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+'% vs 2025 avg ($56.68)';
+        kpis[2].querySelector('.kpi-c').textContent='+'+mereyChg+(curLang==='es'?'% vs prom 2025 ($56.68)':'% vs 2025 avg ($56.68)');
       }
       // Update timestamp
       const ts=document.getElementById('topbarTs');
@@ -1549,16 +1637,22 @@ function fetchT(url){
         var kpi0 = document.querySelectorAll('.kpi')[0];
         if(kpi0) {
           var parts = latest.period.split('-');
-          var periodLabel = months[parseInt(parts[1])-1] + ' ' + parts[0];
+          var monthsEs=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+          var mIdx=parseInt(parts[1])-1;
+          var periodLabel=(curLang==='es'?monthsEs[mIdx]:months[mIdx]) + ' ' + parts[0];
           var isEst = latest.source && latest.source !== 'EIA';
-          kpi0.querySelector('.kpi-l').textContent = 'Production (' + periodLabel + (isEst ? ' est.' : '') + ')';
+          var prodWord=curLang==='es'?'Producción':'Production';
+          var estWord=curLang==='es'?' est.':' est.';
+          kpi0.querySelector('.kpi-l').textContent = prodWord + ' (' + periodLabel + (isEst ? estWord : '') + ')';
           kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t2)">K bpd</span>';
           kpi0.querySelector('.kpi-s').textContent = latest.source || 'EIA';
           if(prev) {
             var chg = ((latest.value - prev.value) / prev.value * 100).toFixed(1);
             var prevLabel = months[parseInt(prev.period.split('-')[1])-1];
             var chgEl = kpi0.querySelector('.kpi-c');
-            chgEl.textContent = (chg >= 0 ? '+' : '') + chg + '% from ' + prevLabel + ' (' + Math.round(prev.value) + 'K)';
+            var prevLabelLocalized=curLang==='es'?monthsEs[parseInt(prev.period.split('-')[1])-1]:prevLabel;
+            var fromWord=curLang==='es'?'desde':'from';
+            chgEl.textContent = (chg >= 0 ? '+' : '') + chg + '% ' + fromWord + ' ' + prevLabelLocalized + ' (' + Math.round(prev.value) + 'K)';
             chgEl.className = 'kpi-c ' + (chg >= 0 ? 't-up' : 't-dn');
           }
         }
@@ -1626,7 +1720,8 @@ function fetchT(url){
       });
     }
   }catch(e){console.log('Feed fetch failed:',e);}
-})();
+}
+loadLiveData();
 </script>
 </body>
 </html>
