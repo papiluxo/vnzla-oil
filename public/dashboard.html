@@ -1483,7 +1483,15 @@ var i18n={
   'Loading EIA data...':'Cargando datos de EIA...',
   'LOADING':'CARGANDO',
   'Fetching latest headlines...':'Cargando últimos titulares...',
-  '-$9 spread':'-$9 diferencial'
+  '-$9 spread':'-$9 diferencial',
+  // /api/production source attributions
+  'Internal est. — pre-MOMR (Eni Junin-5 Apr 28 + Repsol Apr 16)':'Est. interna — pre-MOMR (Eni Junin-5 28 abr + Repsol 16 abr)',
+  'OPEC secondary / Trading Economics':'OPEP secundaria / Trading Economics',
+  'Trading Economics (incl. condensate)':'Trading Economics (incl. condensados)',
+  'Trading Economics':'Trading Economics',
+  'Kpler/vessel exports':'Kpler / exportaciones de buques',
+  'CEIC (crude-only)':'CEIC (solo crudo)',
+  'EIA':'EIA'
 };
 
 // Reverse map for ES→EN
@@ -1645,7 +1653,7 @@ async function loadLiveData(){
           var estWord=curLang==='es'?' est.':' est.';
           kpi0.querySelector('.kpi-l').textContent = prodWord + ' (' + periodLabel + (isEst ? estWord : '') + ')';
           kpi0.querySelector('.kpi-v').innerHTML = Math.round(latest.value) + '<span style="font-size:11px;color:var(--t2)">K bpd</span>';
-          kpi0.querySelector('.kpi-s').textContent = latest.source || 'EIA';
+          kpi0.querySelector('.kpi-s').textContent = translateText(latest.source || 'EIA', curLang);
           if(prev) {
             var chg = ((latest.value - prev.value) / prev.value * 100).toFixed(1);
             var prevLabel = months[parseInt(prev.period.split('-')[1])-1];
