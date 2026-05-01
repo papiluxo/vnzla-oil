@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Venezuela Oil Spills — January 2025 to March 2026",
-    "compiled": "2026-04-01",
+    "title": "Venezuela Oil Spills — January 2025 to April 2026",
+    "compiled": "2026-05-01",
     "total_documented_incidents": 13,
     "coverage_notes": "PDVSA does not publish official spill data. All figures sourced from NGOs (Clima 21, Observatorio de Ecología Política), local Venezuelan press (La Patilla, El Nacional, TalCual), and international wire services (Reuters, Bloomberg). Actual incident count for full period likely 30+; confirmed discrete events documented here: 13. NGO Clima 21 counted 13 spills/gas leaks/explosions in 2025 through June 2025 alone.",
     "primary_sources": [
@@ -324,20 +324,54 @@
       "communities_affected": "Fishing communities in Miranda municipality, Falcón state",
       "note": "Second of two simultaneous LOL pipeline spills reported by Reuters on March 25-26, 2026. PDVSA refused to comment.",
       "source_url": "https://www.tradingview.com/news/reuters.com,2026:newsml_L6N40F14Y:0-venezuela-state-oil-company-containing-two-oil-spills-near-cardon-refinery/"
+    },
+    {
+      "id": "VZ-2026-003",
+      "date": "2026-03-03",
+      "date_precision": "Spill began Mar 3, 2026; ongoing through at least Apr 8 per La Patilla follow-up",
+      "location": {
+        "place_name": "Línea 3 / Punta Caimán wall, Golfete de Coro",
+        "state": "Falcón",
+        "body_of_water": "Golfete de Coro (Gulf of Coro)",
+        "municipality": "Carirubana / Paraguaná Peninsula",
+        "latitude": 11.62,
+        "longitude": -70.20,
+        "communities_affected_named": ["Tiguadare", "Mitare", "Tacuato", "Cayude", "Prudencio"],
+        "coordinates_source": "Estimated from 'Línea 3, Punta Caimán wall' (Paraguaná, Falcón)"
+      },
+      "cause": "Submarine pipeline 'Línea 3' of the Paraguaná Refining Complex (CRP / PDVSA). PDVSA acknowledged the spill and announced 'plan de saneamiento' but did not disclose cause.",
+      "volume": {
+        "barrels_spilled": null,
+        "barrels_precision": "Volume not disclosed by PDVSA; spill estimated at 40 km marine slick driven by wind toward Zulia",
+        "area_km2": null,
+        "shoreline_km": 40
+      },
+      "operator": "PDVSA (Paraguaná Refining Complex)",
+      "pipeline": "Línea 3 (submarine)",
+      "status": "Ongoing as of mid-April 2026. PDVSA announced sanitation plan but fishermen report no remediation.",
+      "environmental_impact": "Crude slick 40 km in length pushed by trade winds toward Zulia state. Golfete de Coro fishing grounds further degraded. Decline in fish species; fishermen forced to navigate deeper, riskier waters.",
+      "communities_affected": "Tiguadare, Mitare, Tacuato, Cayude, Prudencio (Paraguaná Peninsula). Local Insopesca and PDVSA complaints unanswered.",
+      "note": "Reported as '8th spill of 2026' and '80th since 2019' by Falcón residents per La Patilla / Correo del Caroní / TalCual / Efecto Cocuyo. PDVSA acknowledged on Apr 8 reporting cycle.",
+      "source_url": "https://lapatilla.com/2026/04/08/pescadores-de-punta-cardon-al-borde-de-la-desesperacion-pdvsa-debe-solucionar-derrames-de-crudo-en-el-golfete-de-coro/"
     }
   ],
   "aggregate_statistics": {
-    "source": "NGO Clima 21 and Observatorio de Ecología Política de Venezuela",
+    "source": "NGO Clima 21, Observatorio de Ecología Política de Venezuela, Global Witness satellite tracking",
     "total_spills_2024": 65,
     "total_spills_Q1_2025_through_Jun_2025": 13,
     "total_spills_Q3_2024": 25,
+    "total_spills_2026_through_Apr": "8 (per Falcón residents / La Patilla)",
+    "lake_maracaibo_satellite_detections_jan2025_through_mar2026": 504,
+    "lake_maracaibo_satellite_area_km2": 10428.5,
+    "lake_maracaibo_satellite_source": "Global Witness — area roughly equal to Lebanon",
     "states_most_affected": ["Zulia", "Falcón", "Anzoátegui", "Monagas", "Carabobo"],
     "chronic_lake_maracaibo_baseline_bbl_per_day": 1000,
-    "pdvsa_official_disclosure": "None — PDVSA has not published official spill data since approximately 2020. No volume, cause, or cleanup information released voluntarily.",
+    "pdvsa_official_disclosure": "None — PDVSA has not published official spill data since approximately 2020. No volume, cause, or cleanup information released voluntarily. PDVSA acknowledged the Falcón Línea 3 spill in April 2026 but did not disclose cause or volume.",
     "media_suppression_documented": true,
     "media_suppression_note": "Bolivarian National Guard documented confiscating phones/cameras at Anzoátegui spill site (Feb 2025)"
   },
   "data_gaps": {
+    "April_2026_discrete_incidents": "No new discrete events confirmed for Apr 2026 beyond the ongoing Línea 3 / Punta Caimán spill (started Mar 3) and the chronic Lake Maracaibo baseline. Pace from Falcón residents claiming '8th of 2026' implies 5+ undocumented 2026 incidents in this dataset.",
     "H2_2025": "No specific discrete incidents confirmed for July–December 2025. Clima 21 tallied 13 events through June 2025; pace suggests an additional 10-20 incidents likely in H2 2025 based on 2024 rate of 65/year. No public NGO report found for this period.",
     "volume_data": "PDVSA withholds volume data for almost all incidents. Only the Anzoátegui pipeline rupture (VZ-2025-005, >24,000 bbl), the J-20 Morichal spill (VZ-2025-006, ~50,000 bbl), and the LOL-3 spill (VZ-2025-001, ~90,000 bbl) have estimated volumes.",
     "Orinoco_Belt": "No discrete reportable spill events found for Orinoco Belt (Carabobo, Guárico, Monagas eastern production) in 2025-2026 beyond Monagas incidents above. ScienceDirect July 2025 study documented Orinoco, Guárico, and Cuyuní rivers as highest-risk contamination zones.",
