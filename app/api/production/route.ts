@@ -15,9 +15,13 @@ interface EiaResponse {
 // Recent estimates from CEIC, Trading Economics, Kpler vessel tracking
 // Updated by daily-vnzla-intel agent or manually
 // These supplement EIA which lags ~3 months
+// EIA publishes ~3 months in arrears. These supplements bridge the gap.
+// Apr 2026 OPEC MOMR not yet released (drops mid-May); Apr value here is an
+// internal extrapolation from Mar (Eni Junin-5 + Repsol Petroquiriquire deals).
+// Replace with OPEC/TE/Kpler figures as soon as they publish.
 const RECENT_ESTIMATES: ProdPoint[] = [
-  { period: '2026-04', value: 1140, source: 'Kpler/analyst est. (post-Eni Junin-5, Repsol Petroquiriquire deals)' },
-  { period: '2026-03', value: 1090, source: 'Kpler/vessel exports' },
+  { period: '2026-04', value: 1140, source: 'Internal est. — pre-MOMR (Eni Junin-5 Apr 28 + Repsol Apr 16)' },
+  { period: '2026-03', value: 1095, source: 'OPEC secondary / Trading Economics' },
   { period: '2026-02', value: 1021, source: 'Trading Economics (incl. condensate)' },
   { period: '2026-01', value: 924, source: 'Trading Economics' },
 ];
