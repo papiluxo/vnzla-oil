@@ -16,8 +16,9 @@ interface EiaResponse {
 // Updated by daily-vnzla-intel agent or manually
 // These supplement EIA which lags ~3 months
 const RECENT_ESTIMATES: ProdPoint[] = [
+  { period: '2026-04', value: 1140, source: 'Kpler/analyst est. (post-Eni Junin-5, Repsol Petroquiriquire deals)' },
   { period: '2026-03', value: 1090, source: 'Kpler/vessel exports' },
-  { period: '2026-02', value: 903, source: 'CEIC (crude-only)' },
+  { period: '2026-02', value: 1021, source: 'Trading Economics (incl. condensate)' },
   { period: '2026-01', value: 924, source: 'Trading Economics' },
 ];
 
